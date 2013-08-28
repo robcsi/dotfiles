@@ -83,6 +83,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias gv='gvim --remote-tab-silent'
+alias feh='feh -g 1440x900 -B black -p'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
