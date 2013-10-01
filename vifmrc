@@ -312,3 +312,16 @@ nmap <f5> :copy<cr>
 nmap <f6> :move<cr>
 nmap <f7> :mkdir<space>
 nmap <f8> :delete<cr>
+
+" 256-color terminal using highlight
+fileviewer *.c highlight -O xterm256 -s dante --syntax c %c
+fileviewer *.h highlight -O xterm256 -s dante --syntax c %c
+fileviewer *.hpp highlight -O xterm256 -s dante --syntax c %c
+fileviewer *.cpp highlight -O xterm256 -s dante --syntax c %c
+fileviewer *.js highlight -O xterm256 -s dante --syntax c %c
+" 8-color terminal using highlight
+fileviewer *.c,*.h highlight -O ansi -s dante %c
+fileviewer *.cpp,*.hpp highlight -O ansi -s dante %c
+" 256-color terminal using pygmentize
+"fileviewer *.c,*.h pygmentize -O style=monokai -f console256 -g
+
