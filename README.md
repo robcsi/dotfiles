@@ -1,4 +1,4 @@
-.bash
+Dotfiles
 =====
 
-bash related configuration file(s)
+Various configuration file(s)
