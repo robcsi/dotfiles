@@ -325,3 +325,4 @@ fileviewer *.cpp,*.hpp highlight -O ansi -s dante %c
 " 256-color terminal using pygmentize
 "fileviewer *.c,*.h pygmentize -O style=monokai -f console256 -g
 
+fileview */ tree %"c
