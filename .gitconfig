@@ -1,0 +1,10 @@
+[user]
+	name = robcsi
+	email = sarkozi.robert@gmail.com
+[gui]
+	diffcontext = 10
+
+[diff]
+	external = git_diff_wrapper
+[pager]
+	diff = 
