@@ -106,3 +106,13 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 set -o vi
+
+#adding git aliases for faster operation
+alias gp='git push'
+alias gg='git pull'
+alias gd='git diff'
+alias gs='git status'
+alias gc='git commit -m'
+alias gca='git commit -am'
+alias ga='git add'
+alias gsh='git show'
