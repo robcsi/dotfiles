@@ -46,12 +46,12 @@ set undolevels=100
 " If you installed the vim.txt help file set vimhelp.
 " If would rather use a plain text help file set novimhelp.
 
-set novimhelp
+set vimhelp
 
 " If you would like to run an executable file when you
 " press return on the file name set this.
 
-set runexec
+set norunexec
 
 " Use KiB, MiB, ... instead of KB, MB, ...
 
@@ -106,8 +106,7 @@ set statusline="  %t%= %A %10u:%-7g %15s %20d  "
 
 mark b ~/bin/
 mark h ~/
-mark g /win/d/git/
-mark d /win/d/Downloads/Linux/
+mark d /win/d/Downloads/Linux
 
 " :com[mand] command_name action
 " The following macros can be used in a command
@@ -155,7 +154,7 @@ command vgrep vim "+grep %a"
 " program.
 
 " Pdf
-filetype *.pdf xpdf %f
+filetype *.pdf mupdf %f
 fileview *.pdf pdftotext -nopgbrk %c -
 
 " PostScript
@@ -173,15 +172,7 @@ filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a
 fileviewer *.mp3 mp3info
 
 " Video
-filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob,*.flv
-        \ {View using ffplay}
-        \ ffplay -fs %c,
-        \ {View using Dragon}
-        \ dragon %f,
-        \ {View using mplayer}
-        \ mplayer %f,
-fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob
-         \ ffprobe -show_files -pretty %f 2> /dev/null
+filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob,*.flv smplayer %"c
 
 " Web
 filetype *.html,*.htm links,mozilla,uzbl-browser %f %i &
@@ -190,8 +181,8 @@ filetype *.html,*.htm links,mozilla,uzbl-browser %f %i &
 filetype *.o nm %f | less
 
 " Image
-filetype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm feh -B black -g 1440x900 -p %f
-fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm convert -identify %f -verbose /dev/null
+filetype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm,*.tiff feh -p -B black -g 1920x1080
+fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm,*.tiff convert -identify %f -verbose /dev/null
 
 " MD5
 filetype *.md5
@@ -246,11 +237,6 @@ fileview *.docx, docx2txt.pl %f -
 " Qt projects
 filextype *.pro qtcreator %f &
 
-" Directories
-filextype */
-        \ {View in thunar}
-        \ Thunar %f &,
-fileview */ tree %f
 
 " Open all other files with default system programs (you can also remove all
 " :file[x]type commands above to ensure they don't interfere with system-wide
@@ -268,8 +254,8 @@ fileview */ tree %f
 " Like in previous versions of vifm
 " set vifminfo=options,filetypes,commands,bookmarks,dhistory,state,cs
 " Like in vi
-set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
-    \phistory,dirstack,registers,bookmarks
+
+set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,phistory,dirstack,registers,bookmarks
 
 " Sample mappings
 
@@ -294,9 +280,6 @@ nmap I cw<c-a>
 nmap cc cw<c-u>
 nmap A cw<c-w>
 
-" Opening console in current directory
-nmap ,t :!terminator &<cr>
-
 " Opening vim to edit .vifmrc
 nmap ,c :execute ':!vim $MYVIFMRC' | restart<cr>
 " Opening gvim to edit .vifmrc
@@ -314,15 +297,15 @@ nmap <f7> :mkdir<space>
 nmap <f8> :delete<cr>
 
 " 256-color terminal using highlight
-fileviewer *.c highlight -O xterm256 -s dante --syntax c %c
-fileviewer *.h highlight -O xterm256 -s dante --syntax c %c
-fileviewer *.hpp highlight -O xterm256 -s dante --syntax c %c
-fileviewer *.cpp highlight -O xterm256 -s dante --syntax c %c
-fileviewer *.js highlight -O xterm256 -s dante --syntax c %c
+fileviewer *.[ch] highlight -O xterm256 -s dante --syntax c %c
 " 8-color terminal using highlight
 fileviewer *.c,*.h highlight -O ansi -s dante %c
 fileviewer *.cpp,*.hpp highlight -O ansi -s dante %c
-" 256-color terminal using pygmentize
-"fileviewer *.c,*.h pygmentize -O style=monokai -f console256 -g
+
+" Directories - requires tree to be installed!
+fileview */ tree %"c
+
+"remap e to close :view mode
+"qnoremap e q
 
 fileview */ tree %"c
