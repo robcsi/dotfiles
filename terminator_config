@@ -7,7 +7,7 @@
   [[default]]
     background_darkness = 0.76
     use_system_font = False
-    font = Liberation Mono 7
+    font = Liberation Mono 9
     antialias = False
     scrollback_infinite = True
   [[solarized-dark]]
@@ -17,7 +17,7 @@
     cursor_color = "#eee8d5"
     foreground_color = "#eee8d5"
     antialias = False
-    font = Liberation Mono 7
+    font = Liberation Mono 9
     background_color = "#002b36"
     scrollback_infinite = True
   [[solarized-light]]
@@ -27,7 +27,7 @@
     cursor_color = "#002b36"
     foreground_color = "#002b36"
     antialias = False
-    font = Liberation Mono 7
+    font = Liberation Mono 9
     background_color = "#eee8d5"
     scrollback_infinite = True
 [layouts]
