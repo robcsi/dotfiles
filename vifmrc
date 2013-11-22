@@ -264,7 +264,7 @@ nmap S :sort<cr>
 nmap w :view<cr>
 nmap o :!gvim --remote-tab-silent %f<cr>
 nmap O :!gvim %f<cr>
-nmap e :empty<cr>
+nmap E :empty<cr>
 
 " Open file in the background using its default program
 nmap gb :file &<cr>l
@@ -319,4 +319,9 @@ else
 endif
 
 execute 'set' 'statusline=" '.$SL_PREFIX.' %t%= %A %10u:%-7g %15E %20d  "'
+
+" Explore mode shows the content of a file in full screen mode
+nnoremap e <c-w>oe
+qnoremap q q<c-w>v
+
 
