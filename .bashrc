@@ -116,3 +116,6 @@ alias gc='git commit -m'
 alias gca='git commit -am'
 alias ga='git add'
 alias gsh='git show'
+
+#ls++ alias
+alias ls='ls++'
