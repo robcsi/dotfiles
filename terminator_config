@@ -5,7 +5,6 @@
 [keybindings]
 [profiles]
   [[default]]
-    background_darkness = 0.76
     use_system_font = False
     font = Liberation Mono 9
     antialias = False
@@ -17,6 +16,7 @@
     cursor_color = "#eee8d5"
     foreground_color = "#eee8d5"
     antialias = False
+    copy_on_selection = True
     font = Liberation Mono 9
     background_color = "#002b36"
     scrollback_infinite = True

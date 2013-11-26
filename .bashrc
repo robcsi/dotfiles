@@ -119,3 +119,5 @@ alias gsh='git show'
 
 #ls++ alias
 alias ls='ls++'
+
+PATH=$PATH:/win/d/git/scripts
