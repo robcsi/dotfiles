@@ -117,3 +117,8 @@ alias gca='git commit -am'
 alias ga='git add'
 alias gsh='git show'
 alias gap='git add -p'
+
+#ls++ alias
+alias ls='ls++'
+
+PATH=$PATH:/win/d/git/scripts
