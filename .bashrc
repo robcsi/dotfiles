@@ -117,6 +117,7 @@ alias gca='git commit -am'
 alias ga='git add'
 alias gsh='git show'
 alias gap='git add -p'
+alias gl='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 
 #ls++ alias
 alias ls='ls++'
