@@ -327,6 +327,5 @@ qnoremap q q<c-w>v
 " Exiting more easily
 nnoremap q ZZ
 
-set number
-set relativenumber
+windo set number relativenumber
 
