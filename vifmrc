@@ -329,3 +329,5 @@ nnoremap q ZZ
 
 windo set number relativenumber
 
+" Show hidden files automatically on startup
+windo normal zo
