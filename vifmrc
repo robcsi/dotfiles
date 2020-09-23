@@ -179,6 +179,13 @@ fileviewer *.h highlight -O ansi
 fileviewer *.cs highlight -O ansi
 fileviewer *.bat highlight -O ansi
 fileviewer *.d highlight -O ansi
+fileviewer *.py highlight -O ansi
+fileviewer *.sh highlight -O ansi
+fileviewer *.md highlight -O ansi
+fileviewer *.yaml highlight -O ansi
+fileviewer *.yml highlight -O ansi
+fileviewer *.json highlight -O ansi
+fileviewer Dockerfile highlight -O ansi
 
 fileview *.zip unzip -l %"c
 fileview */ tree %"c
