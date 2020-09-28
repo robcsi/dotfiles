@@ -4,10 +4,10 @@
 nmap <c-n> :mkdir<space>
 
 " Yank current directory path into the clipboard
-nmap yd :!echo %d | clip %i<cr>
+nmap yd :!echo %d | xclip %i<cr>
 
 " Yank current file path into the clipboard
-nmap yf :!echo %c:p | clip %i<cr>
+nmap yf :!echo %c:p | xclip %i<cr>
 
 " Mappings for faster renaming
 nmap I cw<c-a>
@@ -42,15 +42,6 @@ set statusline=" %t%= %A %10u:%-7g %15s %15E %20d "
 " show all bookmarks
 nmap <c-b> :marks<cr>
 
-mark h c:/users/sarkozi.robert/AppData/Roaming/vifm
-mark v c:/users/sarkozi.robert/AppData/Roaming/Vico\ Software
-mark d c:/users/sarkozi.robert/Documents/
-mark z z:/
-mark t d:/temp
-mark p d:/projects/perforce/rsarkozi_cs17-sr/
-mark c //codespring.local/dfs/40-Public/Catering/
-mark g d:/git
-mark k d:/kit
 
 " }}}
 
@@ -99,9 +90,7 @@ command run !! ./%"c
 " preview
 nmap w :view<cr>
 
-nmap o :!gvim --remote-tab-silent %f<cr>
-" Open file in the background using its default program
-nmap O :!gvim --remote-silent %f<cr>
+nmap o :!nvim %f<cr>
 
 " }}}
 "
@@ -112,14 +101,15 @@ set runexec
 
 " FILETYPES {{{
 
-filetype *.html,*.htm firefox %"c &
-filetype *.txt,*.tex vim %"c &
+filetype *.html,*.htm brave %"c &
+filetype *.txt,*.tex nvim %"c &
 filetype *.pdf mupdf %"c &
-filetype *.xlsm,*.xlsx,*.xls excel.exe %"c &
-filetype *.doc,*.docx winword.exe %"c &
-filetype *.ppt,*.pptx powerpnt.exe %"c &
-filetype *.jpg,*.jpe,*.jpeg,*.png,*.gif,*.ico,*.bmp,*.tif,*.tiff imageglass.exe %"c &
-filetype *.chm hh.exe %"c &
+filetype *.xlsm,*.xlsx,*.xls libreoffice %"c &
+filetype *.doc,*.docx libreoffice %"c &
+filetype *.ppt,*.pptx libreoffice %"c &
+filetype *.jpg,*.jpe,*.jpeg,*.png,*.gif,*.ico,*.bmp,*.tif,*.tiff feh %"c &
+filetype *.epgz pencil %"c &
+filetype *.MOV,*.mov,*.mpeg,*.mkv,*.avi smplayer %"c &
 
 " }}}
 
@@ -185,6 +175,7 @@ fileviewer *.md highlight -O ansi
 fileviewer *.yaml highlight -O ansi
 fileviewer *.yml highlight -O ansi
 fileviewer *.json highlight -O ansi
+fileviewer *.js highlight -O ansi
 fileviewer Dockerfile highlight -O ansi
 
 fileview *.zip unzip -l %"c
@@ -199,7 +190,7 @@ nnoremap e <c-w>oe
 qnoremap q q<c-w>v
 
 " configure vifm
-nmap \c :execute ':!vim $MYVIFMRC' | restart<cr>
+nmap \c :execute ':!nvim $MYVIFMRC' | restart<cr>
 
 " exit quickly
 nmap q ZZ
