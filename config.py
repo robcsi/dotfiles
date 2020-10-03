@@ -235,6 +235,8 @@ c.tabs.show = 'always'
 # Type: String
 c.fonts.default_size = '11pt'
 
+# Font used for the hints.
+# Type: Font
 c.fonts.hints = 'default_size default_family'
 
 # Default font size (in pixels) for regular text.
@@ -244,14 +246,14 @@ c.fonts.web.size.default = 11
 # Bindings for normal mode
 config.bind('X', ':undo')
 config.bind('d', 'run-with-count 10 scroll down')
-config.bind('u', 'run-with-count 10 scroll up')
 config.bind('gJ', 'tab-move +')
 config.bind('gK', 'tab-move -')
 config.bind('gh', 'home')
 config.bind('gl', 'tab-focus last')
-config.bind('gs', 'config-write-py --force')
+config.bind('gs', ':config-write-py --force')
 config.bind('q', ':quit')
 config.bind('s', ':stop')
 config.bind('t', 'set-cmd-text -s :open -t')
 config.bind('tab-move', '-')
+config.bind('u', 'run-with-count 10 scroll up')
 config.bind('x', ':tab-close')
