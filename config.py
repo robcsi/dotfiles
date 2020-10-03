@@ -47,6 +47,14 @@ c.history_gap_interval = 30
 #   - window: Open in a new window.
 c.new_instance_open_target = 'tab'
 
+# Turn on Qt HighDPI scaling. This is equivalent to setting
+# QT_AUTO_SCREEN_SCALE_FACTOR=1 or QT_ENABLE_HIGHDPI_SCALING=1 (Qt >=
+# 5.14) in the environment. It's off by default as it can cause issues
+# with some bitmap fonts. As an alternative to this, it's possible to
+# set font sizes and the `zoom.default` setting.
+# Type: Bool
+c.qt.highdpi = True
+
 # Which cookies to accept. With QtWebEngine, this setting also controls
 # other features with tracking capabilities similar to those of cookies;
 # including IndexedDB, DOM storage, filesystem API, service workers, and
@@ -220,9 +228,23 @@ c.tabs.position = 'top'
 #   - switching: Show the tab bar when switching tabs.
 c.tabs.show = 'always'
 
+# Default font size to use. Whenever "default_size" is used in a font
+# setting, it's replaced with the size listed here. Valid values are
+# either a float value with a "pt" suffix, or an integer value with a
+# "px" suffix.
+# Type: String
+c.fonts.default_size = '11pt'
+
+c.fonts.hints = 'default_size default_family'
+
+# Default font size (in pixels) for regular text.
+# Type: Int
+c.fonts.web.size.default = 11
+
 # Bindings for normal mode
 config.bind('X', ':undo')
 config.bind('d', 'run-with-count 10 scroll down')
+config.bind('u', 'run-with-count 10 scroll up')
 config.bind('gJ', 'tab-move +')
 config.bind('gK', 'tab-move -')
 config.bind('gh', 'home')
@@ -232,5 +254,4 @@ config.bind('q', ':quit')
 config.bind('s', ':stop')
 config.bind('t', 'set-cmd-text -s :open -t')
 config.bind('tab-move', '-')
-config.bind('u', 'run-with-count 10 scroll up')
 config.bind('x', ':tab-close')
