@@ -176,6 +176,7 @@ fileviewer *.yaml highlight -O ansi
 fileviewer *.yml highlight -O ansi
 fileviewer *.json highlight -O ansi
 fileviewer *.js highlight -O ansi
+fileviewer *.rs highlight -O ansi
 fileviewer Dockerfile highlight -O ansi
 
 fileview *.zip unzip -l %"c
