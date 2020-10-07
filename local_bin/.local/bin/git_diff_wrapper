@@ -1,0 +1,4 @@
+#!/bin/bash
+#taken from: http://technotales.wordpress.com/2009/05/17/git-diff-with-vimdiff/
+echo $*
+vimdiff "$2" "$5"
