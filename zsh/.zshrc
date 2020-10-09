@@ -110,5 +110,11 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 alias ls='exa -alHm --git --group-directories-first'
 alias vim='nvim'
 
+alias dis='docker images'
+alias dcs='docker container ls -a'
+alias dcp='docker container ps'
+alias dirf='docker image rm -f'
+alias dcrf='docker container rm -f'
+
 set -o vi
 
