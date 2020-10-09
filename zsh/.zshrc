@@ -107,14 +107,29 @@ prompt_context() {}
 # fish like syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# generic aliases
 alias ls='exa -alHm --git --group-directories-first'
 alias vim='nvim'
 
+# docker aliases
 alias dis='docker images'
 alias dcs='docker container ls -a'
 alias dcp='docker container ps'
 alias dirf='docker image rm -f'
 alias dcrf='docker container rm -f'
 
+# git aliases for faster operation
+alias gp='git push'
+alias gg='git pull'
+alias gd='git diff'
+alias gs='git status'
+alias gc='git commit -m'
+alias gca='git commit -am'
+alias ga='git add'
+alias gsh='git show'
+alias gap='git add -p'
+alias gl='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+
+# set vi mode for shell
 set -o vi
 
