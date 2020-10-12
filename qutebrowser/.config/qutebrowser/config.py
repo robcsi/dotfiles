@@ -193,6 +193,15 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 # Type: Bool
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
+# Allow websites to register protocol handlers via
+# `navigator.registerProtocolHandler`.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.register_protocol_handler', True, 'https://mail.google.com?extsrc=mailto&url=%25s')
+
 # Position of the status bar.
 # Type: VerticalPosition
 # Valid values:
@@ -257,3 +266,4 @@ config.bind('t', 'set-cmd-text -s :open -t')
 config.bind('tab-move', '-')
 config.bind('u', 'run-with-count 10 scroll up')
 config.bind('x', ':tab-close')
+config.bind('<Escape>', ':clear-keychain ;; search ;; fullscreen --leave ;; fake-key <Escape>')
