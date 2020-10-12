@@ -250,9 +250,10 @@ c.fonts.hints = 'default_size default_family'
 
 # Default font size (in pixels) for regular text.
 # Type: Int
-c.fonts.web.size.default = 11
+c.fonts.web.size.default = 14
 
 # Bindings for normal mode
+config.bind('<Escape>', ':clear-keychain ;; search ;; fullscreen --leave ;; fake-key <Escape>')
 config.bind('X', ':undo')
 config.bind('d', 'run-with-count 10 scroll down')
 config.bind('gJ', 'tab-move +')
@@ -266,4 +267,3 @@ config.bind('t', 'set-cmd-text -s :open -t')
 config.bind('tab-move', '-')
 config.bind('u', 'run-with-count 10 scroll up')
 config.bind('x', ':tab-close')
-config.bind('<Escape>', ':clear-keychain ;; search ;; fullscreen --leave ;; fake-key <Escape>')
