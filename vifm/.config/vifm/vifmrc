@@ -182,6 +182,29 @@ fileviewer Dockerfile highlight -O ansi
 fileview *.zip unzip -l %"c
 fileview */ tree %"c
 
+fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.xpm
+        \ vifmimg draw %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+fileviewer *.gif
+        \ vifmimg gifpreview %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
+          \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
+          \*.as[fx]
+        \ vifmimg videopreview %px %py %pw %ph %c 
+        \ %pc 
+        \ vifmimg clear
+        " \ ffprobe -pretty %c 2>&1
+
+fileviewer *.pdf
+        \ vifmimg pdfpreview %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+        " \ pdftotext -nopgbrk %c -
+
 "setting up findprg to run for the :find command
 "set findprg="c:\\GnuWin32\\bin\\find.exe %s %a"
 set findprg="where /R %s %A"
