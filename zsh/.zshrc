@@ -130,6 +130,9 @@ alias gsh='git show'
 alias gap='git add -p'
 alias gl='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 
+# aliasing vifm to vifm with ueberzug
+alias vifm='vifmrun'
+
 # set vi mode for shell
 set -o vi
 
