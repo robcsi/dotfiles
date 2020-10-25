@@ -2,7 +2,7 @@
 export PATH=$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/robcsi/.oh-my-zsh"
+export ZSH="/home/${USER}/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -129,6 +129,9 @@ alias ga='git add'
 alias gsh='git show'
 alias gap='git add -p'
 alias gl='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+
+# aliasing vifm to vifm with ueberzug
+alias vifm='vifmrun'
 
 # set vi mode for shell
 set -o vi
