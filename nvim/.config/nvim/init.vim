@@ -60,6 +60,7 @@ Plug 'rust-lang/rust.vim'
 " Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
+Plug 'preservim/tagbar'
 call plug#end()
 
 set guioptions=c
@@ -282,7 +283,7 @@ nnoremap <leader>p :vsplit<CR> \| :terminal git push<CR>i
 nnoremap <leader>h :GitGutterPreviewHunk<CR>
 nnoremap <leader>M :Marks<CR>
 nnoremap <leader>v :FloatermNew vifm<CR>
-nnoremap <leader>t :FloatermToggle<CR>
+nnoremap <leader>t :TagbarToggle<CR>
 nnoremap <leader>Z :FloatermNew fzf<CR>
 nnoremap <silent>K :call <SID>show_documentation()<CR>
 nnoremap <leader>S :Startify<CR>
