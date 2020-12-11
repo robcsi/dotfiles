@@ -106,6 +106,7 @@ source $ZSH/oh-my-zsh.sh
 prompt_context() {}
 # fish like syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # generic aliases
 alias ls='exa -alHm --git --group-directories-first'
