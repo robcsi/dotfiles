@@ -2,3 +2,16 @@ yt https://www.youtube.com/
 qb https://github.com/qutebrowser/qutebrowser/releases
 gm https://mail.google.com/mail/u/0/#inbox
 gr https://github.com/robcsi
+cct-aws https://us-east-1.signin.aws.amazon.com/oauth?SignatureVersion=4&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJMOATPLHVSJ563XQ&X-Amz-Date=2020-12-02T19%3A08%3A27.036Z&X-Amz-Signature=49c050973416d2cfdc7c11a2db47a22a9e88fe04726f24d548c790a530402ade&X-Amz-SignedHeaders=host&client_id=arn%3Aaws%3Aiam%3A%3A015428540659%3Auser%2Fhomepage&code_challenge=gIj1VUWzjBDL1AyEDn-uMTq8a8zttvJVsSnBnPS4_lI&code_challenge_method=SHA-256&redirect_uri=https%3A%2F%2Fconsole.aws.amazon.com%2Fconsole%2Fhome%3Fstate%3DhashArgs%2523%26isauthcode%3Dtrue&response_type=code&state=hashArgs%23
+ph https://photos.google.com/
+ox https://www.olx.ro/
+bors-bb https://bitbucket.org/borsdevelopers/aws-cf/src/main/
+digi https://www.digiromania.ro/my-account
+vpn https://spin.atomicobject.com/2019/04/07/openvpn-raspberry-pi/
+pivpn https://www.pcmag.com/how-to/how-to-create-a-vpn-server-with-raspberry-pi
+huawei http://192.168.100.1/
+home https://188.24.127.134/
+rpi400mc https://192.168.100.45/
+tplink http://192.168.100.39/webpages/login.html?t=1603240096315
+bt https://ib.btrl.ro/BT24/bfo/channel/web/loginframe.jsp?locale=RO
+openvpnarch https://averagelinuxuser.com/linux-vpn-server/
