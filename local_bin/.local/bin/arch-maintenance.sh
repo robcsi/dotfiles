@@ -13,7 +13,7 @@ yay -Syu
 echo
 
 echo Remove unwanted dependencies:
-yay -Yc
+yay -Ycc
 echo
 
 echo Check for orphans:
