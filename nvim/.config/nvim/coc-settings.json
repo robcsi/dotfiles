@@ -20,5 +20,24 @@
                                 "4"
                         ]
                 }
-        }
+        },
+        "clangd.path": "/home/siar/.config/coc/extensions/coc-clangd-data/install/10.0.0/clangd_10.0.0/bin/clangd",
+        "yaml.customTags": [
+          "!Equals sequence",
+          "!FindInMap sequence",
+          "!GetAtt",
+          "!GetAZs",
+          "!ImportValue",
+          "!Join sequence",
+          "!Ref",
+          "!Select sequence",
+          "!Split sequence",
+          "!Or sequence",
+          "!And sequence",
+          "!If sequence",
+          "!Not sequence",
+          "!Base64 sequence",
+          "!Sub",
+          "!Condition"
+        ]
 }
