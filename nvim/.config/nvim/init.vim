@@ -61,6 +61,9 @@ Plug 'rust-lang/rust.vim'
 Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'preservim/tagbar'
+" Debugger Plugins
+Plug 'puremourning/vimspector'
+Plug 'szw/vim-maximizer'
 call plug#end()
 
 set guioptions=c
@@ -492,3 +495,44 @@ let g:ctrlsf_auto_focus = {
     \ }
 let g:ctrlsf_auto_preview = 1
 let g:ctrlsf_default_view_mode = 'compact'
+
+"Maximixer & VimSpector
+
+fun GotoWindow(id)
+    call win_gotoid(a:id)
+    MaximizerToggle
+endfun
+
+"Maximizer
+let g:maximizer_set_default_mapping = 1
+
+"VimSpector
+
+let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB', 'vscode-node-debug2', 'vscode-bash-debug' ]
+
+nnoremap <leader>mt :MaximizerToggle!<CR>
+nnoremap <leader>dd :call vimspector#Launch()<CR>
+nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
+nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
+nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
+nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
+nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
+nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
+nnoremap <leader>de :call vimspector#Reset()<CR>
+
+nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
+
+nmap <leader>dl <Plug>VimspectorStepInto
+nmap <leader>dj <Plug>VimspectorStepOver
+nmap <leader>dk <Plug>VimspectorStepOut
+nmap <leader>dl <Plug>VimspectorStepInto
+nnoremap <leader>d<space> :call vimspector#Continue()<CR>
+
+nmap <leader>drc <Plug>VimspectorRunToCursor
+nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
+nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
+
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
