@@ -64,6 +64,10 @@ Plug 'preservim/tagbar'
 " Debugger Plugins
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
+
+Plug 'stsewd/fzf-checkout.vim'
+
+Plug 'samoshkin/vim-mergetool'
 call plug#end()
 
 set guioptions=c
@@ -536,3 +540,13 @@ nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 nmap <Leader>di <Plug>VimspectorBalloonEval
 " for visual mode, the visually selected text
 xmap <Leader>di <Plug>VimspectorBalloonEval
+
+" vim-mergetool plugin settings
+let g:mergetool_layout = 'mr'
+let g:mergetool_prefer_revision = 'local'
+nmap <leader>mt <plug>(MergetoolToggle)
+" smart diff exchange commands
+nmap <expr> <C-Left> &diff? '<Plug>(MergetoolDiffExchangeLeft)' : '<C-Left>'
+nmap <expr> <C-Right> &diff? '<Plug>(MergetoolDiffExchangeRight)' : '<C-Right>'
+nmap <expr> <C-Down> &diff? '<Plug>(MergetoolDiffExchangeDown)' : '<C-Down>'
+nmap <expr> <C-Up> &diff? '<Plug>(MergetoolDiffExchangeUp)' : '<C-Up>'
