@@ -284,7 +284,7 @@ nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>r :Tags<CR>
 nnoremap <leader>g :Gcd<CR>
 nnoremap <leader>s :G<CR>
-nnoremap <leader>e :CocCommand explorer<CR>
+nnoremap <leader>e :CocCommand explorer --sources=buffer+,file+ --position=floating --open-action-strategy=vsplit<CR>
 nnoremap <leader>q :xall!<CR>
 nnoremap <leader>p :vsplit<CR> \| :terminal git push<CR>i
 nnoremap <leader>h :GitGutterPreviewHunk<CR>
@@ -550,3 +550,4 @@ nmap <expr> <C-Left> &diff? '<Plug>(MergetoolDiffExchangeLeft)' : '<C-Left>'
 nmap <expr> <C-Right> &diff? '<Plug>(MergetoolDiffExchangeRight)' : '<C-Right>'
 nmap <expr> <C-Down> &diff? '<Plug>(MergetoolDiffExchangeDown)' : '<C-Down>'
 nmap <expr> <C-Up> &diff? '<Plug>(MergetoolDiffExchangeUp)' : '<C-Up>'
+
