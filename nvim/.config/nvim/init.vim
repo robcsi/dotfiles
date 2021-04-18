@@ -556,5 +556,7 @@ nmap <expr> <C-Up> &diff? '<Plug>(MergetoolDiffExchangeUp)' : '<C-Up>'
 set undofile
 set undodir=~/.undo
 let g:mundo_width = 60
-let g:mundo_preview_height = 40
+let g:mundo_preview_height = 20
 let g:mundo_right = 1
+let g:mundo_preview_bottom = 1
+let g:mundo_auto_preview = 1
