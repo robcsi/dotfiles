@@ -287,7 +287,6 @@ nnoremap <leader>s :G<CR>
 nnoremap <leader>e :CocCommand explorer --sources=buffer+,file+ --position=floating --open-action-strategy=vsplit<CR>
 nnoremap <leader>q :xall!<CR>
 nnoremap <leader>p :vsplit<CR> \| :terminal git push<CR>i
-nnoremap <leader>h :GitGutterPreviewHunk<CR>
 nnoremap <leader>M :Marks<CR>
 nnoremap <leader>v :FloatermNew vifm<CR>
 nnoremap <leader>t :TagbarToggle<CR>
@@ -390,11 +389,12 @@ let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename' ] ]
+      \             [ 'gitbranch', 'readonly', 'filename', 'githunksummary'] ]
       \ },
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead',
       \   'filename': 'LightlineFilename',
+      \   'githunksummary': 'GitHunkSummary',
       \ },
       \ }
 
@@ -402,6 +402,11 @@ function! LightlineFilename()
   let filename = expand('%:p') !=# '' ? expand('%:p') : '[No Name]'
   let modified = &modified ? ' +' : ''
   return filename . modified
+endfunction
+
+function! GitHunkSummary()
+    let [a,m,r] = GitGutterGetHunkSummary()
+    return printf('+%d ~%d -%d', a, m, r)
 endfunction
 
 "===========================================================================
@@ -560,3 +565,10 @@ let g:mundo_preview_height = 20
 let g:mundo_right = 1
 let g:mundo_preview_bottom = 1
 let g:mundo_auto_preview = 1
+
+" git gutter mappings -- these are available by default
+nmap <leader>hp <Plug>(GitGutterPreviewHunk)
+nmap <leader>hs <Plug>(GitGutterStageHunk)
+nmap <leader>hu <Plug>(GitGutterUndoHunk)
+nmap [c <Plug>(GitGutterPrevHunk)
+nmap ]c <Plug>(GitGutterNextHunk)
