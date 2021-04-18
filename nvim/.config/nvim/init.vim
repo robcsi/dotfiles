@@ -572,3 +572,6 @@ nmap <leader>hs <Plug>(GitGutterStageHunk)
 nmap <leader>hu <Plug>(GitGutterUndoHunk)
 nmap [c <Plug>(GitGutterPrevHunk)
 nmap ]c <Plug>(GitGutterNextHunk)
+command! Gqf GitGutterQuickFix | copen
+nmap <leader>hq :Gqf<CR>
+
