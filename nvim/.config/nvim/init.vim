@@ -551,6 +551,10 @@ nmap <expr> <C-Right> &diff? '<Plug>(MergetoolDiffExchangeRight)' : '<C-Right>'
 nmap <expr> <C-Down> &diff? '<Plug>(MergetoolDiffExchangeDown)' : '<C-Down>'
 nmap <expr> <C-Up> &diff? '<Plug>(MergetoolDiffExchangeUp)' : '<C-Up>'
 
+" Settings for Mundo
 " Enable persistent undo so that undo history persists across vim sessions
 set undofile
 set undodir=~/.undo
+let g:mundo_width = 60
+let g:mundo_preview_height = 40
+let g:mundo_right = 1
