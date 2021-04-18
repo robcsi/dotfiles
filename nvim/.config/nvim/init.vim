@@ -32,7 +32,7 @@ Plug 'junegunn/vim-plug'
 Plug 'tpope/vim-fugitive'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-shell'
-Plug 'sjl/gundo.vim'
+Plug 'simnalamburt/vim-mundo'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
@@ -243,7 +243,7 @@ inoremap <C-t>     <Esc>:tabnew<CR>
 nnoremap <C-Delete> :tabclose<CR>
 
 "toggling GUndo plugin
-nnoremap <F5> :GundoToggle<CR>
+nnoremap <F5> :MundoToggle<CR>
 
 "remap n and N to center next search result, and pulse the line
 nnoremap n nzzzv
@@ -551,3 +551,6 @@ nmap <expr> <C-Right> &diff? '<Plug>(MergetoolDiffExchangeRight)' : '<C-Right>'
 nmap <expr> <C-Down> &diff? '<Plug>(MergetoolDiffExchangeDown)' : '<C-Down>'
 nmap <expr> <C-Up> &diff? '<Plug>(MergetoolDiffExchangeUp)' : '<C-Up>'
 
+" Enable persistent undo so that undo history persists across vim sessions
+set undofile
+set undodir=~/.undo
