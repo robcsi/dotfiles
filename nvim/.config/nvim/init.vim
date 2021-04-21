@@ -279,7 +279,7 @@ nnoremap <leader>, :bp<CR>
 
 nnoremap <leader><SPACE> :Files<CR>
 nnoremap <leader>f :CtrlSF <C-r><C-w><CR>
-nnoremap <leader>C :CocSearch -S 
+nnoremap <leader>C :Commits<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>r :Tags<CR>
 nnoremap <leader>g :Gcd<CR>
@@ -288,7 +288,7 @@ nnoremap <leader>e :CocCommand explorer --sources=buffer+,file+ --position=float
 nnoremap <leader>q :xall!<CR>
 nnoremap <leader>p :vsplit<CR> \| :terminal git push<CR>i
 nnoremap <leader>M :Marks<CR>
-nnoremap <leader>v :FloatermNew vifm<CR>
+nnoremap <leader>v :CocSearch -S 
 nnoremap <leader>t :TagbarToggle<CR>
 nnoremap <leader>Z :FloatermNew fzf<CR>
 nnoremap <silent>K :call <SID>show_documentation()<CR>
