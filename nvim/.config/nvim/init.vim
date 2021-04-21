@@ -520,7 +520,7 @@ let g:maximizer_set_default_mapping = 1
 
 let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB', 'vscode-node-debug2', 'vscode-bash-debug' ]
 
-nnoremap <leader>mt :MaximizerToggle!<CR>
+nnoremap <leader>tm :MaximizerToggle!<CR>
 nnoremap <leader>dd :call vimspector#Launch()<CR>
 nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
 nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
