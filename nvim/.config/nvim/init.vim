@@ -284,7 +284,8 @@ nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>r :Tags<CR>
 nnoremap <leader>g :Gcd<CR>
 nnoremap <leader>s :G<CR>
-nnoremap <leader>e :CocCommand explorer --sources=buffer+,file+ --position=floating --open-action-strategy=vsplit<CR>
+nnoremap <leader>e :CocCommand explorer --sources=buffer+,file+ --position=floating <CR>
+"--open-action-strategy=vsplit
 nnoremap <leader>q :xall!<CR>
 nnoremap <leader>p :vsplit<CR> \| :terminal git push<CR>i
 nnoremap <leader>M :Marks<CR>
@@ -574,4 +575,13 @@ nmap [c <Plug>(GitGutterPrevHunk)
 nmap ]c <Plug>(GitGutterNextHunk)
 command! Gqf GitGutterQuickFix | copen
 nmap <leader>hq :Gqf<CR>
+
+" fzf-checkout settings
+
+let g:fzf_checkout_git_options = '--sort=-committerdate'
+nmap <leader>gb :GBranches<CR>
+
+let g:fzf_branch_actions = {
+      \ 'track': {'keymap': 'ctrl-t'},
+      \}
 
