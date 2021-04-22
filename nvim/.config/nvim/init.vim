@@ -291,6 +291,7 @@ nnoremap <leader>C :Commits<CR>
 nnoremap <leader>B :BCommits<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>r :Tags<CR>
+nnoremap <leader>G :GFiles?<CR>
 nnoremap <leader>g :Gcd<CR>
 nnoremap <leader>s :G<CR>
 nnoremap <silent><leader>e :CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width -60<CR>
@@ -299,7 +300,6 @@ nnoremap <leader>q :xall!<CR>
 nnoremap <leader>p :vsplit<CR> \| :terminal git push<CR>i
 nnoremap <leader>v :CocSearch -S 
 nnoremap <leader>t :TagbarToggle<CR>
-nnoremap <leader>Z :GFiles?<CR>
 nnoremap <silent>K :call <SID>show_documentation()<CR>
 nnoremap <leader>S :Startify<CR>
 nnoremap <leader><tab> :Maps<CR>
