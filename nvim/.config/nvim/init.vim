@@ -402,6 +402,7 @@ endfunction
 
 " Use autocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 "===========================================================================
 " Use tab for trigger completion with characters ahead and navigate.
