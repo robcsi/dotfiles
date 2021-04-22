@@ -38,7 +38,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/vim-peekaboo'
 Plug 'tpope/vim-surround'
-" Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-repeat'
 Plug 'itchyny/lightline.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -57,16 +56,11 @@ Plug 'vimwiki/vimwiki'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'dyng/ctrlsf.vim'
 Plug 'rust-lang/rust.vim'
-" Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'preservim/tagbar'
-" Debugger Plugins
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
-
 Plug 'stsewd/fzf-checkout.vim'
-
 Plug 'samoshkin/vim-mergetool'
 call plug#end()
 
@@ -264,9 +258,29 @@ let g:peekaboo_window = 'vertical botright 80new'
 "FZF
 let g:fzf_history_dir = '~'
 
-let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.9, 'relative': v:true } }
 
-let $FZF_DEFAULT_OPTS='--reverse --color=dark --color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#d858fe --color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef'
+" let $FZF_DEFAULT_OPTS='--reverse --color=dark --color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#d858fe --color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef'
+let $FZF_DEFAULT_OPTS='--reverse'
+
+let g:fzf_colors =
+            \ { 'fg':      ['fg', 'Normal'],
+            \ 'bg':      ['bg', 'Normal'],
+            \ 'hl':      ['fg', 'Comment'],
+            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+            \ 'hl+':     ['fg', 'Statement'],
+            \ 'info':    ['fg', 'PreProc'],
+            \ 'border':  ['fg', 'Ignore'],
+            \ 'prompt':  ['fg', 'Conditional'],
+            \ 'pointer': ['fg', 'Exception'],
+            \ 'marker':  ['fg', 'Keyword'],
+            \ 'spinner': ['fg', 'Label'],
+            \ 'header':  ['fg', 'Comment'] }
+
+let g:fzf_tags_command = 'ctags -R'
+let g:fzf_preview_window = ['down:50%', 'ctrl-/']
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 " mappings
 map <SPACE> <leader>
@@ -274,17 +288,18 @@ map <SPACE> <leader>
 nnoremap <leader><SPACE> :Files<CR>
 nnoremap <leader>f :CtrlSF <C-r><C-w><CR>
 nnoremap <leader>C :Commits<CR>
+nnoremap <leader>B :BCommits<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>r :Tags<CR>
 nnoremap <leader>g :Gcd<CR>
 nnoremap <leader>s :G<CR>
-nnoremap <leader>e :CocCommand explorer --sources=buffer+,file+ --position=floating <CR>
+nnoremap <silent><leader>e :CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width -60<CR>
 "--open-action-strategy=vsplit
 nnoremap <leader>q :xall!<CR>
 nnoremap <leader>p :vsplit<CR> \| :terminal git push<CR>i
 nnoremap <leader>v :CocSearch -S 
 nnoremap <leader>t :TagbarToggle<CR>
-nnoremap <leader>Z :FloatermNew fzf<CR>
+nnoremap <leader>Z :GFiles?<CR>
 nnoremap <silent>K :call <SID>show_documentation()<CR>
 nnoremap <leader>S :Startify<CR>
 nnoremap <leader><tab> :Maps<CR>
@@ -583,3 +598,4 @@ let g:fzf_branch_actions = {
 tnoremap <special> jk <C-\><C-n>
 au TermOpen * setlocal modifiable
 autocmd TermOpen * setlocal statusline=%{b:term_title}
+
