@@ -390,12 +390,13 @@ let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'githunksummary'] ]
+      \             [ 'gitbranch', 'readonly', 'filename', 'githunksummary', 'cocstatus'] ]
       \ },
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead',
       \   'filename': 'LightlineFilename',
       \   'githunksummary': 'GitHunkSummary',
+      \   'cocstatus': 'coc#status',
       \ },
       \ }
 
@@ -409,6 +410,9 @@ function! GitHunkSummary()
     let [a,m,r] = GitGutterGetHunkSummary()
     return printf('+%d ~%d -%d', a, m, r)
 endfunction
+
+" Use autocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 "===========================================================================
 " Use tab for trigger completion with characters ahead and navigate.
