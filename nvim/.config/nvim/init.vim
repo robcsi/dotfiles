@@ -38,7 +38,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/vim-peekaboo'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-repeat'
 Plug 'itchyny/lightline.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -113,7 +113,7 @@ set scrolloff=7
 "automatically change directory when opening a file
 set autochdir
 " Switch pwd to whichever file I'm current editing
-autocmd BufEnter * lcd %:p:h 
+" autocmd BufEnter * lcd %:p:h 
 
 " Use the OS clipboard by default
 set clipboard=unnamed
@@ -234,12 +234,9 @@ nnoremap k gk
 nnoremap j gj
 
 " tab navigation like firefox - http://vim.wikia.com/wiki/Alternative_tab_navigation
-nnoremap <C-S-tab> :tabprevious<CR>
-nnoremap <C-tab>   :tabnext<CR>
+nnoremap <leader>.   :tabnext<CR>
+nnoremap <leader>, :tabprevious<CR>
 nnoremap <C-t>     :tabnew<CR>
-inoremap <C-S-tab> <Esc>:tabprevious<CR>i
-inoremap <C-tab>   <Esc>:tabnext<CR>i
-inoremap <C-t>     <Esc>:tabnew<CR>
 nnoremap <C-Delete> :tabclose<CR>
 
 "toggling GUndo plugin
@@ -274,9 +271,6 @@ let $FZF_DEFAULT_OPTS='--reverse --color=dark --color=fg:-1,bg:-1,hl:#c678dd,fg+
 " mappings
 map <SPACE> <leader>
 
-nnoremap <leader>. :bn<CR>
-nnoremap <leader>, :bp<CR>
-
 nnoremap <leader><SPACE> :Files<CR>
 nnoremap <leader>f :CtrlSF <C-r><C-w><CR>
 nnoremap <leader>C :Commits<CR>
@@ -288,12 +282,12 @@ nnoremap <leader>e :CocCommand explorer --sources=buffer+,file+ --position=float
 "--open-action-strategy=vsplit
 nnoremap <leader>q :xall!<CR>
 nnoremap <leader>p :vsplit<CR> \| :terminal git push<CR>i
-nnoremap <leader>M :Marks<CR>
 nnoremap <leader>v :CocSearch -S 
 nnoremap <leader>t :TagbarToggle<CR>
 nnoremap <leader>Z :FloatermNew fzf<CR>
 nnoremap <silent>K :call <SID>show_documentation()<CR>
 nnoremap <leader>S :Startify<CR>
+nnoremap <leader><tab> :Maps<CR>
 
 "shortcut for counting occurence of word under cursor in file
 nnoremap <leader>c :%s/<c-r><c-w>//gn<cr>
@@ -311,13 +305,11 @@ map H <Plug>(operator-quickhl-manual-this-motion)
 nmap <leader>z :%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>
 
 " mapping for next and previous buffer
-nnoremap <leader>. :bn<CR>
-nnoremap <leader>, :bp<CR>
+" nnoremap <leader>. :bnext<CR>
+" nnoremap <leader>, :bprev<CR>
 
 " shortcut to insert current date in file
 nnoremap <leader>D a **<C-R>=strftime("%Y %b %d @ %H:%M")<cr>** <esc>
-
-nmap <leader><tab> <plug>(fzf-maps-n)
 
 " open help in vertical split directly
 command! -nargs=* -complete=help Help vertical belowright help <args>
@@ -330,11 +322,9 @@ function! s:show_documentation()
   endif
 endfunction
 
-nmap <leader><tab> <plug>(fzf-maps-n)
-
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-nmap <leader>i  <Plug>(coc-format)
+nmap <leader>i <Plug>(coc-format)
 
 " Use <c-space> to trigger completion.
 if has('nvim')
@@ -364,7 +354,6 @@ endfunction
 " how to exit quickly from Insert mode
 inoremap <special> kj <ESC> 
 inoremap <special> jk <ESC>:
-tnoremap <special> jk <C-\><C-n>
 
 " Floaterm
 let g:floaterm_keymap_toggle = '<F1>'
@@ -381,13 +370,13 @@ let g:floaterm_autoclose=1
 
 "netrw calling shortcut
 "nnoremap - :Ex<cr>
-let g:netrw_preview   = 1
-let g:netrw_liststyle = 1
-let g:netrw_winsize   = 30
+" let g:netrw_preview   = 1
+" let g:netrw_liststyle = 1
+" let g:netrw_winsize   = 30
 
 "lightline config
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'githunksummary', 'cocstatus'] ]
@@ -408,7 +397,7 @@ endfunction
 
 function! GitHunkSummary()
     let [a,m,r] = GitGutterGetHunkSummary()
-    return printf('+%d ~%d -%d', a, m, r)
+    return printf('gs: +%d ~%d -%d', a, m, r)
 endfunction
 
 " Use autocmd to force lightline update.
@@ -463,8 +452,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>F  <Plug>(coc-format-selected)
-nmap <leader>F  <Plug>(coc-format-selected)
+xmap <leader>F <Plug>(coc-format-selected)
+nmap <leader>F <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -524,7 +513,7 @@ let g:maximizer_set_default_mapping = 1
 
 let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-cpptools', 'CodeLLDB', 'vscode-node-debug2', 'vscode-bash-debug' ]
 
-nnoremap <leader>tm :MaximizerToggle!<CR>
+nnoremap <silent><leader>tm :MaximizerToggle!<CR>
 nnoremap <leader>dd :call vimspector#Launch()<CR>
 nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
 nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
@@ -589,3 +578,7 @@ let g:fzf_branch_actions = {
       \ 'track': {'keymap': 'ctrl-t'},
       \}
 
+" terminal settings
+tnoremap <special> jk <C-\><C-n>
+au TermOpen * setlocal modifiable
+autocmd TermOpen * setlocal statusline=%{b:term_title}
