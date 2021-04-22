@@ -113,7 +113,7 @@ set scrolloff=7
 "automatically change directory when opening a file
 set autochdir
 " Switch pwd to whichever file I'm current editing
-autocmd BufEnter * lcd %:p:h 
+" autocmd BufEnter * lcd %:p:h 
 
 " Use the OS clipboard by default
 set clipboard=unnamed
@@ -354,7 +354,6 @@ endfunction
 " how to exit quickly from Insert mode
 inoremap <special> kj <ESC> 
 inoremap <special> jk <ESC>:
-tnoremap <special> jk <C-\><C-n>
 
 " Floaterm
 let g:floaterm_keymap_toggle = '<F1>'
@@ -397,7 +396,7 @@ endfunction
 
 function! GitHunkSummary()
     let [a,m,r] = GitGutterGetHunkSummary()
-    return printf('+%d ~%d -%d', a, m, r)
+    return printf('gs: +%d ~%d -%d', a, m, r)
 endfunction
 
 "===========================================================================
@@ -575,3 +574,7 @@ let g:fzf_branch_actions = {
       \ 'track': {'keymap': 'ctrl-t'},
       \}
 
+" terminal settings
+tnoremap <special> jk <C-\><C-n>
+au TermOpen * setlocal modifiable
+autocmd TermOpen * setlocal statusline=%{b:term_title}
