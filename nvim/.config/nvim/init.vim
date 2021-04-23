@@ -282,6 +282,9 @@ let g:fzf_tags_command = 'ctags -R'
 let g:fzf_preview_window = ['down:50%', 'ctrl-/']
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
+" fzf-checkout settings
+let g:fzf_checkout_git_options = '--sort=-committerdate'
+
 " mappings
 map <SPACE> <leader>
 
@@ -292,6 +295,7 @@ nnoremap <leader>B :BCommits<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>r :Tags<CR>
 nnoremap <leader>G :GFiles?<CR>
+nnoremap <leader>gb :GBranches<CR>
 nnoremap <leader>g :Gcd<CR>
 nnoremap <leader>s :G<CR>
 nnoremap <silent><leader>e :CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width -60<CR>
@@ -584,11 +588,6 @@ nmap [c <Plug>(GitGutterPrevHunk)
 nmap ]c <Plug>(GitGutterNextHunk)
 command! Gqf GitGutterQuickFix | copen
 nmap <leader>hq :Gqf<CR>
-
-" fzf-checkout settings
-
-let g:fzf_checkout_git_options = '--sort=-committerdate'
-nmap <leader>gb :GBranches<CR>
 
 let g:fzf_branch_actions = {
       \ 'track': {'keymap': 'ctrl-t'},
