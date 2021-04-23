@@ -598,3 +598,6 @@ tnoremap <special> jk <C-\><C-n>
 au TermOpen * setlocal modifiable
 autocmd TermOpen * setlocal statusline=%{b:term_title}
 
+" open terminal is vsplit bottom right
+nmap <leader>T :botright 75vsplit +terminal<CR>i
+
