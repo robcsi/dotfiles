@@ -619,3 +619,4 @@ let g:neoterm_autojump=1
 
 " Startify shortcuts
 nnoremap <A-s> :SSave 
+let g:startify_session_persistence = 1
