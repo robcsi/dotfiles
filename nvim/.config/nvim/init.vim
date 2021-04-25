@@ -616,3 +616,6 @@ let g:neoterm_size=20
 let g:neoterm_default_mod='botright'
 let g:neoterm_autoinsert=0
 let g:neoterm_autojump=1
+
+" Startify shortcuts
+nnoremap <A-s> :SSave 
