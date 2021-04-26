@@ -332,7 +332,7 @@ nmap <leader>z :%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>
 nnoremap <leader>D a **<C-R>=strftime("%Y %b %d @ %H:%M")<cr>** <esc>
 
 " open help in vertical split directly
-command! -nargs=* -complete=help Help vertical belowright help <args> | vertical resize -23
+command! -nargs=* -complete=help Help vertical belowright help <args> | vertical resize 85
 
 " function to show documentation for word under cursor
 " uses Help command above!!!
