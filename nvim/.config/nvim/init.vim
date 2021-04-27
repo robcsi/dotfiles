@@ -585,10 +585,13 @@ let g:mundo_auto_preview = 1
 nmap <leader>hp <Plug>(GitGutterPreviewHunk)
 nmap <leader>hs <Plug>(GitGutterStageHunk)
 nmap <leader>hu <Plug>(GitGutterUndoHunk)
+nmap <leader>gf :GitGutterFold<CR>
 nmap [c <Plug>(GitGutterPrevHunk)
 nmap ]c <Plug>(GitGutterNextHunk)
 command! Gqf GitGutterQuickFix | copen
 nmap <leader>hq :Gqf<CR>
+let g:gitgutter_highlight_linenrs = 1
+let g:gitgutter_highlight_lines = 0
 
 let g:fzf_branch_actions = {
       \ 'track': {'keymap': 'ctrl-t'},
