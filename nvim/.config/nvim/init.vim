@@ -623,3 +623,9 @@ let g:neoterm_autojump=1
 " Startify shortcuts
 nnoremap <A-s> :SSave 
 let g:startify_session_persistence = 1
+
+" resize windows/splits
+nnoremap <Left> :vertical resize -5<CR>
+nnoremap <Right> :vertical resize +5<CR>
+nnoremap <Up> :resize -5<CR>
+nnoremap <Down> :resize +5<CR>
