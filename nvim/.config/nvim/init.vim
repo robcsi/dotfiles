@@ -63,6 +63,8 @@ Plug 'szw/vim-maximizer'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'samoshkin/vim-mergetool'
 Plug 'kassio/neoterm'
+Plug 'ryanoasis/vim-devicons'
+Plug 'pacha/vem-tabline'
 call plug#end()
 
 set guioptions=c
@@ -629,3 +631,7 @@ nnoremap <silent><Left> :vertical resize -5<CR>
 nnoremap <silent><Right> :vertical resize +5<CR>
 nnoremap <silent><Up> :resize -5<CR>
 nnoremap <silent><Down> :resize +5<CR>
+
+" vem-tabline
+let g:vem_tabline_show = 2
+let g:vem_tabline_show_number = 'buffnr'
