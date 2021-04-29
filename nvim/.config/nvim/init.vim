@@ -625,7 +625,7 @@ nnoremap <A-s> :SSave
 let g:startify_session_persistence = 1
 
 " resize windows/splits
-nnoremap <Left> :vertical resize -5<CR>
-nnoremap <Right> :vertical resize +5<CR>
-nnoremap <Up> :resize -5<CR>
-nnoremap <Down> :resize +5<CR>
+nnoremap <silent><Left> :vertical resize -5<CR>
+nnoremap <silent><Right> :vertical resize +5<CR>
+nnoremap <silent><Up> :resize -5<CR>
+nnoremap <silent><Down> :resize +5<CR>
