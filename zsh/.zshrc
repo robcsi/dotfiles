@@ -24,6 +24,11 @@ alias ga='git add'
 alias gsh='git show'
 alias gap='git add -p'
 alias gl='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+alias gfa='git fetch --all'
+alias gb='git branch'
+alias gba='git branch --all'
+alias gsw='git switch'
+alias grs='git restore'
 
 # aliasing vifm to vifm with ueberzug
 alias vifm='vifmrun'
