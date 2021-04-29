@@ -1,5 +1,7 @@
 source /usr/share/instantshell/zshrc
 
+export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
+
 # generic aliases
 alias ls='exa -alHm --git --group-directories-first'
 alias vim='nvim'
