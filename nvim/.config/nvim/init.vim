@@ -234,10 +234,10 @@ nnoremap k gk
 nnoremap j gj
 
 " tab navigation like firefox - http://vim.wikia.com/wiki/Alternative_tab_navigation
-nnoremap <leader>.   :tabnext<CR>
-nnoremap <leader>, :tabprevious<CR>
-nnoremap <C-t>     :tabnew<CR>
-nnoremap <C-Delete> :tabclose<CR>
+nnoremap <silent><leader>.  :tabnext<CR>
+nnoremap <silent><leader>,  :tabprevious<CR>
+nnoremap <silent><C-t>      :tabnew<CR>
+nnoremap <silent><C-Delete> :tabclose<CR>
 
 "toggling GUndo plugin
 nnoremap <F5> :MundoToggle<CR>
