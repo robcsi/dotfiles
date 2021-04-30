@@ -233,7 +233,6 @@ nnoremap <C-l> <C-W>l
 nnoremap k gk
 nnoremap j gj
 
-" tab navigation like firefox - http://vim.wikia.com/wiki/Alternative_tab_navigation
 command! -nargs=0 TabNew :tabnew | Startify
 nnoremap <silent><leader>.  :tabnext<CR>
 nnoremap <silent><leader>,  :tabprevious<CR>
@@ -324,7 +323,6 @@ xmap <Space>m <Plug>(quickhl-manual-this)
 nmap <Space>M <Plug>(quickhl-manual-reset)
 xmap <Space>M <Plug>(quickhl-manual-reset)
 nmap <Space>j <Plug>(quickhl-cword-toggle)
-nmap <Space>] <Plug>(quickhl-tag-toggle)
 " map H <Plug>(operator-quickhl-manual-this-motion)
 
 " custom substitute/sed mapping to shortcut the replacement of work under cursor
@@ -335,7 +333,7 @@ nmap <leader>z :%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>
 " nnoremap <leader>, :bprev<CR>
 
 " shortcut to insert current date in file
-nnoremap <leader>D a **<C-R>=strftime("%Y %b %d @ %H:%M")<cr>** <esc>
+nnoremap <silent><leader>D a **<C-R>=strftime("%Y %b %d @ %H:%M")<cr>** <esc>
 
 " open help in vertical split directly
 command! -nargs=* -complete=help Help vertical belowright help <args> | vertical resize 85
@@ -378,20 +376,13 @@ function! s:check_back_space() abort
 endfunction
 
 " how to exit quickly from Insert mode
-inoremap <special> kj <ESC> 
+inoremap <special> jj <ESC> 
 inoremap <special> jk <ESC>:
 
 " Floaterm
-let g:floaterm_keymap_toggle = '<F1>'
-let g:floaterm_keymap_next   = '<F2>'
-let g:floaterm_keymap_prev   = '<F3>'
-let g:floaterm_keymap_new    = '<F4>'
-
-let g:floaterm_gitcommit='floaterm'
 let g:floaterm_autoinsert=1
 let g:floaterm_width=0.8
 let g:floaterm_height=0.8
-let g:floaterm_wintitle=0
 let g:floaterm_autoclose=1
 
 "netrw calling shortcut
@@ -511,16 +502,13 @@ augroup end
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <silent><leader>a  <Plug>(coc-codeaction-selected)
+nmap <silent><leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <silent><leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
+nmap <silent><leader>qf  <Plug>(coc-fix-current)
 
 " disable python2 provider/neovim
 let g:loaded_python_provider = 0
@@ -632,7 +620,7 @@ autocmd TermOpen * setlocal statusline=%{b:term_title}
 set autowriteall
 
 " general terminal settings
-tnoremap <special> jk <C-\><C-n>
+tnoremap <special> jj <C-\><C-n>
 tnoremap :q! <C-\><C-n>:q!<CR>
 " " Toggle terminal on/off (neovim )
 nnoremap <silent><A-t> :Ttoggle<CR>
