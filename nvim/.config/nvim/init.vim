@@ -64,7 +64,10 @@ Plug 'stsewd/fzf-checkout.vim'
 Plug 'samoshkin/vim-mergetool'
 Plug 'kassio/neoterm'
 Plug 'ryanoasis/vim-devicons'
-Plug 'pacha/vem-tabline'
+" Plug 'pacha/vem-tabline'
+Plug 'mengelbrecht/lightline-bufferline'
+Plug 'zefei/vim-wintabs'
+Plug 'zefei/vim-wintabs-powerline'
 call plug#end()
 
 set guioptions=c
@@ -651,6 +654,51 @@ nnoremap <silent><Right> :vertical resize +5<CR>
 nnoremap <silent><Up> :resize -5<CR>
 nnoremap <silent><Down> :resize +5<CR>
 
+" always show tab line
+set showtabline=2
+
 " vem-tabline
-let g:vem_tabline_show = 2
+let g:vem_tabline_show = 0
+let g:vem_tabline_multiwindow_mode = 1
 let g:vem_tabline_show_number = 'buffnr'
+" highlight VemTablineNormal           term=reverse cterm=none ctermfg=0   ctermbg=251 guifg=#242424 guibg=#cdcdcd gui=none
+highlight VemTablineLocation         term=reverse cterm=none ctermfg=239 ctermbg=251 guifg=#666666 guibg=#cdcdcd gui=none
+" highlight VemTablineNumber           term=reverse cterm=none ctermfg=239 ctermbg=251 guifg=#666666 guibg=#cdcdcd gui=none
+highlight VemTablineSelected         term=bold    cterm=bold ctermfg=0   ctermbg=255 guifg=#242424 guibg=#ffffff gui=bold
+highlight VemTablineLocationSelected term=bold    cterm=none ctermfg=239 ctermbg=255 guifg=#666666 guibg=#ffffff gui=bold
+highlight VemTablineNumberSelected   term=bold    cterm=none ctermfg=239 ctermbg=255 guifg=#666666 guibg=#ffffff gui=bold
+" highlight VemTablineShown            term=reverse cterm=none ctermfg=0   ctermbg=251 guifg=#242424 guibg=#cdcdcd gui=none
+highlight VemTablineLocationShown    term=reverse cterm=none ctermfg=0   ctermbg=251 guifg=#666666 guibg=#cdcdcd gui=none
+highlight VemTablineNumberShown      term=reverse cterm=none ctermfg=0   ctermbg=251 guifg=#666666 guibg=#cdcdcd gui=none
+highlight VemTablineSeparator        term=reverse cterm=none ctermfg=246 ctermbg=251 guifg=#888888 guibg=#cdcdcd gui=none
+highlight VemTablinePartialName      term=reverse cterm=none ctermfg=246 ctermbg=251 guifg=#888888 guibg=#cdcdcd gui=none
+" tab numbers
+highlight VemTablineTabNormal        term=reverse cterm=none ctermfg=0   ctermbg=251 guifg=#242424 guibg=#4a4a4a gui=none
+highlight VemTablineTabSelected      term=bold    cterm=bold ctermfg=0   ctermbg=255 guifg=#242424 guibg=#ffffff gui=bold
+
+" lightline bufferline
+let g:lightline#bufferline#unnamed = 'No Name'
+let g:lightline#bufferline#filename_modifier= ':.'
+let g:lightline#bufferline#more_buffers = '...'
+let g:lightline#bufferline#modified = ' ●'
+let g:lightline#bufferline#read_only = ' '
+let g:lightline#bufferline#shorten_path = 0
+let g:lightline#bufferline#show_number = 0
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#unicode_symbols = 1
+let g:lightline#bufferline#clickable = 1
+
+autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+
+" wintabs
+let g:wintabs_autoclose = 0
+" let g:wintabs_display = 'statusline'
+" nnoremap <silent><leader>, <Plug>(wintabs_previous)
+" nnoremap <silent><leader>. <Plug>(wintabs_next)
+" nnoremap <silent><C-Delete> <Plug>(wintabs_close)
+" nnoremap <silent><C-T>u <Plug>(wintabs_undo)
+" nnoremap <silent><C-T>o <Plug>(wintabs_only)
+" nnoremap <silent><C-W>c <Plug>(wintabs_close_window)
+" nnoremap <silent><C-W>o <Plug>(wintabs_only_window)
+" command! Tabc WintabsCloseVimtab
+" command! Tabo WintabsOnlyVimtab
