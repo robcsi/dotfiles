@@ -234,9 +234,10 @@ nnoremap k gk
 nnoremap j gj
 
 " tab navigation like firefox - http://vim.wikia.com/wiki/Alternative_tab_navigation
+command! -nargs=0 TabNew :tabnew | Startify
 nnoremap <silent><leader>.  :tabnext<CR>
 nnoremap <silent><leader>,  :tabprevious<CR>
-nnoremap <silent><C-t>      :tabnew<CR>
+nnoremap <silent><C-t>      :TabNew<CR>
 nnoremap <silent><C-Delete> :tabclose<CR>
 
 "toggling GUndo plugin
