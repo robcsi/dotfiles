@@ -694,12 +694,11 @@ autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 " wintabs
 let g:wintabs_autoclose = 0
 " let g:wintabs_display = 'statusline'
-" nnoremap <silent><leader>, <Plug>(wintabs_previous)
-" nnoremap <silent><leader>. <Plug>(wintabs_next)
-" nnoremap <silent><C-Delete> <Plug>(wintabs_close)
-" nnoremap <silent><C-T>u <Plug>(wintabs_undo)
-" nnoremap <silent><C-T>o <Plug>(wintabs_only)
-" nnoremap <silent><C-W>c <Plug>(wintabs_close_window)
-" nnoremap <silent><C-W>o <Plug>(wintabs_only_window)
-" command! Tabc WintabsCloseVimtab
-" command! Tabo WintabsOnlyVimtab
+nnoremap <silent><A-n> :WintabsNext<CR>
+nnoremap <silent><A-p> :WintabsPrevious<CR>
+nnoremap <silent><A-c> :WintabsCloseWindow<CR>
+nnoremap <silent><A-C> :WintabsCloseVimtab<CR>
+nnoremap <silent><A-u> :WintabsUndo<CR>
+nnoremap <silent><A-o> :WintabsOnlyWindow<CR>
+nnoremap <silent><A-r> :WintabsRefresh<CR>
+
