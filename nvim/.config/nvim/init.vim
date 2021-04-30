@@ -398,22 +398,41 @@ let g:floaterm_autoclose=1
 
 "lightline config
 let g:lightline = {
+      \ 'enable': { 'statusline': 1, 'tabline': 0 },
       \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'githunksummary', 'cocstatus'] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead',
+      \   'gitbranch': 'FugitiveStatusline',
       \   'filename': 'LightlineFilename',
       \   'githunksummary': 'GitHunkSummary',
       \   'cocstatus': 'coc#status',
       \ },
+      \ 'tabline': {
+      \   'left': [ ['tabs'] ],
+      \   'right': [ ['bufnum'] ]
+      \ },
+      \ 'component_expand': {
+      \   'buffers': 'lightline#bufferline#buffers'
+      \ },
+      \ 'component_type': {
+      \   'buffers': 'tabsel'
+      \ },
+      \   'tab_component_function': {
+      \     'filename': 'lightline#tab#filename', 'modified': 'lightline#tab#modified',
+      \     'readonly': 'lightline#tab#readonly', 'tabnum': 'lightline#tab#tabnum'
+      \   },
       \ }
+
+let g:lightline.tab = {
+		    \ 'active': [ 'tabnum', 'filename', 'modified' ],
+		    \ 'inactive': [ 'tabnum', 'filename', 'modified' ] }
 
 function! LightlineFilename()
   let filename = expand('%:p') !=# '' ? expand('%:p') : '[No Name]'
-  let modified = &modified ? ' +' : ''
+  let modified = &modified ? ' ●' : ''
   return filename . modified
 endfunction
 
