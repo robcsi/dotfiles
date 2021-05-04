@@ -1,43 +1,68 @@
 {
-        "diagnostic-languageserver.filetypes": {
-                // lint `sh` (includes `bash`) files
-                "sh": "shellcheck"
-        },
-        "diagnostic-languageserver.formatFiletypes": {
-                "sh": "shfmt"
-        },
-        "diagnostic-languageserver.formatters": {
-                // define our formatter so that we can reference it from
-                // `diagnostic-languageserver.formatFiletypes`
-                "shfmt": {
-                        "command": "shfmt",
-                        // all the below args are entirely optional
-                        // primarily listed here to call out that flags which take an
-                        // argument (such as `-i <num-spaces>` for specifying indentation)
-                        // should be split into two strings, the flag and then the value
-                        "args": [
-                                "-i",
-                                "4"
-                        ]
+
+	"coc.preferences.currentFunctionSymbolAutoUpdate": true,
+    "diagnostic-languageserver.filetypes": {
+        // lint `sh` (includes `bash`) files
+        "sh": "shellcheck"
+    },
+    "diagnostic-languageserver.formatFiletypes": {
+        "sh": "shfmt"
+    },
+    "diagnostic-languageserver.formatters": {
+        // define our formatter so that we can reference it from
+        // `diagnostic-languageserver.formatFiletypes`
+        "shfmt": {
+            "command": "shfmt",
+            // all the below args are entirely optional
+            // primarily listed here to call out that flags which take an
+            // argument (such as `-i <num-spaces>` for specifying indentation)
+            // should be split into two strings, the flag and then the value
+            "args": [
+                "-i",
+                "4"
+            ]
+        }
+    },
+    "clangd.path": "/home/siar/.config/coc/extensions/coc-clangd-data/install/10.0.0/clangd_10.0.0/bin/clangd",
+    "yaml.customTags": [
+        "!Equals sequence",
+        "!FindInMap sequence",
+        "!GetAtt",
+        "!GetAZs",
+        "!ImportValue",
+        "!Join sequence",
+        "!Ref",
+        "!Select sequence",
+        "!Split sequence",
+        "!Or sequence",
+        "!And sequence",
+        "!If sequence",
+        "!Not sequence",
+        "!Base64 sequence",
+        "!Sub",
+        "!Condition"
+    ],
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cpp",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
                 }
-        },
-        "clangd.path": "/home/siar/.config/coc/extensions/coc-clangd-data/install/10.0.0/clangd_10.0.0/bin/clangd",
-        "yaml.customTags": [
-          "!Equals sequence",
-          "!FindInMap sequence",
-          "!GetAtt",
-          "!GetAZs",
-          "!ImportValue",
-          "!Join sequence",
-          "!Ref",
-          "!Select sequence",
-          "!Split sequence",
-          "!Or sequence",
-          "!And sequence",
-          "!If sequence",
-          "!Not sequence",
-          "!Base64 sequence",
-          "!Sub",
-          "!Condition"
-        ]
+            }
+        }
+    }
 }
