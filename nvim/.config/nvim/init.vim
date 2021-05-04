@@ -100,7 +100,8 @@ set incsearch
 set foldmethod=indent
 set nofoldenable
 
-set list lcs=tab:\|\ 
+" set list listchars=tab:\|\ 
+set list listchars=tab:<->,space:.,nbsp:+,eol:$,precedes:<,extends:>
 
 set title
 
