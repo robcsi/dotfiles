@@ -101,7 +101,7 @@ set foldmethod=indent
 set nofoldenable
 
 " set list listchars=tab:\|\ 
-set list listchars=tab:<->,space:.,nbsp:+,eol:$,precedes:<,extends:>
+set list listchars=tab:<->,space:·,nbsp:+,eol:↓,trail:●,precedes:<,extends:>
 
 set title
 
