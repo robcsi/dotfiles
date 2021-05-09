@@ -1,5 +1,6 @@
 {
-
+    "tsserver.log": "verbose",
+    "tsserver.trace.server": "verbose",
 	"coc.preferences.currentFunctionSymbolAutoUpdate": true,
     "diagnostic-languageserver.filetypes": {
         // lint `sh` (includes `bash`) files
