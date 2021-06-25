@@ -57,3 +57,4 @@
 (package! docker-cli)
 (package! zlc)
 (package! bash-completion)
+(package! command-log-mode)
