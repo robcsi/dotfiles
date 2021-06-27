@@ -58,3 +58,4 @@
 (package! zlc)
 (package! bash-completion)
 (package! command-log-mode)
+(package! lsp-mode)
