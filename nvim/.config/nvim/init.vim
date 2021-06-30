@@ -835,6 +835,8 @@ require('telescope').setup{
       }
     },
     find_files = {
+        hidden = true,
+        follow = true
     }
   },
   extensions = {
