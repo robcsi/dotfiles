@@ -296,14 +296,7 @@ let g:fzf_checkout_git_options = '--sort=-committerdate'
 " mappings
 map <SPACE> <leader>
 
-nnoremap <leader><SPACE> :Files<CR>
-nnoremap <leader>f :CtrlSF <C-r><C-w><CR>
-nnoremap <leader>C :Commits<CR>
-nnoremap <leader>B :BCommits<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>r :Tags<CR>
-nnoremap <leader>G :GFiles?<CR>
-nnoremap <leader>gb :GBranches<CR>
+nnoremap <leader><SPACE> :CtrlSF <C-r><C-w><CR>
 nnoremap <leader>g :Gcd<CR>
 nnoremap <leader>s :G<CR>
 nnoremap <silent><leader>e :CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width -60<CR>
@@ -314,6 +307,14 @@ nnoremap <leader>v :CocSearch -S
 nnoremap <leader>t :TagbarToggle<CR>
 nnoremap <silent>K :call <SID>show_documentation()<CR>
 nnoremap <leader>S :Startify<CR>
+
+" FZF
+nnoremap <leader>C :Commits<CR>
+nnoremap <leader>B :BCommits<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>G :GFiles?<CR>
+nnoremap <leader>r :Tags<CR>
+nnoremap <leader>gb :GBranches<CR>
 nnoremap <leader><tab> :Maps<CR>
 
 "shortcut for counting occurence of word under cursor in file
@@ -731,17 +732,31 @@ nnoremap <silent><A-r> :WintabsRefresh<CR>
 
 " Telescope
 " Find files using Telescope command-line sugar.
+" general pickers
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <leader>fg <cmd>Telescope grep_string<cr>
 nnoremap <leader>fr <cmd>Telescope live_grep<cr>
+nnoremap <leader>fm <cmd>Telescope man_pages<cr>
+
+" vim-specific pickers
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>ft <cmd>Telescope help_tags<cr>
 nnoremap <leader>fv <cmd>Telescope vim_options<cr>
-nnoremap <leader>fm <cmd>Telescope man_pages<cr>
 nnoremap <leader>fs <cmd>Telescope search_history<cr>
 nnoremap <leader>fh <cmd>Telescope command_history<cr>
+nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
+nnoremap <leader>fk <cmd>Telescope keymaps<cr>
+
+" git-specific pickers
+nnoremap <leader>fF <cmd>Telescope git_files<cr>
+nnoremap <leader>fC <cmd>Telescope git_commits<CR>
+nnoremap <leader>fB <cmd>Telescope git_bcommits<CR>
+nnoremap <leader>fR <cmd>Telescope git_branches<CR>
+
+" extensions
 nnoremap <leader>fp <cmd>Telescope project<cr>
+
 " Settings
 lua << EOF
 local actions = require('telescope.actions')
@@ -761,13 +776,13 @@ require('telescope').setup{
       '--column',
       '--smart-case'
     },
-    prompt_position = "bottom",
+    prompt_position = "top",
     prompt_prefix = "$ ",
     selection_caret = "> ",
     entry_prefix = "  ",
     initial_mode = "insert",
     selection_strategy = "reset",
-    sorting_strategy = "descending",
+    sorting_strategy = "ascending",
     layout_strategy = "horizontal",
     layout_defaults = {
       horizontal = {
