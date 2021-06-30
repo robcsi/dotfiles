@@ -68,8 +68,11 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'zefei/vim-wintabs'
 Plug 'zefei/vim-wintabs-powerline'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
-
 set guioptions=c
 
 colorscheme onedark
