@@ -72,8 +72,9 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope-fzy-native.nvim', { 'do': 'make' }
 Plug 'fannheyward/telescope-coc.nvim'
+Plug 'nvim-telescope/telescope-project.nvim'
 call plug#end()
 set guioptions=c
 
@@ -732,16 +733,23 @@ nnoremap <silent><A-r> :WintabsRefresh<CR>
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fg <cmd>Telescope grep_string<cr>
+nnoremap <leader>fr <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>ft <cmd>Telescope help_tags<cr>
 nnoremap <leader>fv <cmd>Telescope vim_options<cr>
 nnoremap <leader>fm <cmd>Telescope man_pages<cr>
 nnoremap <leader>fs <cmd>Telescope search_history<cr>
 nnoremap <leader>fh <cmd>Telescope command_history<cr>
+nnoremap <leader>fp <cmd>Telescope project<cr>
 " Settings
 lua << EOF
 local actions = require('telescope.actions')
+
+require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('coc')
+require('telescope').load_extension('project')
+
 require('telescope').setup{
   defaults = {
     vimgrep_arguments = {
@@ -791,7 +799,8 @@ require('telescope').setup{
     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
     mappings = {
       i = {
-        -- ["<esc>"] = actions.close
+        -- ["<esc>"] = actions.close,
+        ["<C-q"] = actions.send_to_qflist
       }
     }
   },
@@ -812,9 +821,17 @@ require('telescope').setup{
     },
     find_files = {
     }
-  }
+  },
+  extensions = {
+        fzy_native = {
+            override_generic_sorter = false,
+            override_file_sorter = true,
+        },
+        project = {
+          base_dir = '~/projects',
+          max_depth = 3,
+          display_type='full'
+        }
+    }
 }
-
-require('telescope').load_extension('fzf')
-require('telescope').load_extension('coc')
 EOF
