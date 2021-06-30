@@ -72,6 +72,8 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'fannheyward/telescope-coc.nvim'
 call plug#end()
 set guioptions=c
 
@@ -726,3 +728,93 @@ nnoremap <silent><A-u> :WintabsUndo<CR>
 nnoremap <silent><A-o> :WintabsOnlyWindow<CR>
 nnoremap <silent><A-r> :WintabsRefresh<CR>
 
+" Telescope
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>ft <cmd>Telescope help_tags<cr>
+nnoremap <leader>fv <cmd>Telescope vim_options<cr>
+nnoremap <leader>fm <cmd>Telescope man_pages<cr>
+nnoremap <leader>fs <cmd>Telescope search_history<cr>
+nnoremap <leader>fh <cmd>Telescope command_history<cr>
+" Settings
+lua << EOF
+local actions = require('telescope.actions')
+require('telescope').setup{
+  defaults = {
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case'
+    },
+    prompt_position = "bottom",
+    prompt_prefix = "$ ",
+    selection_caret = "> ",
+    entry_prefix = "  ",
+    initial_mode = "insert",
+    selection_strategy = "reset",
+    sorting_strategy = "descending",
+    layout_strategy = "horizontal",
+    layout_defaults = {
+      horizontal = {
+        mirror = false,
+      },
+      vertical = {
+        mirror = false,
+      },
+    },
+    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+    file_ignore_patterns = {},
+    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+    shorten_path = true,
+    winblend = 0,
+    width = 0.75,
+    preview_cutoff = 120,
+    results_height = 1,
+    results_width = 0.8,
+    border = {},
+    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    color_devicons = true,
+    use_less = true,
+    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+
+    -- Developer configurations: Not meant for general override
+    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
+    mappings = {
+      i = {
+        -- ["<esc>"] = actions.close
+      }
+    }
+  },
+  pickers = {
+    -- Your special builtin config goes in here
+    buffers = {
+      sort_lastused = true,
+      mappings = {
+        i = {
+          ["<c-d>"] = require("telescope.actions").delete_buffer,
+          -- or right hand side can also be a the name of the action as string
+          ["<c-d>"] = "delete_buffer",
+        },
+        n = {
+          ["<c-d>"] = require("telescope.actions").delete_buffer,
+        }
+      }
+    },
+    find_files = {
+    }
+  }
+}
+
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('coc')
+EOF
