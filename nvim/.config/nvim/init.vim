@@ -638,7 +638,7 @@ let g:mundo_auto_preview = 1
 nmap <leader>hp <Plug>(GitGutterPreviewHunk)
 nmap <leader>hs <Plug>(GitGutterStageHunk)
 nmap <leader>hu <Plug>(GitGutterUndoHunk)
-nmap <leader>gf :GitGutterFold<CR>
+nmap <leader>hf :GitGutterFold<CR>
 nmap [c <Plug>(GitGutterPrevHunk)
 nmap ]c <Plug>(GitGutterNextHunk)
 command! Gqf GitGutterQuickFix | copen
