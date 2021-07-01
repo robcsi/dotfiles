@@ -75,6 +75,8 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim', { 'do': 'make' }
 Plug 'fannheyward/telescope-coc.nvim'
 Plug 'nvim-telescope/telescope-project.nvim'
+Plug 'Yggdroot/indentLine'
+Plug 'kshenoy/vim-signature'
 call plug#end()
 set guioptions=c
 
@@ -852,3 +854,9 @@ require('telescope').setup{
     }
 }
 EOF
+
+" indentLine
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+" signcolumn
+set signcolumn=auto:9
