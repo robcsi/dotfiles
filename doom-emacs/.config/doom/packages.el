@@ -59,3 +59,5 @@
 (package! bash-completion)
 (package! command-log-mode)
 (package! lsp-mode)
+(package! cfn-mode)
+(package! flycheck-cfn)
