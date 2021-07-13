@@ -309,6 +309,8 @@ nnoremap <leader>v :CocSearch -S
 nnoremap <leader>t :TagbarToggle<CR>
 nnoremap <silent>K :call <SID>show_documentation()<CR>
 nnoremap <leader>S :Startify<CR>
+xnoremap K :move '<-2<CR>gv-gv
+xnoremap J :move '>+1<CR>gv-gv
 
 " FZF
 nnoremap <leader>C :Commits<CR>
