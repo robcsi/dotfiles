@@ -34,7 +34,6 @@ require "paq" {
   "glepnir/lspsaga.nvim",
   "hrsh7th/nvim-compe",
   "mhartington/formatter.nvim",
-  "phaazon/hop.nvim",
   "savq/paq-nvim",
   "wfxr/minimap.vim",
   "hrsh7th/vim-vsnip",
@@ -89,12 +88,194 @@ require "paq" {
   "neovim/nvim-lspconfig"
 }
 
--- Hop
-require "hop".setup()
-map("n", "<leader>j", "<cmd>lua require'hop'.hint_words()<cr>")
-map("n", "<leader>l", "<cmd>lua require'hop'.hint_lines()<cr>")
-map("v", "<leader>j", "<cmd>lua require'hop'.hint_words()<cr>")
-map("v", "<leader>l", "<cmd>lua require'hop'.hint_lines()<cr>")
+-- general mappings
+-- scroll by 3 lines
+map("n", "<C-e>", "3<C-e>")
+map("n", "<C-y>", "3<C-y>")
+map("v", "<C-e>", "3<C-e>")
+map("v", "<C-y>", "3<C-y>")
+
+map("n", "'", "`")
+map("n", "`", "'")
+
+-- yank to the end of the line
+map("n", "Y", "y$")
+
+-- Smart way to move between windows
+map("n", "<C-j>", "<C-W>j")
+map("n", "<C-k>", "<C-W>k")
+map("n", "<C-h>", "<C-W>h")
+map("n", "<C-l>", "<C-W>l")
+
+-- move through word wrapped line
+map("n", "k", "gk")
+map("n", "j", "gj")
+
+-- adding newline before the current line and after
+map("n", "OO", "O<Esc>")
+map("n", "oo", "o<Esc>")
+
+map("n", "<leader><SPACE>", ":CtrlSF <C-r><C-w><CR>")
+map("n", "<leader>g", ":Gcd<CR>")
+map("n", "<leader>s", ":G<CR>")
+map(
+  "n",
+  "<silent><leader>e",
+  ":CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width -60<CR>"
+)
+-- --open-action-strategy=vsplit
+map("n", "<leader>q", ":xall!<CR>")
+map("n", "<leader>p", ":vsplit<CR> \\| :terminal git push<CR>i")
+map("n", "<leader>v", ":CocSearch -S")
+map("n", "<leader>t", ":TagbarToggle<CR>")
+map("n", "<silent>K", ":Help '.expand('<cword><CR>")
+map("n", "<leader>S", ":Startify<CR>")
+map("x", "K", ":move '<-2<CR>gv-gv")
+map("x", "J", ":move '>+1<CR>gv-gv")
+
+-- Use K to show documentation in preview window.
+-- function! s:show_documentation()
+--   if (index(['vim','help'], &filetype) >= 0)
+--     execute 'Help '.expand('<cword>')
+--   elseif (coc#rpc#ready())
+--     call CocActionAsync('doHover')
+--   else
+--     execute '!' . &keywordprg . " " . expand('<cword>')
+--   endif
+-- endfunction
+
+-- FZF
+map("n", "<leader>C", ":Commits<CR>")
+map("n", "<leader>B", ":BCommits<CR>")
+map("n", "<leader>b", ":Buffers<CR>")
+map("n", "<leader>G", ":GFiles?<CR>")
+map("n", "<leader>r", ":Tags<CR>")
+map("n", "<leader>gb", ":GBranches<CR>")
+map("n", "<leader><tab>", ":Maps<CR>")
+
+-- shortcut for counting occurence of word under cursor in file
+map("n", "<leader>c", ":%s/<c-r><c-w>//gn<cr>")
+
+-- maximixer
+g.maximizer_set_default_mapping = 1
+map("n", "<leader>tm", ":MaximizerToggle!<CR>")
+
+-- peekaboo settings
+g.peekaboo_window = "vertical botright 80new"
+
+-- quickhl shortcuts
+map("n", "<Space>m", "<Plug>(quickhl-manual-this)")
+map("x", "<Space>m", "<Plug>(quickhl-manual-this)")
+map("n", "<Space>M", "<Plug>(quickhl-manual-reset)")
+map("x", "<Space>M", "<Plug>(quickhl-manual-reset)")
+map("n", "<Space>j", "<Plug>(quickhl-cword-toggle)")
+-- map H <Plug>(operator-quickhl-manual-this-motion)
+
+-- custom substitute/sed mapping to shortcut the replacement of work under cursor
+map("n", "<leader>z", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gIc<Left><Left><Left><Left>")
+
+-- mapping for next and previous buffer
+-- nnoremap <leader>. :bnext<CR>
+-- nnoremap <leader>, :bprev<CR>
+
+-- shortcut to insert current date in file
+map("n", "<silent><leader>D", "a**<C-R>=strftime('%Y %b %d @ %H:%M')<cr>** <esc>")
+
+-- open help in vertical split directly
+vim.api.nvim_command("command! -nargs=* -complete=help Help vertical belowright help <args> | vertical resize 85")
+
+-- how to exit quickly from Insert mode
+-- inoremap <special> jj <ESC>
+-- inoremap <special> jk <ESC>:
+
+-- tab handling
+vim.api.nvim_command("command! -nargs=0 TabNew :tabnew | Startify")
+map("n", "<leader>.", ":tabnext<CR>", {silent = true})
+map("n", "<leader>,", ":tabprevious<CR>", {silent = true})
+map("n", "<C-t>", ":TabNew<CR>", {silent = true})
+map("n", "<C-Delete>", ":tabclose<CR>", {silent = true})
+
+-- mundo
+map("n", "<F5>", ":MundoToggle<CR>", {silent = true})
+g.mundo_width = 60
+g.mundo_preview_height = 20
+g.mundo_right = 1
+g.mundo_preview_bottom = 1
+g.mundo_auto_preview = 1
+
+-- git gutter mappings -- these are available by default
+map("n", "<leader>hp", ":GitGutterPreviewHunk<CR>")
+map("n", "<leader>hs", "<Plug>(GitGutterStageHunk)")
+map("n", "<leader>hu", "<Plug>(GitGutterUndoHunk)")
+map("n", "<leader>hf", ":GitGutterFold<CR>")
+map("n", "[c", "<Plug>(GitGutterPrevHunk)")
+map("n", "]c", "<Plug>(GitGutterNextHunk)")
+vim.api.nvim_command("command! Gqf GitGutterQuickFix | copen")
+map("n", "<leader>hq", ":Gqf<CR>")
+g.gitgutter_highlight_linenrs = 1
+g.gitgutter_highlight_lines = 0
+
+-- tagbar width
+g.tagbar_width = 70
+g.tagbar_autofocus = 1
+map("n", "<leader>t", ":TagbarToggle<CR>")
+
+-- vim-markdown
+g.mkdp_auto_close = 0
+g.mkdp_refresh_slow = 1
+-- example
+map("n", "<C-s>", "<Plug>MarkdownPreview")
+map("n", "<M-s>", "<Plug>MarkdownPreviewStop")
+map("n", "<C-p>", "<Plug>MarkdownPreviewToggle")
+g.mkdp_browser = "qutebrowser"
+
+-- CtrlSF
+g.ctrlsf_auto_focus = {["at"] = "start"}
+g.ctrlsf_auto_preview = 1
+g.ctrlsf_default_view_mode = "compact"
+
+-- terminal settings
+-- vim.api.nvim_exec([[
+-- augroup termopen
+--     autocmd TermOpen * setlocal statusline=%{b:term_title}
+-- augroup END
+-- ]], true)
+cmd "autocmd TermOpen * setlocal statusline=%{b:term_title}" -- disabled in visual mode
+
+-- general terminal settings
+map("t", "<special> jj", "<C-\\><C-n>")
+map("t", ":q!", "<C-\\><C-n>:q!<CR>")
+-- Toggle terminal on/off (neovim )
+map("n", "<A-t>", ":Ttoggle<CR>")
+map("i", "<A-t>", "<Esc>:Ttoggle<CR>")
+map("t", "<A-t>", "<C-\\><C-n>:Ttoggle<CR>")
+
+-- neoterm settings
+g.neoterm_size = 20
+g.neoterm_default_mod = "botright"
+g.neoterm_autoinsert = 1
+g.neoterm_autojump = 1
+
+-- Startify shortcuts
+map("n", "<A-s>", ":SSave")
+g.startify_session_persistence = 1
+
+-- resize windows/splits
+map("n", "<Left>", ":vertical resize -5<CR>")
+map("n", "<Right>", ":vertical resize +5<CR>")
+map("n", "<Up>", ":resize -5<CR>")
+map("n", "<Down>", ":resize +5<CR>")
+
+-- wintabs
+g.wintabs_autoclose = 0
+-- g.wintabs_display = 'statusline'
+map("n", "<A-n>", ":WintabsNext<CR>")
+map("n", "<A-p>", ":WintabsPrevious<CR>")
+map("n", "<A-c>", ":WintabsCloseWindow<CR>")
+map("n", "<A-C>", ":WintabsCloseVimtab<CR>")
+map("n", "<A-u>", ":WintabsUndo<CR>")
+map("n", "<A-o>", ":WintabsOnlyWindow<CR>")
+map("n", "<A-r>", ":WintabsRefresh<CR>")
 
 -- LSP this is needed for LSP completions in CSS along with the snippets plugin
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -248,6 +429,10 @@ opt.backup = false
 opt.writebackup = false
 opt.cmdheight = 1
 opt.shortmess = "c"
+opt.autowriteall = true
+opt.showtabline = 2
+opt.undofile = true
+opt.undodir = "~/.undo"
 
 -- Use spelling for markdown files ‘]s’ to find next, ‘[s’ for previous, 'z=‘ for suggestions when on one.
 -- Source: http:--thejakeharding.com/tutorial/2012/06/13/using-spell-check-in-vim.html
@@ -510,14 +695,43 @@ require("telescope").setup {
   }
 }
 
-map("n", "<leader>p", '<cmd>lua require("telescope.builtin").find_files(require("telescope.themes"))<cr>')
-map("n", "<leader>r", '<cmd>lua require("telescope.builtin").registers()<cr>')
-map("n", "<leader>g", '<cmd>lua require("telescope.builtin").live_grep(require("telescope.themes"))<cr>')
-map("n", "<leader>b", '<cmd>lua require("telescope.builtin").buffers(require("telescope.themes"))<cr>')
-map("n", "<leader>h", '<cmd>lua require("telescope.builtin").help_tags()<cr>')
-map("n", "<leader>f", '<cmd>lua require("telescope.builtin").file_browser(require("telescope.themes"))<cr>')
-map("n", "<leader>s", '<cmd>lua require("telescope.builtin").spell_suggest()<cr>')
-map("n", "<leader>i", '<cmd>lua require("telescope.builtin").git_status(require("telescope.themes"))<cr>')
+-- map("n", "<leader>p", '<cmd>lua require("telescope.builtin").find_files(require("telescope.themes"))<cr>')
+-- map("n", "<leader>r", '<cmd>lua require("telescope.builtin").registers()<cr>')
+-- map("n", "<leader>g", '<cmd>lua require("telescope.builtin").live_grep(require("telescope.themes"))<cr>')
+-- map("n", "<leader>b", '<cmd>lua require("telescope.builtin").buffers(require("telescope.themes"))<cr>')
+-- map("n", "<leader>h", '<cmd>lua require("telescope.builtin").help_tags()<cr>')
+-- map("n", "<leader>f", '<cmd>lua require("telescope.builtin").file_browser(require("telescope.themes"))<cr>')
+-- map("n", "<leader>s", '<cmd>lua require("telescope.builtin").spell_suggest()<cr>')
+-- map("n", "<leader>i", '<cmd>lua require("telescope.builtin").git_status(require("telescope.themes"))<cr>')
+-- Telescope keybindings
+-- Find files using Telescope command-line sugar.
+-- general pickers
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
+map("n", "<leader>fc", "<cmd>Telescope current_buffer_fuzzy_find<cr>")
+map("n", "<leader>fg", "<cmd>Telescope grep_string<cr>")
+map("n", "<leader>fr", "<cmd>Telescope live_grep<cr>")
+map("n", "<leader>fm", "<cmd>Telescope man_pages<cr>")
+
+-- vim-specific pickers
+map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+map("n", "<leader>ft", "<cmd>Telescope help_tags<cr>")
+map("n", "<leader>fv", "<cmd>Telescope vim_options<cr>")
+map("n", "<leader>fs", "<cmd>Telescope search_history<cr>")
+map("n", "<leader>fh", "<cmd>Telescope command_history<cr>")
+map("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>")
+map("n", "<leader>fk", "<cmd>Telescope keymaps<cr>")
+
+-- git-specific pickers
+map("n", "<leader>fF", "<cmd>Telescope git_files<cr>")
+map("n", "<leader>fC", "<cmd>Telescope git_commits<CR>")
+map("n", "<leader>fB", "<cmd>Telescope git_bcommits<CR>")
+map("n", "<leader>fR", "<cmd>Telescope git_branches<CR>")
+
+-- extensions
+map("n", "<leader>fp", "<cmd>Telescope project<cr>")
+
+-- indentLine
+g.indentLine_char_list = {"|", "¦", "┆", "┊"}
 
 -------------------- COMMANDS ------------------------------
 cmd "au TextYankPost * lua vim.highlight.on_yank {on_visual = true}" -- disabled in visual mode
