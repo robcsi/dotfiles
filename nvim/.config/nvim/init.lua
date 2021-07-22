@@ -192,6 +192,16 @@ map("n", "<leader>,", ":tabprevious<CR>")
 map("n", "<C-t>", ":TabNew<CR>")
 map("n", "<C-Delete>", ":tabclose<CR>")
 
+-- vim-mergetool plugin settings
+g.mergetool_layout = "mr"
+g.mergetool_prefer_revision = "local"
+map("n", "<leader>mt", ":MergetoolToggle<CR>")
+-- smart diff exchange commands
+map("n", "<expr> <C-Left>", "&diff? '<Plug>(MergetoolDiffExchangeLeft)' : '<C-Left>'")
+map("n", "<expr> <C-Right>", "&diff? '<Plug>(MergetoolDiffExchangeRight)' : '<C-Right>'")
+map("n", "<expr> <C-Down>", "&diff? '<Plug>(MergetoolDiffExchangeDown)' : '<C-Down>'")
+map("n", "<expr> <C-Up>", "&diff? '<Plug>(MergetoolDiffExchangeUp)' : '<C-Up>'")
+
 -- mundo
 map("n", "<F5>", ":MundoToggle<CR>")
 g.mundo_width = 60
