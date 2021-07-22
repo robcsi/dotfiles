@@ -117,15 +117,11 @@ map("n", "oo", "o<Esc>")
 
 map("n", "<leader><SPACE>", ":CtrlSF <C-r><C-w><CR>")
 map("n", "<leader>g", ":Gcd<CR>")
-map("n", "<leader>s", ":G<CR>")
-map(
-  "n",
-  "<silent><leader>e",
-  ":CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width -60<CR>"
-)
+map("n", "<leader>s", ":topleft G<CR>")
+map("n", "<leader>e", ":CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width -60<CR>")
 -- --open-action-strategy=vsplit
 map("n", "<leader>q", ":xall!<CR>")
-map("n", "<leader>p", ":vsplit<CR> \\| :terminal git push<CR>i")
+map("n", "<leader>p", ":vsplit<CR> | :terminal git push<CR>i")
 map("n", "<leader>v", ":CocSearch -S")
 map("n", "<leader>t", ":TagbarToggle<CR>")
 map("n", "<silent>K", ":Help '.expand('<cword><CR>")
@@ -134,15 +130,19 @@ map("x", "K", ":move '<-2<CR>gv-gv")
 map("x", "J", ":move '>+1<CR>gv-gv")
 
 -- Use K to show documentation in preview window.
--- function! s:show_documentation()
---   if (index(['vim','help'], &filetype) >= 0)
---     execute 'Help '.expand('<cword>')
---   elseif (coc#rpc#ready())
---     call CocActionAsync('doHover')
---   else
---     execute '!' . &keywordprg . " " . expand('<cword>')
---   endif
--- endfunction
+map("n", "K", ":call Show_documentation()<CR>")
+vim.api.nvim_exec(
+  [[
+function! Show_documentation()
+  if (index(['nvim','help'], &filetype) >= 0)
+    execute 'Help '.expand('<cword>')
+  else
+    execute &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+]],
+  true
+)
 
 -- FZF
 map("n", "<leader>C", ":Commits<CR>")
@@ -205,8 +205,8 @@ g.mundo_auto_preview = 1
 
 -- git gutter mappings -- these are available by default
 map("n", "<leader>hp", ":GitGutterPreviewHunk<CR>")
-map("n", "<leader>hs", "<Plug>(GitGutterStageHunk)")
-map("n", "<leader>hu", "<Plug>(GitGutterUndoHunk)")
+map("n", "<leader>hs", ":GitGutterStageHunk<CR>")
+map("n", "<leader>hu", ":GitGutterUndoHunk<CR>")
 map("n", "<leader>hf", ":GitGutterFold<CR>")
 map("n", "[c", "<Plug>(GitGutterPrevHunk)")
 map("n", "]c", "<Plug>(GitGutterNextHunk)")
@@ -452,6 +452,19 @@ g.minimap_width = 10
 g.minimap_auto_start = 0
 g.minimap_auto_start_win_enter = 0
 
+-- local githunksummary =
+--   vim.api.nvim_exec(
+--   [[
+-- function! GitHunkSummary()
+--     let [a,m,r] = GitGutterGetHunkSummary()
+--     return printf('gs: +%d ~%d -%d', a, m, r)
+-- endfunction
+
+-- call GitHunkSummary()
+-- ]],
+--   true
+-- )
+
 -- lualine
 require "lualine".setup {
   options = {
@@ -595,8 +608,8 @@ map("n", "<S-Tab>", ":bprevious<CR>")
 -- Use these two if you don't have prettier
 --map('n'), '<c-j>', '<cmd>m .+1<CR>==')
 --map('n,) <c-k>', '<cmd>m .-2<CR>==')
-map("n", "<c-j>", "<cmd>m .+1<CR>", {silent = true})
-map("n", "<c-k>", "<cmd>m .-2<CR>", {silent = true})
+-- map("n", "<c-j>", "<cmd>m .+1<CR>", {silent = true})
+-- map("n", "<c-k>", "<cmd>m .-2<CR>", {silent = true})
 map("i", "<c-j> <Esc>", "<cmd>m .+1<CR>==gi", {silent = true})
 map("i", "<c-k> <Esc>", "<cmd>m .-2<CR>==gi", {silent = true})
 map("v", "<c-j>", "<cmd>m +1<CR>gv=gv", {silent = true})
