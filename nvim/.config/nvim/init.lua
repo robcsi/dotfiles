@@ -324,6 +324,9 @@ require "lspconfig".pyright.setup {}
 require "lspconfig".vimls.setup {}
 require "lspconfig".yamlls.setup {}
 require "lspconfig".sumneko_lua.setup {}
+require "lspconfig".clangd.setup {}
+require "lspconfig".cmake.setup {}
+require "lspconfig".texlab.setup {}
 
 -- LSP Prevents inline buffer annotations
 vim.lsp.diagnostic.show_line_diagnostics()
@@ -781,15 +784,12 @@ require("formatter").setup(
 )
 
 -- Runs Formatter on save
-vim.api.nvim_exec(
-  [[
+vim.api.nvim_exec([[
 augroup FormatAutogroup
   autocmd!
   autocmd BufWritePost *.lua : FormatWrite
 augroup END
-]],
-  true
-)
+]], true)
 
 -- restoring the last cursor position
 vim.api.nvim_exec(
