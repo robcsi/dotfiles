@@ -118,25 +118,25 @@ map("n", "<leader>g", ":Gcd<CR>")
 map("n", "<leader>s", ":topleft G<CR>")
 map("n", "<leader>e", ":CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width -60<CR>")
 -- --open-action-strategy=vsplit
-map("n", "<leader>q", ":xall!<CR>")
+map("n", "<leader>q", ":TcloseAll! | :xall!<CR>")
 map("n", "<leader>p", ":vsplit<CR> | :terminal git push<CR>i")
 map("n", "<leader>v", ":CocSearch -S")
 map("n", "<leader>t", ":TagbarToggle<CR>")
--- map("n", "K", ":Help '.expand('<cword><CR>")
+-- map("n", "H", ":Help .expand('<cword>')<CR>")
 map("n", "<leader>S", ":Startify<CR>")
 map("x", "K", ":move '<-2<CR>gv-gv")
 map("x", "J", ":move '>+1<CR>gv-gv")
 
 -- Use K to show documentation in preview window.
-map("n", "K", ":call Show_documentation()<CR>")
+map("n", "H", ":call Show_documentation()<CR>")
 vim.api.nvim_exec(
   [[
 function! Show_documentation()
-  if (index(['nvim','help'], &filetype) >= 0)
+  "if (index(['nvim','help'], &filetype) >= 0)
     execute 'Help '.expand('<cword>')
-  else
-    execute &keywordprg . " " . expand('<cword>')
-  endif
+  "else
+  "  execute &keywordprg . " " . expand('<cword>')
+  "endif
 endfunction
 ]],
   true
@@ -162,12 +162,11 @@ map("n", "<leader>tm", ":MaximizerToggle!<CR>")
 g.peekaboo_window = "vertical botright 80new"
 
 -- quickhl shortcuts
-map("n", "<Space>m", "<Plug>(quickhl-manual-this)")
-map("x", "<Space>m", "<Plug>(quickhl-manual-this)")
-map("n", "<Space>M", "<Plug>(quickhl-manual-reset)")
-map("x", "<Space>M", "<Plug>(quickhl-manual-reset)")
-map("n", "<Space>j", "<Plug>(quickhl-cword-toggle)")
--- map H <Plug>(operator-quickhl-manual-this-motion)
+map("n", "<Space>m", ":QuickhlManualAdd <c-r><c-w><ESC><CR>")
+map("x", "<Space>m", ":QuickhlManualAdd <c-r><c-w><ESC><CR>")
+map("n", "<Space>M", ":QuickhlManualReset<CR>")
+map("x", "<Space>M", ":QuickhlManualReset<CR>")
+map("n", "<Space>j", ":QuickhlManualLockToggle<CR>")
 
 -- custom substitute/sed mapping to shortcut the replacement of work under cursor
 map("n", "<leader>z", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gIc<Left><Left><Left><Left>")
@@ -287,30 +286,74 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 
 -- LSP Server config
-require "lspconfig".cssls.setup(
-  {
-    cmd = {"vscode-css-language-server", "--stdio"},
-    capabilities = capabilities,
-    settings = {
-      scss = {
-        lint = {
-          idSelector = "warning",
-          zeroUnits = "warning",
-          duplicateProperties = "warning"
-        },
-        completion = {
-          completePropertyWithSemicolon = true,
-          triggerPropertyValueCompletion = true
-        }
-      }
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(_, bufnr)
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  map("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>")
+  map("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>")
+  map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+  map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+  -- map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
+  map("n", "K", ":Lspsaga hover_doc<CR>")
+  -- map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+  map("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
+  -- map("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
+  -- map("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+  -- map("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
+  -- map("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
+  -- map("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
+  map("n", "<space>d", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>")
+  -- map("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = {
+  "tsserver",
+  "rust_analyzer",
+  "bashls",
+  "dockerls",
+  "html",
+  "pyright",
+  "vimls",
+  "yamlls",
+  "sumneko_lua",
+  "clangd",
+  "cmake",
+  "texlab",
+  "jsonls"
+}
+
+local nvim_lsp = require("lspconfig")
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150
     }
   }
-)
-require "lspconfig".tsserver.setup {}
-require "lspconfig".rust_analyzer.setup {}
-require "lspconfig".bashls.setup {}
-require "lspconfig".dockerls.setup {}
-require "lspconfig".html.setup {}
+end
+
+-- require "lspconfig".tsserver.setup {}
+-- require "lspconfig".rust_analyzer.setup {}
+-- require "lspconfig".bashls.setup {}
+-- require "lspconfig".dockerls.setup {}
+-- require "lspconfig".html.setup {}
+-- require "lspconfig".pyright.setup {}
+-- require "lspconfig".vimls.setup {}
+-- require "lspconfig".yamlls.setup {}
+-- require "lspconfig".sumneko_lua.setup {}
+-- require "lspconfig".clangd.setup {}
+-- require "lspconfig".cmake.setup {}
+-- require "lspconfig".texlab.setup {}
 require "lspconfig".jsonls.setup {
   commands = {
     Format = {
@@ -320,13 +363,6 @@ require "lspconfig".jsonls.setup {
     }
   }
 }
-require "lspconfig".pyright.setup {}
-require "lspconfig".vimls.setup {}
-require "lspconfig".yamlls.setup {}
-require "lspconfig".sumneko_lua.setup {}
-require "lspconfig".clangd.setup {}
-require "lspconfig".cmake.setup {}
-require "lspconfig".texlab.setup {}
 
 -- LSP Prevents inline buffer annotations
 vim.lsp.diagnostic.show_line_diagnostics()
@@ -349,21 +385,40 @@ saga.init_lsp_saga {
   finder_reference_icon = "  ",
   hint_sign = "⚡",
   infor_sign = "",
-  warn_sign = ""
+  warn_sign = "",
+  max_preview_lines = 20, -- preview lines of lsp_finder and definition preview
+  border_style = "round",
+  finder_action_keys = {
+    open = "o",
+    vsplit = "v",
+    split = "s",
+    quit = "q",
+    scroll_down = "<C-f>",
+    scroll_up = "<C-u>" -- quit can be a table
+  },
+  code_action_keys = {
+    quit = "q",
+    exec = "<CR>"
+  },
+  rename_action_keys = {
+    quit = "<ESC>",
+    exec = "<CR>" -- quit can be a table
+  }
 }
 
 map("n", "<Leader>cf", ":Lspsaga lsp_finder<CR>")
 map("n", "<leader>ca", ":Lspsaga code_action<CR>")
 map("v", "<leader>ca", ":<C-U>Lspsaga range_code_action<CR>")
-map("n", "<leader>ch", ":Lspsaga hover_doc<CR>")
-map("n", "<leader>ck", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>')
-map("n", "<leader>cj", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>')
+-- map("n", "C-n", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>')
+-- map("n", "C-p", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>')
 map("n", "<leader>cs", ":Lspsaga signature_help<CR>")
 map("n", "<leader>ci", ":Lspsaga show_line_diagnostics<CR>")
-map("n", "<leader>cn", ":Lspsaga diagnostic_jump_next<CR>")
-map("n", "<leader>cp", ":Lspsaga diagnostic_jump_prev<CR>")
-map("n", "<leader>cr", ":Lspsaga rename<CR>")
-map("n", "<leader>cd", ":Lspsaga preview_definition<CR>")
+map("n", "<leader>cc", ":Lspsaga show_cursor_diagnostics<CR>")
+map("n", "]d", ":Lspsaga diagnostic_jump_next<CR>")
+map("n", "[d", ":Lspsaga diagnostic_jump_prev<CR>")
+-- map("n", "<leader>cd", ":Lspsaga preview_definition<CR>")
+map("n", "<leader>cd", ":Telescope lsp_references<CR>")
+map("n", "<leader>rn", ":Lspsaga rename<CR>")
 
 -- Setup treesitter
 local ts = require "nvim-treesitter.configs"
@@ -602,8 +657,8 @@ map("n", "<Leader>n", "<cmd>enew<CR>")
 map("n", "<Leader>sa", "ggVG<c-$>")
 
 -- Tab to switch buffers in Normal mode
-map("n", "<Tab>", ":bnext<CR>")
-map("n", "<S-Tab>", ":bprevious<CR>")
+-- map("n", "<Tab>", ":bnext<CR>")
+-- map("n", "<S-Tab>", ":bprevious<CR>")
 
 -- Line bubbling
 -- Use these two if you don't have prettier
@@ -611,8 +666,8 @@ map("n", "<S-Tab>", ":bprevious<CR>")
 --map('n,) <c-k>', '<cmd>m .-2<CR>==')
 -- map("n", "<c-j>", "<cmd>m .+1<CR>")
 -- map("n", "<c-k>", "<cmd>m .-2<CR>")
-map("i", "<c-j> <Esc>", "<cmd>m .+1<CR>==gi")
-map("i", "<c-k> <Esc>", "<cmd>m .-2<CR>==gi")
+-- map("i", "<c-j> <Esc>", "<cmd>m .+1<CR>==gi")
+-- map("i", "<c-k> <Esc>", "<cmd>m .-2<CR>==gi")
 map("v", "<c-j>", "<cmd>m +1<CR>gv=gv")
 map("v", "<c-k>", "<cmd>m -2<CR>gv=gv")
 
@@ -726,15 +781,6 @@ map("n", "<leader>fg", "<cmd>Telescope grep_string<cr>")
 map("n", "<leader>fr", "<cmd>Telescope live_grep<cr>")
 map("n", "<leader>fm", "<cmd>Telescope man_pages<cr>")
 
--- vim-specific pickers
-map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
-map("n", "<leader>ft", "<cmd>Telescope help_tags<cr>")
-map("n", "<leader>fv", "<cmd>Telescope vim_options<cr>")
-map("n", "<leader>fs", "<cmd>Telescope search_history<cr>")
-map("n", "<leader>fh", "<cmd>Telescope command_history<cr>")
-map("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>")
-map("n", "<leader>fk", "<cmd>Telescope keymaps<cr>")
-
 -- git-specific pickers
 map("n", "<leader>fF", "<cmd>Telescope git_files<cr>")
 map("n", "<leader>fC", "<cmd>Telescope git_commits<CR>")
@@ -743,6 +789,15 @@ map("n", "<leader>fR", "<cmd>Telescope git_branches<CR>")
 
 -- extensions
 map("n", "<leader>fp", "<cmd>Telescope project<cr>")
+
+-- vim-specific pickers
+map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+map("n", "<leader>ft", "<cmd>Telescope help_tags<cr>")
+map("n", "<leader>fv", "<cmd>Telescope vim_options<cr>")
+map("n", "<leader>fs", "<cmd>Telescope search_history<cr>")
+map("n", "<leader>fh", "<cmd>Telescope command_history<cr>")
+map("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>")
+map("n", "<leader>fk", "<cmd>Telescope keymaps<cr>")
 
 -- indentLine
 g.indentLine_char_list = {"|", "¦", "┆", "┊"}
