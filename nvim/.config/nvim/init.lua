@@ -241,7 +241,7 @@ g.ctrlsf_default_view_mode = "compact"
 cmd "autocmd TermOpen * setlocal statusline=%{b:term_title}" -- disabled in visual mode
 
 -- general terminal settings
-map("t", "<special> jj", "<C-\\><C-n>")
+map("t", "jj", "<C-\\><C-n>")
 map("t", ":q!", "<C-\\><C-n>:q!<CR>")
 -- Toggle terminal on/off (neovim )
 map("n", "<A-t>", ":Ttoggle<CR>")
