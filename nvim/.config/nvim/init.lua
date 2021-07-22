@@ -403,7 +403,7 @@ opt.showmode = false -- Don't display mode
 opt.sidescrolloff = 8 -- Columns of context
 opt.smartcase = true -- Do not ignore case with capitals
 opt.smartindent = true -- Insert indents automatically
-opt.spelllang = "en"
+-- opt.spelllang = "en"
 opt.splitbelow = true -- Put new windows below current
 opt.splitright = true -- Put new windows right of current
 opt.tabstop = 4 -- Number of spaces tabs count for
@@ -434,16 +434,16 @@ opt.undodir = "~/.undo"
 
 -- Use spelling for markdown files ‘]s’ to find next, ‘[s’ for previous, 'z=‘ for suggestions when on one.
 -- Source: http:--thejakeharding.com/tutorial/2012/06/13/using-spell-check-in-vim.html
-vim.api.nvim_exec(
-  [[
-augroup markdownSpell
-    autocmd!
-    autocmd FileType markdown,md,txt setlocal spell
-    autocmd BufRead,BufNewFile *.md,*.txt,*.markdown setlocal spell
-augroup END
-]],
-  false
-)
+-- vim.api.nvim_exec(
+--   [[
+-- augroup markdownSpell
+--     autocmd!
+--     autocmd FileType markdown,md,txt setlocal spell
+--     autocmd BufRead,BufNewFile *.md,*.txt,*.markdown setlocal spell
+-- augroup END
+-- ]],
+--   false
+-- )
 
 -- minimap config
 g.minimap_width = 10
@@ -781,15 +781,15 @@ require("formatter").setup(
 )
 
 -- Runs Formatter on save
--- vim.api.nvim_exec(
---   [[
--- augroup FormatAutogroup
---   autocmd!
---   autocmd BufWritePost *.js,*.ts,*.css,*.scss,*.md,*.html,*.lua : FormatWrite
--- augroup END
--- ]],
---   true
--- )
+vim.api.nvim_exec(
+  [[
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost *.lua : FormatWrite
+augroup END
+]],
+  true
+)
 
 -- restoring the last cursor position
 vim.api.nvim_exec(
