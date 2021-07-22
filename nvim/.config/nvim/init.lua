@@ -3,10 +3,8 @@ local fn = vim.fn -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g -- a table to access global variables
 local opt = vim.opt -- to set options
 
-cmd "packadd paq-vim"
-
 local function map(mode, lhs, rhs, opts)
-  local options = {noremap = true}
+  local options = {noremap = true, silent = true}
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
@@ -124,7 +122,7 @@ map("n", "<leader>q", ":xall!<CR>")
 map("n", "<leader>p", ":vsplit<CR> | :terminal git push<CR>i")
 map("n", "<leader>v", ":CocSearch -S")
 map("n", "<leader>t", ":TagbarToggle<CR>")
-map("n", "<silent>K", ":Help '.expand('<cword><CR>")
+-- map("n", "K", ":Help '.expand('<cword><CR>")
 map("n", "<leader>S", ":Startify<CR>")
 map("x", "K", ":move '<-2<CR>gv-gv")
 map("x", "J", ":move '>+1<CR>gv-gv")
@@ -179,7 +177,7 @@ map("n", "<leader>z", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gIc<Left><Left><Left><Lef
 -- nnoremap <leader>, :bprev<CR>
 
 -- shortcut to insert current date in file
-map("n", "<silent><leader>D", "a**<C-R>=strftime('%Y %b %d @ %H:%M')<cr>** <esc>")
+map("n", "<leader>D", "a**<C-R>=strftime('%Y %b %d @ %H:%M')<cr>** <esc>")
 
 -- open help in vertical split directly
 vim.api.nvim_command("command! -nargs=* -complete=help Help vertical belowright help <args> | vertical resize 85")
@@ -190,13 +188,13 @@ vim.api.nvim_command("command! -nargs=* -complete=help Help vertical belowright 
 
 -- tab handling
 vim.api.nvim_command("command! -nargs=0 TabNew :tabnew | Startify")
-map("n", "<leader>.", ":tabnext<CR>", {silent = true})
-map("n", "<leader>,", ":tabprevious<CR>", {silent = true})
-map("n", "<C-t>", ":TabNew<CR>", {silent = true})
-map("n", "<C-Delete>", ":tabclose<CR>", {silent = true})
+map("n", "<leader>.", ":tabnext<CR>")
+map("n", "<leader>,", ":tabprevious<CR>")
+map("n", "<C-t>", ":TabNew<CR>")
+map("n", "<C-Delete>", ":tabclose<CR>")
 
 -- mundo
-map("n", "<F5>", ":MundoToggle<CR>", {silent = true})
+map("n", "<F5>", ":MundoToggle<CR>")
 g.mundo_width = 60
 g.mundo_preview_height = 20
 g.mundo_right = 1
@@ -208,8 +206,8 @@ map("n", "<leader>hp", ":GitGutterPreviewHunk<CR>")
 map("n", "<leader>hs", ":GitGutterStageHunk<CR>")
 map("n", "<leader>hu", ":GitGutterUndoHunk<CR>")
 map("n", "<leader>hf", ":GitGutterFold<CR>")
-map("n", "[c", "<Plug>(GitGutterPrevHunk)")
-map("n", "]c", "<Plug>(GitGutterNextHunk)")
+map("n", "[c", ":GitGutterPrevHunk<CR>")
+map("n", "]c", ":GitGutterNextHunk<CR>")
 vim.api.nvim_command("command! Gqf GitGutterQuickFix | copen")
 map("n", "<leader>hq", ":Gqf<CR>")
 g.gitgutter_highlight_linenrs = 1
@@ -351,18 +349,18 @@ saga.init_lsp_saga {
   warn_sign = ""
 }
 
-map("n", "<Leader>cf", ":Lspsaga lsp_finder<CR>", {silent = true})
-map("n", "<leader>ca", ":Lspsaga code_action<CR>", {silent = true})
-map("v", "<leader>ca", ":<C-U>Lspsaga range_code_action<CR>", {silent = true})
-map("n", "<leader>ch", ":Lspsaga hover_doc<CR>", {silent = true})
-map("n", "<leader>ck", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', {silent = true})
-map("n", "<leader>cj", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', {silent = true})
-map("n", "<leader>cs", ":Lspsaga signature_help<CR>", {silent = true})
-map("n", "<leader>ci", ":Lspsaga show_line_diagnostics<CR>", {silent = true})
-map("n", "<leader>cn", ":Lspsaga diagnostic_jump_next<CR>", {silent = true})
-map("n", "<leader>cp", ":Lspsaga diagnostic_jump_prev<CR>", {silent = true})
-map("n", "<leader>cr", ":Lspsaga rename<CR>", {silent = true})
-map("n", "<leader>cd", ":Lspsaga preview_definition<CR>", {silent = true})
+map("n", "<Leader>cf", ":Lspsaga lsp_finder<CR>")
+map("n", "<leader>ca", ":Lspsaga code_action<CR>")
+map("v", "<leader>ca", ":<C-U>Lspsaga range_code_action<CR>")
+map("n", "<leader>ch", ":Lspsaga hover_doc<CR>")
+map("n", "<leader>ck", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>')
+map("n", "<leader>cj", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>')
+map("n", "<leader>cs", ":Lspsaga signature_help<CR>")
+map("n", "<leader>ci", ":Lspsaga show_line_diagnostics<CR>")
+map("n", "<leader>cn", ":Lspsaga diagnostic_jump_next<CR>")
+map("n", "<leader>cp", ":Lspsaga diagnostic_jump_prev<CR>")
+map("n", "<leader>cr", ":Lspsaga rename<CR>")
+map("n", "<leader>cd", ":Lspsaga preview_definition<CR>")
 
 -- Setup treesitter
 local ts = require "nvim-treesitter.configs"
@@ -608,15 +606,15 @@ map("n", "<S-Tab>", ":bprevious<CR>")
 -- Use these two if you don't have prettier
 --map('n'), '<c-j>', '<cmd>m .+1<CR>==')
 --map('n,) <c-k>', '<cmd>m .-2<CR>==')
--- map("n", "<c-j>", "<cmd>m .+1<CR>", {silent = true})
--- map("n", "<c-k>", "<cmd>m .-2<CR>", {silent = true})
-map("i", "<c-j> <Esc>", "<cmd>m .+1<CR>==gi", {silent = true})
-map("i", "<c-k> <Esc>", "<cmd>m .-2<CR>==gi", {silent = true})
-map("v", "<c-j>", "<cmd>m +1<CR>gv=gv", {silent = true})
-map("v", "<c-k>", "<cmd>m -2<CR>gv=gv", {silent = true})
+-- map("n", "<c-j>", "<cmd>m .+1<CR>")
+-- map("n", "<c-k>", "<cmd>m .-2<CR>")
+map("i", "<c-j> <Esc>", "<cmd>m .+1<CR>==gi")
+map("i", "<c-k> <Esc>", "<cmd>m .-2<CR>==gi")
+map("v", "<c-j>", "<cmd>m +1<CR>gv=gv")
+map("v", "<c-k>", "<cmd>m -2<CR>gv=gv")
 
 --After searching, pressing escape stops the highlight
-map("n", "<esc>", ":noh<cr><esc>", {silent = true})
+map("n", "<esc>", ":noh<cr><esc>")
 
 -- Telescope Global remapping
 local actions = require("telescope.actions")
@@ -783,15 +781,15 @@ require("formatter").setup(
 )
 
 -- Runs Formatter on save
-vim.api.nvim_exec(
-  [[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost *.js,*.ts,*.css,*.scss,*.md,*.html,*.lua : FormatWrite
-augroup END
-]],
-  true
-)
+-- vim.api.nvim_exec(
+--   [[
+-- augroup FormatAutogroup
+--   autocmd!
+--   autocmd BufWritePost *.js,*.ts,*.css,*.scss,*.md,*.html,*.lua : FormatWrite
+-- augroup END
+-- ]],
+--   true
+-- )
 
 -- restoring the last cursor position
 vim.api.nvim_exec(
