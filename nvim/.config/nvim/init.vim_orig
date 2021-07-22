@@ -39,7 +39,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/vim-peekaboo'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -63,9 +63,10 @@ Plug 'szw/vim-maximizer'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'samoshkin/vim-mergetool'
 Plug 'kassio/neoterm'
+Plug 'hoob3rt/lualine.nvim'
 Plug 'ryanoasis/vim-devicons'
 " Plug 'pacha/vem-tabline'
-Plug 'mengelbrecht/lightline-bufferline'
+" Plug 'mengelbrecht/lightline-bufferline'
 Plug 'zefei/vim-wintabs'
 Plug 'zefei/vim-wintabs-powerline'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -78,6 +79,8 @@ Plug 'nvim-telescope/telescope-project.nvim'
 Plug 'Yggdroot/indentLine'
 Plug 'kshenoy/vim-signature'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-lua/lsp-status.nvim'
+Plug 'neovim/nvim-lspconfig'
 call plug#end()
 set guioptions=c
 
@@ -408,7 +411,7 @@ function! GitHunkSummary()
 endfunction
 
 " Use autocmd to force lightline update.
-autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+" autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 "===========================================================================
@@ -531,7 +534,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -722,7 +725,7 @@ let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 let g:lightline#bufferline#clickable = 1
 
-autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+" autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
 " wintabs
 let g:wintabs_autoclose = 0
@@ -878,5 +881,73 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+}
+EOF
+
+" lsp-status
+lua << EOF
+local lsp_status = require('lsp-status')
+lsp_status.register_progress()
+
+local lspconfig = require('lspconfig')
+
+lspconfig.rust_analyzer.setup({
+  on_attach = lsp_status.on_attach,
+  capabilities = lsp_status.capabilities
+})
+EOF
+
+" Statusline
+function! LspStatus() abort
+  if luaeval('#vim.lsp.buf_get_clients() > 0')
+    return luaeval("require('lsp-status').status()")
+  endif
+
+  return ''
+endfunction
+
+" lualine
+lua <<EOF
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'onedark',
+    component_separators = {'', ''},
+    disabled_filetypes = {}
+    section_separators = {'', ''},
+  },
+  sections = {
+    lualine_a = {'mode', 'paste'},
+    lualine_b = {'branch', 'diff',
+                    {
+                        { 'diagnostics',
+                            sources = 'coc',
+                            symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
+                            sections = {'error', 'warn', 'info', 'hint'} 
+                        }
+                    }
+    },
+    lualine_c = {{'filename', file_status = true, path = 2}, 'LspStatus'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = { {'location', icon = "" }},
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {
+    lualine_a = {},
+    lualine_b = {'branch'},
+    lualine_c = {'filename'},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  extensions = {'fzf', 'fugitive', 'quickfix'}
 }
 EOF
