@@ -326,6 +326,8 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
+-- list of lspconfig language servers
+-- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
 local servers = {
   "tsserver",
   "rust_analyzer",
