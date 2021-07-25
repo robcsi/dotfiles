@@ -882,7 +882,7 @@ else
 end
 
 -- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
-local sumneko_root_path = vim.fn.stdpath("cache") .. "~/git/lua-language-server"
+local sumneko_root_path = vim.fn.stdpath("cache") .. "/lua-language-server"
 local sumneko_binary = sumneko_root_path .. "/bin/" .. system_name .. "/lua-language-server"
 -- local sumneko_root_path = "/bin"
 -- local sumneko_binary = sumneko_root_path .. "/lua-language-server"
