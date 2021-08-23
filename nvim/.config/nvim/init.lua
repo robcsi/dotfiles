@@ -120,7 +120,7 @@ map("n", "<leader>e", ":CocCommand explorer --sources=buffer+,file+ --position=f
 -- --open-action-strategy=vsplit
 map("n", "<leader>q", ":TcloseAll! | :xall!<CR>")
 map("n", "<leader>p", ":vsplit<CR> | :terminal git push<CR>i")
-map("n", "<leader>v", ":CocSearch -S")
+map("n", "<leader>v", ":CocSearch -S <C-r><C-w><CR>")
 map("n", "<leader>t", ":TagbarToggle<CR>")
 -- map("n", "H", ":Help .expand('<cword>')<CR>")
 map("n", "<leader>S", ":Startify<CR>")
@@ -657,7 +657,7 @@ vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 -- End Compe related setup
 
 -- Open nvimrc file
-map("n", "<Leader>v", "<cmd>e $MYVIMRC<CR>")
+map("n", "<Leader>V", "<cmd>e $MYVIMRC<CR>")
 
 -- Source nvimrc file
 map("n", "<Leader>vs", ":luafile %<CR>")
