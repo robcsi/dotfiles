@@ -500,7 +500,7 @@ opt.shortmess = "c"
 opt.autowriteall = true
 opt.showtabline = 2
 opt.undofile = true
-opt.undodir = "~/.undo"
+opt.undodir = vim.fn.getenv("HOME") .. "/.undo"
 
 -- Use spelling for markdown files ‘]s’ to find next, ‘[s’ for previous, 'z=‘ for suggestions when on one.
 -- Source: http:--thejakeharding.com/tutorial/2012/06/13/using-spell-check-in-vim.html
@@ -660,13 +660,13 @@ vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 map("n", "<Leader>v", "<cmd>e $MYVIMRC<CR>")
 
 -- Source nvimrc file
-map("n", "<Leader>sv", ":luafile %<CR>")
+map("n", "<Leader>vs", ":luafile %<CR>")
 
 -- Quick new file
 map("n", "<Leader>n", "<cmd>enew<CR>")
 
 -- Easy select all of file
-map("n", "<Leader>sa", "ggVG<c-$>")
+map("n", "<Leader>as", "ggVG<c-$>")
 
 -- Tab to switch buffers in Normal mode
 -- map("n", "<Tab>", ":bnext<CR>")
