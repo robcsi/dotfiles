@@ -428,7 +428,7 @@ map("n", "<leader>ci", ":Lspsaga show_line_diagnostics<CR>")
 map("n", "<leader>cc", ":Lspsaga show_cursor_diagnostics<CR>")
 map("n", "]d", ":Lspsaga diagnostic_jump_next<CR>")
 map("n", "[d", ":Lspsaga diagnostic_jump_prev<CR>")
--- map("n", "<leader>cd", ":Lspsaga preview_definition<CR>")
+map("n", "<leader>cp", ":Lspsaga preview_definition<CR>")
 map("n", "<leader>cd", ":Telescope lsp_references<CR>")
 map("n", "<leader>rn", ":Lspsaga rename<CR>")
 
