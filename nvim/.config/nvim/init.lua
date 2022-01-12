@@ -1,5 +1,4 @@
 local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
-local fn = vim.fn -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g -- a table to access global variables
 local opt = vim.opt -- to set options
 
@@ -915,12 +914,13 @@ require "lspconfig".sumneko_lua.setup {
     Lua = {
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = "LuaJIT",
+        version = "Lua 5.1",
         -- Setup your lua path
         path = runtime_path
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
+        enable = false,
         globals = {"vim"}
       },
       workspace = {
