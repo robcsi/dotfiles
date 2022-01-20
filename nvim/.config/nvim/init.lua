@@ -376,7 +376,8 @@ require "lspconfig".jsonls.setup {
 }
 
 -- LSP Prevents inline buffer annotations
-vim.lsp.diagnostic.show_line_diagnostics()
+-- vim.lsp.diagnostic.show_line_diagnostics()
+vim.diagnostic.open_float()
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
   vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics,
