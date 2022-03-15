@@ -195,6 +195,7 @@ map("n", "<C-Delete>", ":tabclose<CR>")
 g.mergetool_layout = "mr"
 g.mergetool_prefer_revision = "local"
 map("n", "<leader>mt", ":MergetoolToggle<CR>")
+map("n", "<leader>mb", ":call mergetool#toggle_layout('mr,b')")
 -- smart diff exchange commands
 map("n", "<expr> <C-Left>", "&diff? '<Plug>(MergetoolDiffExchangeLeft)' : '<C-Left>'")
 map("n", "<expr> <C-Right>", "&diff? '<Plug>(MergetoolDiffExchangeRight)' : '<C-Right>'")
