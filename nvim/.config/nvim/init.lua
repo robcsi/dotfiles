@@ -82,7 +82,8 @@ require "paq" {
   "kshenoy/vim-signature",
   {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"},
   "nvim-lua/lsp-status.nvim",
-  "neovim/nvim-lspconfig"
+  "neovim/nvim-lspconfig",
+  "github/copilot.vim"
 }
 
 -- general mappings
@@ -937,3 +938,6 @@ require "lspconfig".sumneko_lua.setup {
     }
   }
 }
+
+-- copilot suggestion hightlight
+-- cmd "highlight CopilotSuggestion guifg=#444444 ctermfg=8"
