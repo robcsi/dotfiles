@@ -28,6 +28,7 @@ cmd ":call vimwiki#vars#init()"
 
 -- Plugins
 require "paq" {
+  "savq/paq-nvim",
   "tami5/lspsaga.nvim",
   "hrsh7th/nvim-compe",
   "mhartington/formatter.nvim",
@@ -56,7 +57,12 @@ require "paq" {
   "vifm/vifm.vim",
   "t9md/vim-quickhl",
   "vimwiki/vimwiki",
-  {"iamcco/markdown-preview.nvim", run = "mkdp#util#install()"},
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   run = vim.fn["mkdp#util#install()"],
+  --   as = "markdownPreview"
+  -- },
+  { "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, },
   "dyng/ctrlsf.vim",
   "rust-lang/rust.vim",
   "tjdevries/lsp_extensions.nvim",
@@ -83,7 +89,8 @@ require "paq" {
   {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"},
   "nvim-lua/lsp-status.nvim",
   "neovim/nvim-lspconfig",
-  "github/copilot.vim"
+  "github/copilot.vim",
+  "kdheepak/lazygit.nvim"
 }
 
 -- general mappings
@@ -230,12 +237,25 @@ map("n", "<leader>t", ":TagbarToggle<CR>")
 
 -- vim-markdown
 g.mkdp_auto_close = 0
-g.mkdp_refresh_slow = 1
+g.mkdp_refresh_slow = 0
 -- example
 map("n", "<C-s>", "<Plug>MarkdownPreview")
 map("n", "<M-s>", "<Plug>MarkdownPreviewStop")
 map("n", "<C-p>", "<Plug>MarkdownPreviewToggle")
 g.mkdp_browser = "qutebrowser"
+
+-- vim.cmd(
+--   [[
+-- augroup markdown!
+-- 	autocmd!
+-- 	au FileType markdown packadd! markdownPreview
+-- 	au FileType markdown setlocal spell spelllang=pt_pt,en_us
+-- 	au FileType markdown inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+-- 	au FileType markdown nmap <F5> <Plug>MarkdownPreviewToggle
+-- 	au FileType markdown set conceallevel=2
+-- 	augroup END
+-- ]]
+-- )
 
 -- CtrlSF
 g.ctrlsf_auto_focus = {["at"] = "start"}
@@ -789,7 +809,7 @@ require("telescope").setup {
       override_file_sorter = true
     },
     project = {
-      base_dir = "~/projects",
+      base_dirs = "~/projects",
       max_depth = 3,
       display_type = "full"
     }
