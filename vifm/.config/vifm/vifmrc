@@ -207,7 +207,7 @@ fileviewer *.pdf
 
 "setting up findprg to run for the :find command
 "set findprg="c:\\GnuWin32\\bin\\find.exe %s %a"
-set findprg="where /R %s %A"
+set findprg="find %s %a -print , -type d \( ! -readable -o ! -executable \) -prune"
 
 "adding mappings for Explore command to display file content in one full screen window
 nnoremap e <c-w>oe
