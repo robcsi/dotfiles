@@ -57,12 +57,14 @@ require "paq" {
   "vifm/vifm.vim",
   "t9md/vim-quickhl",
   "vimwiki/vimwiki",
-  -- {
-  --   "iamcco/markdown-preview.nvim",
-  --   run = vim.fn["mkdp#util#install()"],
-  --   as = "markdownPreview"
-  -- },
-  { "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, },
+  {
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    setup = function()
+      vim.g.mkdp_filetypes = {"markdown"}
+    end,
+    ft = {"markdown"}
+  },
   "dyng/ctrlsf.vim",
   "rust-lang/rust.vim",
   "tjdevries/lsp_extensions.nvim",
@@ -90,7 +92,14 @@ require "paq" {
   "nvim-lua/lsp-status.nvim",
   "neovim/nvim-lspconfig",
   "github/copilot.vim",
-  "kdheepak/lazygit.nvim"
+  {
+    "saecki/crates.nvim",
+    requires = {"nvim-lua/plenary.nvim"},
+    config = function()
+      require("crates").setup()
+    end
+  },
+  "simrat39/rust-tools.nvim"
 }
 
 -- general mappings
@@ -351,7 +360,7 @@ end
 -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
 local servers = {
   "tsserver",
-  "rust_analyzer",
+  -- "rust_analyzer",
   "bashls",
   "dockerls",
   "html",
@@ -575,7 +584,7 @@ require "lualine".setup {
         --   'nvim_lsp', 'nvim_diagnostic', 'coc', 'ale', 'vim_lsp'.
         -- or a function that returns a table as such:
         --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
-        sources = {"nvim_lsp", "coc"},
+        sources = {"nvim_lsp"},
         -- Displays diagnostics for the defined severity types
         sections = {"error", "warn", "info", "hint"},
         diagnostics_color = {
@@ -961,3 +970,9 @@ require "lspconfig".sumneko_lua.setup {
 
 -- copilot suggestion hightlight
 -- cmd "highlight CopilotSuggestion guifg=#444444 ctermfg=8"
+
+-- rust-tools config
+-- Update this path
+local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.7.0"
+local codelldb_path = extension_path .. "adapter/codelldb"
+local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
