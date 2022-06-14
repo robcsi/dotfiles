@@ -342,7 +342,6 @@ local on_attach = function(_, bufnr)
   map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
   map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
   -- map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
-  map("n", "K", ":Lspsaga hover_doc<CR>")
   -- map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
   map("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
   -- map("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
@@ -360,7 +359,7 @@ end
 -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
 local servers = {
   "tsserver",
-  -- "rust_analyzer",
+  "rust_analyzer",
   "bashls",
   "dockerls",
   "html",
@@ -462,6 +461,7 @@ map("n", "[d", ":Lspsaga diagnostic_jump_prev<CR>")
 map("n", "<leader>cp", ":Lspsaga preview_definition<CR>")
 map("n", "<leader>cd", ":Telescope lsp_references<CR>")
 map("n", "<leader>rn", ":Lspsaga rename<CR>")
+map("n", "K", ":Lspsaga hover_doc<CR>")
 
 -- Setup treesitter
 local ts = require "nvim-treesitter.configs"
