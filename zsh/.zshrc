@@ -35,3 +35,5 @@ alias vifm='vifmrun'
 
 # set vi mode for shell
 set -o vi
+
+eval "$(atuin init zsh)"
