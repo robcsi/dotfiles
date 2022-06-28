@@ -86,12 +86,14 @@ require "paq" {
   {"nvim-telescope/telescope-fzy-native.nvim", run = "make"},
   "fannheyward/telescope-coc.nvim",
   "nvim-telescope/telescope-project.nvim",
+  "nvim-telescope/telescope-ui-select.nvim",
+  "nvim-telescope/telescope-file-browser.nvim",
   "Yggdroot/indentLine",
   "kshenoy/vim-signature",
   {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"},
   "nvim-lua/lsp-status.nvim",
   "neovim/nvim-lspconfig",
-  "github/copilot.vim",
+  -- "github/copilot.vim",
   {
     "saecki/crates.nvim",
     requires = {"nvim-lua/plenary.nvim"},
@@ -99,7 +101,8 @@ require "paq" {
       require("crates").setup()
     end
   },
-  "simrat39/rust-tools.nvim"
+  "simrat39/rust-tools.nvim",
+  "williamboman/nvim-lsp-installer"
 }
 
 -- general mappings
