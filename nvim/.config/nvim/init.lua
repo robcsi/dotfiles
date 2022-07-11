@@ -102,7 +102,20 @@ require "paq" {
     end
   },
   "simrat39/rust-tools.nvim",
-  "williamboman/nvim-lsp-installer"
+  "williamboman/nvim-lsp-installer",
+  "mfussenger/nvim-dap",
+  "rcarriga/nvim-dap-ui",
+  "theHamsta/nvim-dap-virtual-text",
+  "nvim-telescope/telescope-dap.nvim",
+  "Pocco81/DAPInstall.nvim",
+  "p00f/nvim-ts-rainbow",
+  {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {}
+    end
+  }
 }
 
 -- general mappings
@@ -976,6 +989,36 @@ require "lspconfig".sumneko_lua.setup {
 
 -- rust-tools config
 -- Update this path
-local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.7.0"
+local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.7.0/"
 local codelldb_path = extension_path .. "adapter/codelldb"
 local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+local opts = {
+  -- ... other configs
+  dap = {
+    adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+  }
+}
+
+-- Normal setup
+require("rust-tools").setup(opts)
+
+require("nvim-treesitter.configs").setup {
+  highlight = {},
+  -- ...
+  rainbow = {
+    enable = true,
+    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil -- Do not enable for files with more than n lines, int
+    -- colors = {}, -- table of hex strings
+    -- termcolors = {} -- table of colour name strings
+  }
+}
+
+-- trouble.nvim
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", {silent = true, noremap = true})
