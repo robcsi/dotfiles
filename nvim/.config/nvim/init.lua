@@ -30,16 +30,22 @@ cmd ":call vimwiki#vars#init()"
 require "paq" {
   "savq/paq-nvim",
   "tami5/lspsaga.nvim",
-  "hrsh7th/nvim-compe",
+  "hrsh7th/nvim-cmp",
+  "hrsh7th/cmp-buffer",
+  "hrsh7th/cmp-path",
+  "saadparwaiz1/cmp_luasnip",
+  "hrsh7th/cmp-nvim-lsp",
+  "hrsh7th/cmp-nvim-lua",
   "mhartington/formatter.nvim",
-  "savq/paq-nvim",
-  "wfxr/minimap.vim",
   "hrsh7th/vim-vsnip",
   "tpope/vim-fugitive",
   "xolox/vim-misc",
   "xolox/vim-shell",
-  "simnalamburt/vim-mundo",
-  "tpope/vim-commentary",
+  "mbbill/undotree",
+  {
+    "numToStr/Comment.nvim",
+    config = require("Comment").setup()
+  },
   "tpope/vim-unimpaired",
   "junegunn/vim-peekaboo",
   "tpope/vim-surround",
@@ -49,7 +55,11 @@ require "paq" {
   {"junegunn/fzf", run = "fzf#install()"},
   "junegunn/fzf.vim",
   "airblade/vim-rooter",
-  "airblade/vim-gitgutter",
+  -- "airblade/vim-gitgutter",
+  {
+    "lewis6991/gitsigns.nvim",
+    config = require("gitsigns").setup()
+  },
   "voldikss/vim-floaterm",
   "psliwka/vim-smoothie",
   "tpope/vim-eunuch",
@@ -91,13 +101,10 @@ require "paq" {
   {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"},
   "nvim-lua/lsp-status.nvim",
   "neovim/nvim-lspconfig",
-  -- "github/copilot.vim",
   {
     "saecki/crates.nvim",
     requires = {"nvim-lua/plenary.nvim"},
-    config = function()
-      require("crates").setup()
-    end
+    config = require("crates").setup()
   },
   "simrat39/rust-tools.nvim",
   "williamboman/nvim-lsp-installer",
@@ -110,9 +117,7 @@ require "paq" {
   {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("trouble").setup {}
-    end
+    config = require("trouble").setup()
   }
 }
 
@@ -233,25 +238,95 @@ map("n", "<expr> <C-Right>", "&diff? '<Plug>(MergetoolDiffExchangeRight)' : '<C-
 map("n", "<expr> <C-Down>", "&diff? '<Plug>(MergetoolDiffExchangeDown)' : '<C-Down>'")
 map("n", "<expr> <C-Up>", "&diff? '<Plug>(MergetoolDiffExchangeUp)' : '<C-Up>'")
 
--- mundo
-map("n", "<F5>", ":MundoToggle<CR>")
-g.mundo_width = 60
-g.mundo_preview_height = 20
-g.mundo_right = 1
-g.mundo_preview_bottom = 1
-g.mundo_auto_preview = 1
+map("n", "<F5>", ":UndotreeToggle<CR>")
 
 -- git gutter mappings -- these are available by default
-map("n", "<leader>hp", ":GitGutterPreviewHunk<CR>")
-map("n", "<leader>hs", ":GitGutterStageHunk<CR>")
-map("n", "<leader>hu", ":GitGutterUndoHunk<CR>")
-map("n", "<leader>hf", ":GitGutterFold<CR>")
-map("n", "[c", ":GitGutterPrevHunk<CR>")
-map("n", "]c", ":GitGutterNextHunk<CR>")
-vim.api.nvim_command("command! Gqf GitGutterQuickFix | copen")
-map("n", "<leader>hq", ":Gqf<CR>")
-g.gitgutter_highlight_linenrs = 1
-g.gitgutter_highlight_lines = 0
+-- map("n", "<leader>hp", ":GitGutterPreviewHunk<CR>")
+-- map("n", "<leader>hs", ":GitGutterStageHunk<CR>")
+-- map("n", "<leader>hu", ":GitGutterUndoHunk<CR>")
+-- map("n", "<leader>hf", ":GitGutterFold<CR>")
+-- map("n", "[c", ":GitGutterPrevHunk<CR>")
+-- map("n", "]c", ":GitGutterNextHunk<CR>")
+-- vim.api.nvim_command("command! Gqf GitGutterQuickFix | copen")
+-- map("n", "<leader>hq", ":Gqf<CR>")
+-- g.gitgutter_highlight_linenrs = 1
+-- g.gitgutter_highlight_lines = 0
+
+-- gitsigns mappings
+require("gitsigns").setup {
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    map(
+      "n",
+      "]c",
+      function()
+        if vim.wo.diff then
+          return "]c"
+        end
+        vim.schedule(
+          function()
+            gs.next_hunk()
+          end
+        )
+        return "<Ignore>"
+      end,
+      {expr = true}
+    )
+
+    map(
+      "n",
+      "[c",
+      function()
+        if vim.wo.diff then
+          return "[c"
+        end
+        vim.schedule(
+          function()
+            gs.prev_hunk()
+          end
+        )
+        return "<Ignore>"
+      end,
+      {expr = true}
+    )
+
+    -- Actions
+    map({"n", "v"}, "<leader>hs", ":Gitsigns stage_hunk<CR>")
+    map("n", "<leader>hu", gs.undo_stage_hunk)
+    map({"n", "v"}, "<leader>hr", ":Gitsigns reset_hunk<CR>")
+    map("n", "<leader>hS", gs.stage_buffer)
+    map("n", "<leader>hR", gs.reset_buffer)
+    map("n", "<leader>hp", gs.preview_hunk)
+    map(
+      "n",
+      "<leader>hb",
+      function()
+        gs.blame_line {full = true}
+      end
+    )
+    map("n", "<leader>tb", gs.toggle_current_line_blame)
+    map("n", "<leader>hd", gs.diffthis)
+    map(
+      "n",
+      "<leader>hD",
+      function()
+        gs.diffthis("~")
+      end
+    )
+    map("n", "<leader>td", gs.toggle_deleted)
+
+    -- Text object
+    map({"o", "x"}, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+  end
+}
 
 -- tagbar width
 g.tagbar_width = 70
@@ -560,11 +635,6 @@ opt.undodir = vim.fn.getenv("HOME") .. "/.undo"
 --   false
 -- )
 
--- minimap config
-g.minimap_width = 10
-g.minimap_auto_start = 0
-g.minimap_auto_start_win_enter = 0
-
 -- local githunksummary =
 --   vim.api.nvim_exec(
 --   [[
@@ -646,37 +716,227 @@ require "lualine".setup {
   extensions = {"fzf", "fugitive", "quickfix"}
 }
 
--- Compe setup start
-require "compe".setup {
-  enabled = true,
-  autocomplete = true,
-  debug = false,
-  min_length = 1,
-  preselect = "enable",
-  throttle_time = 80,
-  source_timeout = 200,
-  resolve_timeout = 800,
-  incomplete_delay = 400,
-  max_abbr_width = 100,
-  max_kind_width = 100,
-  max_menu_width = 100,
-  documentation = {
-    border = {"", "", "", " ", "", "", "", " "}, -- the border option is the same as `|help nvim_open_win|`
-    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-    max_width = 120,
-    min_width = 60,
-    max_height = math.floor(vim.o.lines * 0.3),
-    min_height = 1
-  },
-  source = {
-    path = true,
-    buffer = true,
-    calc = true,
-    nvim_lsp = true,
-    nvim_lua = true,
-    luasnip = true
-  }
+local cmp_status_ok, cmp = pcall(require, "cmp")
+if not cmp_status_ok then
+  return
+end
+
+local snip_status_ok, luasnip = pcall(require, "luasnip")
+if not snip_status_ok then
+  return
+end
+
+require("luasnip/loaders/from_vscode").lazy_load()
+
+local check_backspace = function()
+  local col = vim.fn.col(".") - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+end
+
+local kind_icons = {
+  Text = "",
+  Method = "",
+  Function = "",
+  Constructor = "",
+  Field = "",
+  Variable = "",
+  Class = "",
+  Interface = "",
+  Module = "",
+  Property = "",
+  Unit = "",
+  Value = "",
+  Enum = "",
+  Keyword = "",
+  Snippet = "",
+  Color = "",
+  File = "",
+  Reference = "",
+  Folder = "",
+  EnumMember = "",
+  Constant = "",
+  Struct = "",
+  Event = "",
+  Operator = "",
+  TypeParameter = ""
 }
+
+cmp.setup(
+  {
+    snippet = {
+      expand = function(args)
+        luasnip.lsp_expand(args.body) -- For `luasnip` users.
+      end
+    },
+    mapping = cmp.mapping.preset.insert(
+      {
+        ["<C-k>"] = cmp.mapping.select_prev_item(),
+        ["<C-j>"] = cmp.mapping.select_next_item(),
+        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), {"i", "c"}),
+        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), {"i", "c"}),
+        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
+        ["<C-e>"] = cmp.mapping(
+          {
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close()
+          }
+        ),
+        -- Accept currently selected item. If none selected, `select` first item.
+        -- Set `select` to `false` to only confirm explicitly selected items.
+        ["<CR>"] = cmp.mapping.confirm({select = true}),
+        ["<Tab>"] = cmp.mapping(
+          function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expandable() then
+              luasnip.expand()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif check_backspace() then
+              fallback()
+            else
+              fallback()
+            end
+          end,
+          {
+            "i",
+            "s"
+          }
+        ),
+        ["<S-Tab>"] = cmp.mapping(
+          function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end,
+          {
+            "i",
+            "s"
+          }
+        )
+      }
+    ),
+    formatting = {
+      fields = {"kind", "abbr", "menu"},
+      format = function(entry, vim_item)
+        vim_item.kind = kind_icons[vim_item.kind]
+        vim_item.menu =
+          ({
+          nvim_lsp = "",
+          nvim_lua = "",
+          luasnip = "",
+          buffer = "",
+          path = "",
+          emoji = ""
+        })[entry.source.name]
+        return vim_item
+      end
+    },
+    sources = {
+      {name = "nvim_lsp"},
+      {name = "nvim_lua"},
+      {name = "luasnip"},
+      {name = "buffer"},
+      {name = "path"}
+    },
+    confirm_opts = {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = false
+    },
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered()
+    },
+    experimental = {
+      ghost_text = true
+    }
+  }
+)
+
+-- Compe setup start
+-- local cmp = require "cmp"
+
+-- cmp.setup(
+--   {
+--     snippet = {
+--       -- REQUIRED - you must specify a snippet engine
+--       expand = function(args)
+--         vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+--         -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+--         -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+--         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+--       end
+--     },
+--     window = {},
+--     mapping = cmp.mapping.preset.insert(
+--       {
+--         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+--         ["<C-f>"] = cmp.mapping.scroll_docs(4),
+--         ["<C-Space>"] = cmp.mapping.complete(),
+--         ["<C-e>"] = cmp.mapping.abort(),
+--         ["<CR>"] = cmp.mapping.confirm({select = true}) -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+--       }
+--     ),
+--     sources = cmp.config.sources(
+--       {
+--         {name = "nvim_lsp"},
+--         {name = "vsnip"} -- For vsnip users.
+--         -- { name = 'luasnip' }, -- For luasnip users.
+--         -- { name = 'ultisnips' }, -- For ultisnips users.
+--         -- { name = 'snippy' }, -- For snippy users.
+--       },
+--       {
+--         {name = "buffer"}
+--       }
+--     )
+--   }
+-- )
+
+-- -- Set configuration for specific filetype.
+-- cmp.setup.filetype(
+--   "gitcommit",
+--   {
+--     sources = cmp.config.sources(
+--       {
+--         {name = "cmp_git"} -- You can specify the `cmp_git` source if you were installed it.
+--       },
+--       {
+--         {name = "buffer"}
+--       }
+--     )
+--   }
+-- )
+
+-- -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+-- cmp.setup.cmdline(
+--   "/",
+--   {
+--     mapping = cmp.mapping.preset.cmdline(),
+--     sources = {
+--       {name = "buffer"}
+--     }
+--   }
+-- )
+
+-- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+-- cmp.setup.cmdline(
+--   ":",
+--   {
+--     mapping = cmp.mapping.preset.cmdline(),
+--     sources = cmp.config.sources(
+--       {
+--         {name = "path"}
+--       },
+--       {
+--         {name = "cmdline"}
+--       }
+--     )
+--   }
+-- )
 
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
