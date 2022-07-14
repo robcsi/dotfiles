@@ -50,7 +50,7 @@ require "paq" {
   "junegunn/vim-peekaboo",
   "tpope/vim-surround",
   "tpope/vim-repeat",
-  {"neoclide/coc.nvim", branch = "release"},
+  -- {"neoclide/coc.nvim", branch = "release"},
   "mhinz/vim-startify",
   {"junegunn/fzf", run = "fzf#install()"},
   "junegunn/fzf.vim",
@@ -118,7 +118,8 @@ require "paq" {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
     config = require("trouble").setup()
-  }
+  },
+  "kyazdani42/nvim-tree.lua"
 }
 
 -- general mappings
@@ -151,7 +152,7 @@ map("n", "oo", "o<Esc>")
 map("n", "<leader><SPACE>", ":CtrlSF <C-r><C-w><CR>")
 map("n", "<leader>g", ":Gcd<CR>")
 map("n", "<leader>s", ":topleft G<CR>")
-map("n", "<leader>e", ":CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width -60<CR>")
+-- map("n", "<leader>e", ":CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width -60<CR>")
 -- --open-action-strategy=vsplit
 map("n", "<leader>q", ":TcloseAll! | :xall!<CR>")
 map("n", "<leader>p", ":vsplit<CR> | :terminal git push<CR>i")
@@ -254,6 +255,38 @@ map("n", "<F5>", ":UndotreeToggle<CR>")
 
 -- gitsigns mappings
 require("gitsigns").setup {
+  signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+  numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+  linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+  word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+  watch_gitdir = {
+    interval = 1000,
+    follow_files = true
+  },
+  attach_to_untracked = true,
+  current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  current_line_blame_opts = {
+    virt_text = true,
+    virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+    delay = 1000,
+    ignore_whitespace = false
+  },
+  current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+  sign_priority = 6,
+  update_debounce = 100,
+  status_formatter = nil, -- Use default
+  max_file_length = 40000,
+  preview_config = {
+    -- Options passed to nvim_open_win
+    border = "single",
+    style = "minimal",
+    relative = "cursor",
+    row = 0,
+    col = 1
+  },
+  yadm = {
+    enable = false
+  },
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
@@ -716,6 +749,7 @@ require "lualine".setup {
   extensions = {"fzf", "fugitive", "quickfix"}
 }
 
+--nvim-cmp
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
   return
@@ -857,9 +891,9 @@ cmp.setup(
   }
 )
 
--- Compe setup start
+-- nvim-cmp setup start
 -- local cmp = require "cmp"
-
+--
 -- cmp.setup(
 --   {
 --     snippet = {
@@ -884,10 +918,6 @@ cmp.setup(
 --     sources = cmp.config.sources(
 --       {
 --         {name = "nvim_lsp"},
---         {name = "vsnip"} -- For vsnip users.
---         -- { name = 'luasnip' }, -- For luasnip users.
---         -- { name = 'ultisnips' }, -- For ultisnips users.
---         -- { name = 'snippy' }, -- For snippy users.
 --       },
 --       {
 --         {name = "buffer"}
@@ -895,7 +925,7 @@ cmp.setup(
 --     )
 --   }
 -- )
-
+--
 -- -- Set configuration for specific filetype.
 -- cmp.setup.filetype(
 --   "gitcommit",
@@ -910,7 +940,7 @@ cmp.setup(
 --     )
 --   }
 -- )
-
+--
 -- -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 -- cmp.setup.cmdline(
 --   "/",
@@ -921,7 +951,7 @@ cmp.setup(
 --     }
 --   }
 -- )
-
+--
 -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 -- cmp.setup.cmdline(
 --   ":",
@@ -937,6 +967,12 @@ cmp.setup(
 --     )
 --   }
 -- )
+-- --Setup lspconfig.
+-- local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+-- require("lspconfig")["sumneko_lua"].setup {
+--   capabilities = capabilities
+-- }
 
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -1281,3 +1317,74 @@ vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", {silent = 
 
 -- switch between header and source in C++
 vim.api.nvim_set_keymap("n", "<M-h>", "<cmd>ClangdSwitchSourceHeader<cr>", {silent = true, noremap = true})
+
+--nvim-tree
+map("n", "<leader>e", ":NvimTreeToggle<CR>")
+local status_ok, nvim_tree = pcall(require, "nvim-tree")
+if not status_ok then
+  return
+end
+
+local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+if not config_status_ok then
+  return
+end
+
+local tree_cb = nvim_tree_config.nvim_tree_callback
+
+nvim_tree.setup {
+  update_focused_file = {
+    enable = true,
+    update_cwd = true
+  },
+  renderer = {
+    root_folder_modifier = ":t",
+    icons = {
+      glyphs = {
+        default = "",
+        symlink = "",
+        folder = {
+          arrow_open = "",
+          arrow_closed = "",
+          default = "",
+          open = "",
+          empty = "",
+          empty_open = "",
+          symlink = "",
+          symlink_open = ""
+        },
+        git = {
+          unstaged = "",
+          staged = "S",
+          unmerged = "",
+          renamed = "➜",
+          untracked = "U",
+          deleted = "",
+          ignored = "◌"
+        }
+      }
+    }
+  },
+  diagnostics = {
+    enable = true,
+    show_on_dirs = true,
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = ""
+    }
+  },
+  view = {
+    width = 60,
+    height = 30,
+    side = "left",
+    mappings = {
+      list = {
+        {key = {"l", "<CR>", "o"}, cb = tree_cb "edit"},
+        {key = "h", cb = tree_cb "close_node"},
+        {key = "v", cb = tree_cb "vsplit"}
+      }
+    }
+  }
+}
