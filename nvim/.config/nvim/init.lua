@@ -1246,6 +1246,7 @@ require("nvim-treesitter.configs").setup {
 }
 
 -- trouble.nvim
+map("n", "<leader>xt", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
 map("n", "<leader>xx", "<cmd>Trouble<cr>", {silent = true, noremap = true})
 map("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", {silent = true, noremap = true})
 map("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", {silent = true, noremap = true})
