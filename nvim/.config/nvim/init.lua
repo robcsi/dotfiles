@@ -123,6 +123,63 @@ require ("packer").startup(function(use)
     }
 end)
 
+opt.backspace = {"indent", "eol", "start"}
+opt.clipboard = "unnamed"
+opt.completeopt = "menuone,noselect"
+opt.cursorline = true
+opt.encoding = "utf-8" -- Set default encoding to UTF-8
+opt.expandtab = true -- Use spaces instead of tabs
+opt.foldenable = false
+opt.foldmethod = "indent"
+opt.formatoptions = "l"
+opt.hidden = true -- Enable background buffers
+opt.hlsearch = false -- Highlight found searches
+opt.ignorecase = true -- Ignore case
+opt.inccommand = "split" -- Get a preview of replacements
+opt.incsearch = true -- Shows the match while typing
+opt.joinspaces = false -- No double spaces with join
+opt.linebreak = true -- Stop words being broken on wrap
+opt.list = true -- Show some invisible characters
+opt.listchars = "tab:<->,space:·,nbsp:+,eol:↓,trail:●,precedes:<,extends:>"
+opt.number = true -- Show line numbers
+opt.relativenumber = true -- Show relative numbers
+opt.numberwidth = 5 -- Make the gutter wider by default
+opt.scrolloff = 7 -- Lines of context
+opt.shiftround = true -- Round indent
+opt.shiftwidth = 4 -- Size of an indent
+opt.showmode = false -- Don't display mode
+opt.sidescrolloff = 8 -- Columns of context
+opt.smartcase = true -- Do not ignore case with capitals
+opt.smartindent = true -- Insert indents automatically
+-- opt.spelllang = "en"
+opt.splitbelow = true -- Put new windows below current
+opt.splitright = true -- Put new windows right of current
+opt.tabstop = 4 -- Number of spaces tabs count for
+opt.termguicolors = true -- You will have bad experience for diagnostic messages when it's default 4000.
+opt.updatetime = 250
+opt.wrap = true
+opt.signcolumn = "auto:9"
+opt.showcmd = true
+opt.showmatch = true
+opt.title = true
+opt.startofline = false
+opt.autochdir = true
+opt.wildmode = "full"
+opt.wildmenu = true
+opt.laststatus = 2
+opt.history = 1000
+opt.switchbuf = "useopen,usetab"
+opt.softtabstop = 4 -- Number of spaces tabs count for
+opt.shiftwidth = 4
+opt.backup = false
+opt.writebackup = false
+opt.cmdheight = 1
+opt.shortmess = "c"
+opt.autowriteall = true
+opt.showtabline = 2
+opt.undofile = true
+opt.undodir = vim.fn.getenv("HOME") .. "/.undo"
+
 -- general mappings
 -- scroll by 3 lines
 map("n", "<C-e>", "3<C-e>")
@@ -207,10 +264,6 @@ map("n", "<Space>j", ":QuickhlManualLockToggle<CR>")
 
 -- custom substitute/sed mapping to shortcut the replacement of work under cursor
 map("n", "<leader>z", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gIc<Left><Left><Left><Left>")
-
--- mapping for next and previous buffer
--- nnoremap <leader>. :bnext<CR>
--- nnoremap <leader>, :bprev<CR>
 
 -- shortcut to insert current date in file
 map("n", "<leader>D", "a**<C-R>=strftime('%Y %b %d @ %H:%M')<cr>** <esc>")
@@ -376,30 +429,11 @@ map("n", "<M-s>", "<Plug>MarkdownPreviewStop")
 map("n", "<C-p>", "<Plug>MarkdownPreviewToggle")
 g.mkdp_browser = "qutebrowser"
 
--- vim.cmd(
---   [[
--- augroup markdown!
--- 	autocmd!
--- 	au FileType markdown packadd! markdownPreview
--- 	au FileType markdown setlocal spell spelllang=pt_pt,en_us
--- 	au FileType markdown inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
--- 	au FileType markdown nmap <F5> <Plug>MarkdownPreviewToggle
--- 	au FileType markdown set conceallevel=2
--- 	augroup END
--- ]]
--- )
-
 -- CtrlSF
 g.ctrlsf_auto_focus = {["at"] = "start"}
 g.ctrlsf_auto_preview = 1
 g.ctrlsf_default_view_mode = "compact"
 
--- terminal settings
--- vim.api.nvim_exec([[
--- augroup termopen
---     autocmd TermOpen * setlocal statusline=%{b:term_title}
--- augroup END
--- ]], true)
 cmd "autocmd TermOpen * setlocal statusline=%{b:term_title}" -- disabled in visual mode
 
 -- general terminal settings
@@ -472,7 +506,7 @@ local on_attach = function(_, bufnr)
   -- map("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
   -- map("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
   -- map("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
-  map("n", "<space>d", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>")
+  -- map("n", "<space>d", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>")
   -- map("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
 end
 
@@ -506,18 +540,6 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- require "lspconfig".tsserver.setup {}
--- require "lspconfig".rust_analyzer.setup {}
--- require "lspconfig".bashls.setup {}
--- require "lspconfig".dockerls.setup {}
--- require "lspconfig".html.setup {}
--- require "lspconfig".pyright.setup {}
--- require "lspconfig".vimls.setup {}
--- require "lspconfig".yamlls.setup {}
--- require "lspconfig".sumneko_lua.setup {}
--- require "lspconfig".clangd.setup {}
--- require "lspconfig".cmake.setup {}
--- require "lspconfig".texlab.setup {}
 require "lspconfig".jsonls.setup {
   commands = {
     Format = {
@@ -574,8 +596,8 @@ saga.init_lsp_saga {
 map("n", "<Leader>cf", ":Lspsaga lsp_finder<CR>")
 map("n", "<leader>ca", ":Lspsaga code_action<CR>")
 map("v", "<leader>ca", ":<C-U>Lspsaga range_code_action<CR>")
--- map("n", "C-n", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>')
--- map("n", "C-p", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>')
+map("n", "C-n", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>')
+map("n", "C-p", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>')
 map("n", "<leader>cs", ":Lspsaga signature_help<CR>")
 map("n", "<leader>ci", ":Lspsaga show_line_diagnostics<CR>")
 map("n", "<leader>cc", ":Lspsaga show_cursor_diagnostics<CR>")
@@ -590,84 +612,7 @@ map("n", "K", ":Lspsaga hover_doc<CR>")
 local ts = require "nvim-treesitter.configs"
 ts.setup {ensure_installed = "all", highlight = {enable = true}}
 
--- Colourscheme config
---[[ vim.g.everforest_background = "hard"
-vim.g.everforest_enable_italic = 1
-vim.g.everforest_diagnostic_text_highlight = 1
-vim.g.everforest_diagnostic_virtual_text = "colored"
-vim.g.everforest_current_word = "bold" ]]
--- Load the colorscheme
 cmd [[colorscheme onedark]] -- Put your favorite colorscheme here
-
-opt.backspace = {"indent", "eol", "start"}
-opt.clipboard = "unnamed"
-opt.completeopt = "menuone,noselect"
-opt.cursorline = true
-opt.encoding = "utf-8" -- Set default encoding to UTF-8
-opt.expandtab = true -- Use spaces instead of tabs
-opt.foldenable = false
-opt.foldmethod = "indent"
-opt.formatoptions = "l"
-opt.hidden = true -- Enable background buffers
-opt.hlsearch = false -- Highlight found searches
-opt.ignorecase = true -- Ignore case
-opt.inccommand = "split" -- Get a preview of replacements
-opt.incsearch = true -- Shows the match while typing
-opt.joinspaces = false -- No double spaces with join
-opt.linebreak = true -- Stop words being broken on wrap
-opt.list = true -- Show some invisible characters
-opt.listchars = "tab:<->,space:·,nbsp:+,eol:↓,trail:●,precedes:<,extends:>"
-opt.number = true -- Show line numbers
-opt.relativenumber = true -- Show relative numbers
-opt.numberwidth = 5 -- Make the gutter wider by default
-opt.scrolloff = 7 -- Lines of context
-opt.shiftround = true -- Round indent
-opt.shiftwidth = 4 -- Size of an indent
-opt.showmode = false -- Don't display mode
-opt.sidescrolloff = 8 -- Columns of context
-opt.smartcase = true -- Do not ignore case with capitals
-opt.smartindent = true -- Insert indents automatically
--- opt.spelllang = "en"
-opt.splitbelow = true -- Put new windows below current
-opt.splitright = true -- Put new windows right of current
-opt.tabstop = 4 -- Number of spaces tabs count for
-opt.termguicolors = true -- You will have bad experience for diagnostic messages when it's default 4000.
-opt.updatetime = 250
-opt.wrap = true
-opt.signcolumn = "auto:9"
-opt.showcmd = true
-opt.showmatch = true
-opt.title = true
-opt.startofline = false
-opt.autochdir = true
-opt.wildmode = "full"
-opt.wildmenu = true
-opt.laststatus = 2
-opt.history = 1000
-opt.switchbuf = "useopen,usetab"
-opt.softtabstop = 4 -- Number of spaces tabs count for
-opt.shiftwidth = 4
-opt.backup = false
-opt.writebackup = false
-opt.cmdheight = 1
-opt.shortmess = "c"
-opt.autowriteall = true
-opt.showtabline = 2
-opt.undofile = true
-opt.undodir = vim.fn.getenv("HOME") .. "/.undo"
-
--- Use spelling for markdown files ‘]s’ to find next, ‘[s’ for previous, 'z=‘ for suggestions when on one.
--- Source: http:--thejakeharding.com/tutorial/2012/06/13/using-spell-check-in-vim.html
--- vim.api.nvim_exec(
---   [[
--- augroup markdownSpell
---     autocmd!
---     autocmd FileType markdown,md,txt setlocal spell
---     autocmd BufRead,BufNewFile *.md,*.txt,*.markdown setlocal spell
--- augroup END
--- ]],
---   false
--- )
 
 -- local githunksummary =
 --   vim.api.nvim_exec(
@@ -1009,11 +954,11 @@ _G.s_tab_complete = function()
   end
 end
 
-vim.api.nvim_set_keymap("i", "<CR>", "cmp#confirm({ 'keys': '<CR>', 'select': v:true })", {expr = true})
-vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+map("i", "<CR>", "cmp#confirm({ 'keys': '<CR>', 'select': v:true })", {expr = true})
+map("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+map("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+map("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+map("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 -- End Compe related setup
 
@@ -1029,18 +974,7 @@ map("n", "<Leader>n", "<cmd>enew<CR>")
 -- Easy select all of file
 map("n", "<Leader>as", "ggVG<c-$>")
 
--- Tab to switch buffers in Normal mode
--- map("n", "<Tab>", ":bnext<CR>")
--- map("n", "<S-Tab>", ":bprevious<CR>")
-
 -- Line bubbling
--- Use these two if you don't have prettier
---map('n'), '<c-j>', '<cmd>m .+1<CR>==')
---map('n,) <c-k>', '<cmd>m .-2<CR>==')
--- map("n", "<c-j>", "<cmd>m .+1<CR>")
--- map("n", "<c-k>", "<cmd>m .-2<CR>")
--- map("i", "<c-j> <Esc>", "<cmd>m .+1<CR>==gi")
--- map("i", "<c-k> <Esc>", "<cmd>m .-2<CR>==gi")
 map("v", "<c-j>", "<cmd>m +1<CR>gv=gv")
 map("v", "<c-k>", "<cmd>m -2<CR>gv=gv")
 
@@ -1135,14 +1069,6 @@ require("telescope").setup {
   }
 }
 
--- map("n", "<leader>p", '<cmd>lua require("telescope.builtin").find_files(require("telescope.themes"))<cr>')
--- map("n", "<leader>r", '<cmd>lua require("telescope.builtin").registers()<cr>')
--- map("n", "<leader>g", '<cmd>lua require("telescope.builtin").live_grep(require("telescope.themes"))<cr>')
--- map("n", "<leader>b", '<cmd>lua require("telescope.builtin").buffers(require("telescope.themes"))<cr>')
--- map("n", "<leader>h", '<cmd>lua require("telescope.builtin").help_tags()<cr>')
--- map("n", "<leader>f", '<cmd>lua require("telescope.builtin").file_browser(require("telescope.themes"))<cr>')
--- map("n", "<leader>s", '<cmd>lua require("telescope.builtin").spell_suggest()<cr>')
--- map("n", "<leader>i", '<cmd>lua require("telescope.builtin").git_status(require("telescope.themes"))<cr>')
 -- Telescope keybindings
 -- Find files using Telescope command-line sugar.
 -- general pickers
@@ -1173,7 +1099,6 @@ map("n", "<leader>fk", "<cmd>Telescope keymaps<cr>")
 -- indentLine
 g.indentLine_char_list = {"|", "¦", "┆", "┊"}
 
--------------------- COMMANDS ------------------------------
 cmd "au TextYankPost * lua vim.highlight.on_yank {on_visual = true}" -- disabled in visual mode
 
 -- Prettier function for formatter
@@ -1310,15 +1235,15 @@ require("nvim-treesitter.configs").setup {
 }
 
 -- trouble.nvim
-vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", {silent = true, noremap = true})
+map("n", "<leader>xx", "<cmd>Trouble<cr>", {silent = true, noremap = true})
+map("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", {silent = true, noremap = true})
+map("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", {silent = true, noremap = true})
+map("n", "<leader>xl", "<cmd>Trouble loclist<cr>", {silent = true, noremap = true})
+map("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", {silent = true, noremap = true})
+map("n", "gR", "<cmd>Trouble lsp_references<cr>", {silent = true, noremap = true})
 
 -- switch between header and source in C++
-vim.api.nvim_set_keymap("n", "<M-h>", "<cmd>ClangdSwitchSourceHeader<cr>", {silent = true, noremap = true})
+map("n", "<M-h>", "<cmd>ClangdSwitchSourceHeader<cr>", {silent = true, noremap = true})
 
 --nvim-tree
 map("n", "<leader>e", ":NvimTreeToggle<CR>")
