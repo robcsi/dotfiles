@@ -26,101 +26,101 @@ vim.g.vimwiki_ext2syntax = {
 }
 cmd ":call vimwiki#vars#init()"
 
+vim.cmd [[packadd packer.nvim]]
+
 -- Plugins
-require "paq" {
-  "savq/paq-nvim",
-  "tami5/lspsaga.nvim",
-  "hrsh7th/nvim-cmp",
-  "hrsh7th/cmp-buffer",
-  "hrsh7th/cmp-path",
-  "saadparwaiz1/cmp_luasnip",
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/cmp-nvim-lua",
-  "mhartington/formatter.nvim",
-  "hrsh7th/vim-vsnip",
-  "tpope/vim-fugitive",
-  "xolox/vim-misc",
-  "xolox/vim-shell",
-  "mbbill/undotree",
-  {
-    "numToStr/Comment.nvim",
-    config = require("Comment").setup()
-  },
-  "tpope/vim-unimpaired",
-  "junegunn/vim-peekaboo",
-  "tpope/vim-surround",
-  "tpope/vim-repeat",
-  -- {"neoclide/coc.nvim", branch = "release"},
-  "mhinz/vim-startify",
-  {"junegunn/fzf", run = "fzf#install()"},
-  "junegunn/fzf.vim",
-  "airblade/vim-rooter",
-  -- "airblade/vim-gitgutter",
-  {
-    "lewis6991/gitsigns.nvim",
-    config = require("gitsigns").setup()
-  },
-  "voldikss/vim-floaterm",
-  "psliwka/vim-smoothie",
-  "tpope/vim-eunuch",
-  "joshdick/onedark.vim",
-  "vifm/vifm.vim",
-  "t9md/vim-quickhl",
-  "vimwiki/vimwiki",
-  {
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-    setup = function()
-      vim.g.mkdp_filetypes = {"markdown"}
-    end,
-    ft = {"markdown"}
-  },
-  "dyng/ctrlsf.vim",
-  "rust-lang/rust.vim",
-  "tjdevries/lsp_extensions.nvim",
-  "preservim/tagbar",
-  "szw/vim-maximizer",
-  "stsewd/fzf-checkout.vim",
-  "samoshkin/vim-mergetool",
-  "kassio/neoterm",
-  "hoob3rt/lualine.nvim",
-  "ryanoasis/vim-devicons",
-  "pacha/vem-tabline",
-  "mengelbrecht/lightline-bufferline",
-  "zefei/vim-wintabs",
-  "zefei/vim-wintabs-powerline",
-  "kyazdani42/nvim-web-devicons",
-  "nvim-lua/popup.nvim",
-  "nvim-lua/plenary.nvim",
-  "nvim-telescope/telescope.nvim",
-  "nvim-telescope/telescope-project.nvim",
-  "nvim-telescope/telescope-ui-select.nvim",
-  "nvim-telescope/telescope-file-browser.nvim",
-  "Yggdroot/indentLine",
-  "kshenoy/vim-signature",
-  {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"},
-  "nvim-lua/lsp-status.nvim",
-  "neovim/nvim-lspconfig",
-  {
-    "saecki/crates.nvim",
-    requires = {"nvim-lua/plenary.nvim"},
-    config = require("crates").setup()
-  },
-  "simrat39/rust-tools.nvim",
-  "williamboman/nvim-lsp-installer",
-  "mfussenger/nvim-dap",
-  "rcarriga/nvim-dap-ui",
-  "theHamsta/nvim-dap-virtual-text",
-  "nvim-telescope/telescope-dap.nvim",
-  "Pocco81/DAPInstall.nvim",
-  "p00f/nvim-ts-rainbow",
-  {
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = require("trouble").setup()
-  },
-  "kyazdani42/nvim-tree.lua"
-}
+require ("packer").startup(function(use)
+    -- use  "savq/paq-nvim"
+    use  "tami5/lspsaga.nvim"
+    use  "hrsh7th/nvim-cmp"
+    use  "hrsh7th/cmp-buffer"
+    use  "hrsh7th/cmp-path"
+    use  "saadparwaiz1/cmp_luasnip"
+    use  "hrsh7th/cmp-nvim-lsp"
+    use  "hrsh7th/cmp-nvim-lua"
+    use  "mhartington/formatter.nvim"
+    use  "hrsh7th/vim-vsnip"
+    use  "tpope/vim-fugitive"
+    use  "xolox/vim-misc"
+    use  "xolox/vim-shell"
+    use  "mbbill/undotree"
+    use  {
+        "numToStr/Comment.nvim",
+        config = require("Comment").setup()
+    }
+    use  "tpope/vim-unimpaired"
+    use  "junegunn/vim-peekaboo"
+    use  "tpope/vim-surround"
+    use  "tpope/vim-repeat"
+    use  "mhinz/vim-startify"
+    use  {"junegunn/fzf", run = "fzf#install()"}
+    use  "junegunn/fzf.vim"
+    use  "airblade/vim-rooter"
+    use  {
+        "lewis6991/gitsigns.nvim",
+        config = require("gitsigns").setup()
+    }
+    use  "voldikss/vim-floaterm"
+    use  "psliwka/vim-smoothie"
+    use  "tpope/vim-eunuch"
+    use  "joshdick/onedark.vim"
+    use  "vifm/vifm.vim"
+    use  "t9md/vim-quickhl"
+    use  "vimwiki/vimwiki"
+    use  {
+        "iamcco/markdown-preview.nvim",
+        run = "cd app && npm install",
+        setup = function()
+            vim.g.mkdp_filetypes = {"markdown"}
+        end,
+        ft = {"markdown"}
+    }
+    use  "dyng/ctrlsf.vim"
+    use  "rust-lang/rust.vim"
+    use  "tjdevries/lsp_extensions.nvim"
+    use  "preservim/tagbar"
+    use  "szw/vim-maximizer"
+    use  "stsewd/fzf-checkout.vim"
+    use  "samoshkin/vim-mergetool"
+    use  "kassio/neoterm"
+    use  "hoob3rt/lualine.nvim"
+    use  "ryanoasis/vim-devicons"
+    use  "pacha/vem-tabline"
+    use  "mengelbrecht/lightline-bufferline"
+    use  "zefei/vim-wintabs"
+    use  "zefei/vim-wintabs-powerline"
+    use  "kyazdani42/nvim-web-devicons"
+    use  "nvim-lua/popup.nvim"
+    use  "nvim-lua/plenary.nvim"
+    use  "nvim-telescope/telescope.nvim"
+    use  "nvim-telescope/telescope-project.nvim"
+    use  "nvim-telescope/telescope-ui-select.nvim"
+    use  "nvim-telescope/telescope-file-browser.nvim"
+    use  "Yggdroot/indentLine"
+    use  "kshenoy/vim-signature"
+    use  {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+    use  "nvim-lua/lsp-status.nvim"
+    use  "neovim/nvim-lspconfig"
+    use  {
+        "saecki/crates.nvim",
+        requires = {"nvim-lua/plenary.nvim"},
+        config = require("crates").setup()
+    }
+    use  "simrat39/rust-tools.nvim"
+    use  "williamboman/nvim-lsp-installer"
+    use  "mfussenger/nvim-dap"
+    use  "rcarriga/nvim-dap-ui"
+    use  "theHamsta/nvim-dap-virtual-text"
+    use  "nvim-telescope/telescope-dap.nvim"
+    use  "Pocco81/DAPInstall.nvim"
+    use  "p00f/nvim-ts-rainbow"
+    use  {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = require("trouble").setup()
+    }
+    use  "kyazdani42/nvim-tree.lua"
+end)
 
 -- general mappings
 -- scroll by 3 lines
