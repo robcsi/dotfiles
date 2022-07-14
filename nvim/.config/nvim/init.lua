@@ -31,95 +31,96 @@ vim.cmd [[packadd packer.nvim]]
 -- Plugins
 require ("packer").startup(function(use)
     -- use  "savq/paq-nvim"
-    use  "tami5/lspsaga.nvim"
-    use  "hrsh7th/nvim-cmp"
-    use  "hrsh7th/cmp-buffer"
-    use  "hrsh7th/cmp-path"
-    use  "saadparwaiz1/cmp_luasnip"
-    use  "hrsh7th/cmp-nvim-lsp"
-    use  "hrsh7th/cmp-nvim-lua"
-    use  "mhartington/formatter.nvim"
-    use  "hrsh7th/vim-vsnip"
-    use  "tpope/vim-fugitive"
-    use  "xolox/vim-misc"
-    use  "xolox/vim-shell"
-    use  "mbbill/undotree"
-    use  {
+    use"wbthomason/packer.nvim"
+    use "tami5/lspsaga.nvim"
+    use "hrsh7th/nvim-cmp"
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/cmp-path"
+    use "saadparwaiz1/cmp_luasnip"
+    use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-nvim-lua"
+    use "mhartington/formatter.nvim"
+    use "hrsh7th/vim-vsnip"
+    use "tpope/vim-fugitive"
+    use "xolox/vim-misc"
+    use "xolox/vim-shell"
+    use "mbbill/undotree"
+    use "kyazdani42/nvim-tree.lua"
+    use {
         "numToStr/Comment.nvim",
-        config = require("Comment").setup()
+        config = function() require("Comment").setup() end
     }
-    use  "tpope/vim-unimpaired"
-    use  "junegunn/vim-peekaboo"
-    use  "tpope/vim-surround"
-    use  "tpope/vim-repeat"
-    use  "mhinz/vim-startify"
-    use  {"junegunn/fzf", run = "fzf#install()"}
-    use  "junegunn/fzf.vim"
-    use  "airblade/vim-rooter"
-    use  {
+    use "tpope/vim-unimpaired"
+    use "junegunn/vim-peekaboo"
+    use "tpope/vim-surround"
+    use "tpope/vim-repeat"
+    use "mhinz/vim-startify"
+    -- use  {"junegunn/fzf", run = "fzf#install()"}
+    -- use  "junegunn/fzf.vim"
+    use "airblade/vim-rooter"
+    use {
         "lewis6991/gitsigns.nvim",
-        config = require("gitsigns").setup()
+        config = function() require("gitsigns").setup() end
     }
-    use  "voldikss/vim-floaterm"
-    use  "psliwka/vim-smoothie"
-    use  "tpope/vim-eunuch"
-    use  "joshdick/onedark.vim"
-    use  "vifm/vifm.vim"
-    use  "t9md/vim-quickhl"
-    use  "vimwiki/vimwiki"
-    use  {
+    use "voldikss/vim-floaterm"
+    use "psliwka/vim-smoothie"
+    use "tpope/vim-eunuch"
+    use "joshdick/onedark.vim"
+    use "vifm/vifm.vim"
+    use "t9md/vim-quickhl"
+    use "vimwiki/vimwiki"
+    use {
         "iamcco/markdown-preview.nvim",
         run = "cd app && npm install",
-        setup = function()
+        config = function()
             vim.g.mkdp_filetypes = {"markdown"}
         end,
         ft = {"markdown"}
     }
-    use  "dyng/ctrlsf.vim"
-    use  "rust-lang/rust.vim"
-    use  "tjdevries/lsp_extensions.nvim"
-    use  "preservim/tagbar"
-    use  "szw/vim-maximizer"
-    use  "stsewd/fzf-checkout.vim"
-    use  "samoshkin/vim-mergetool"
-    use  "kassio/neoterm"
-    use  "hoob3rt/lualine.nvim"
-    use  "ryanoasis/vim-devicons"
-    use  "pacha/vem-tabline"
-    use  "mengelbrecht/lightline-bufferline"
-    use  "zefei/vim-wintabs"
-    use  "zefei/vim-wintabs-powerline"
-    use  "kyazdani42/nvim-web-devicons"
-    use  "nvim-lua/popup.nvim"
-    use  "nvim-lua/plenary.nvim"
-    use  "nvim-telescope/telescope.nvim"
-    use  "nvim-telescope/telescope-project.nvim"
-    use  "nvim-telescope/telescope-ui-select.nvim"
-    use  "nvim-telescope/telescope-file-browser.nvim"
-    use  "Yggdroot/indentLine"
-    use  "kshenoy/vim-signature"
-    use  {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
-    use  "nvim-lua/lsp-status.nvim"
-    use  "neovim/nvim-lspconfig"
-    use  {
+    use "dyng/ctrlsf.vim"
+    use "rust-lang/rust.vim"
+    use "tjdevries/lsp_extensions.nvim"
+    use "preservim/tagbar"
+    use "szw/vim-maximizer"
+    -- use  "stsewd/fzf-checkout.vim"
+    use "samoshkin/vim-mergetool"
+    use "kassio/neoterm"
+    use "hoob3rt/lualine.nvim"
+    use "ryanoasis/vim-devicons"
+    use "pacha/vem-tabline"
+    use "mengelbrecht/lightline-bufferline"
+    use "zefei/vim-wintabs"
+    use "zefei/vim-wintabs-powerline"
+    use "kyazdani42/nvim-web-devicons"
+    use "nvim-lua/popup.nvim"
+    use "nvim-lua/plenary.nvim"
+    use "nvim-telescope/telescope.nvim"
+    use "nvim-telescope/telescope-project.nvim"
+    use "nvim-telescope/telescope-ui-select.nvim"
+    use "nvim-telescope/telescope-file-browser.nvim"
+    use "Yggdroot/indentLine"
+    use "kshenoy/vim-signature"
+    use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+    use "nvim-lua/lsp-status.nvim"
+    use "neovim/nvim-lspconfig"
+    use {
         "saecki/crates.nvim",
         requires = {"nvim-lua/plenary.nvim"},
-        config = require("crates").setup()
+        config = function () require("crates").setup() end
     }
-    use  "simrat39/rust-tools.nvim"
-    use  "williamboman/nvim-lsp-installer"
-    use  "mfussenger/nvim-dap"
-    use  "rcarriga/nvim-dap-ui"
-    use  "theHamsta/nvim-dap-virtual-text"
-    use  "nvim-telescope/telescope-dap.nvim"
-    use  "Pocco81/DAPInstall.nvim"
-    use  "p00f/nvim-ts-rainbow"
-    use  {
+    use "simrat39/rust-tools.nvim"
+    use "williamboman/nvim-lsp-installer"
+    -- use "mfussenger/nvim-dap"
+    -- use "rcarriga/nvim-dap-ui"
+    -- use "theHamsta/nvim-dap-virtual-text"
+    -- use "nvim-telescope/telescope-dap.nvim"
+    -- use "Pocco81/DAPInstall.nvim"
+    use "p00f/nvim-ts-rainbow"
+    use {
         "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
-        config = require("trouble").setup()
+        requires = {"kyazdani42/nvim-web-devicons"},
+        config = function () require("trouble").setup() end
     }
-    use  "kyazdani42/nvim-tree.lua"
 end)
 
 -- general mappings
@@ -156,7 +157,7 @@ map("n", "<leader>s", ":topleft G<CR>")
 -- --open-action-strategy=vsplit
 map("n", "<leader>q", ":TcloseAll! | :xall!<CR>")
 map("n", "<leader>p", ":vsplit<CR> | :terminal git push<CR>i")
-map("n", "<leader>v", ":CocSearch -S <C-r><C-w><CR>")
+-- map("n", "<leader>v", ":CocSearch -S <C-r><C-w><CR>")
 map("n", "<leader>t", ":TagbarToggle<CR>")
 -- map("n", "H", ":Help .expand('<cword>')<CR>")
 map("n", "<leader>S", ":Startify<CR>")
@@ -179,13 +180,13 @@ endfunction
 )
 
 -- FZF
-map("n", "<leader>C", ":Commits<CR>")
-map("n", "<leader>B", ":BCommits<CR>")
-map("n", "<leader>b", ":Buffers<CR>")
-map("n", "<leader>G", ":GFiles?<CR>")
-map("n", "<leader>r", ":Tags<CR>")
-map("n", "<leader>gb", ":GBranches<CR>")
-map("n", "<leader><tab>", ":Maps<CR>")
+-- map("n", "<leader>C", ":Commits<CR>")
+-- map("n", "<leader>B", ":BCommits<CR>")
+-- map("n", "<leader>b", ":Buffers<CR>")
+-- map("n", "<leader>G", ":GFiles?<CR>")
+-- map("n", "<leader>r", ":Tags<CR>")
+-- map("n", "<leader>gb", ":GBranches<CR>")
+-- map("n", "<leader><tab>", ":Maps<CR>")
 
 -- shortcut for counting occurence of word under cursor in file
 map("n", "<leader>c", ":%s/<c-r><c-w>//gn<cr>")
@@ -746,7 +747,8 @@ require "lualine".setup {
     lualine_y = {},
     lualine_z = {}
   },
-  extensions = {"fzf", "fugitive", "quickfix"}
+  -- extensions = {"fzf", "fugitive", "quickfix"}
+  extensions = {"fugitive", "quickfix"}
 }
 
 --nvim-cmp
@@ -996,7 +998,7 @@ _G.tab_complete = function()
   elseif check_back_space() then
     return t "<Tab>"
   else
-    return vim.fn["compe#complete"]()
+    return vim.fn["cmp#complete"]()
   end
 end
 _G.s_tab_complete = function()
@@ -1007,7 +1009,7 @@ _G.s_tab_complete = function()
   end
 end
 
-vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm({ 'keys': '<CR>', 'select': v:true })", {expr = true})
+vim.api.nvim_set_keymap("i", "<CR>", "cmp#confirm({ 'keys': '<CR>', 'select': v:true })", {expr = true})
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
