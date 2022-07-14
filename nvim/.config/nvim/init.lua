@@ -29,9 +29,10 @@ cmd ":call vimwiki#vars#init()"
 vim.cmd [[packadd packer.nvim]]
 
 -- Plugins
-require ("packer").startup(function(use)
+require("packer").startup(
+  function(use)
     -- use  "savq/paq-nvim"
-    use"wbthomason/packer.nvim"
+    use "wbthomason/packer.nvim"
     use "tami5/lspsaga.nvim"
     use "hrsh7th/nvim-cmp"
     use "hrsh7th/cmp-buffer"
@@ -47,8 +48,10 @@ require ("packer").startup(function(use)
     use "mbbill/undotree"
     use "kyazdani42/nvim-tree.lua"
     use {
-        "numToStr/Comment.nvim",
-        config = function() require("Comment").setup() end
+      "numToStr/Comment.nvim",
+      config = function()
+        require("Comment").setup()
+      end
     }
     use "tpope/vim-unimpaired"
     use "junegunn/vim-peekaboo"
@@ -59,8 +62,10 @@ require ("packer").startup(function(use)
     -- use  "junegunn/fzf.vim"
     use "airblade/vim-rooter"
     use {
-        "lewis6991/gitsigns.nvim",
-        config = function() require("gitsigns").setup() end
+      "lewis6991/gitsigns.nvim",
+      config = function()
+        require("gitsigns").setup()
+      end
     }
     use "voldikss/vim-floaterm"
     use "psliwka/vim-smoothie"
@@ -70,12 +75,12 @@ require ("packer").startup(function(use)
     use "t9md/vim-quickhl"
     use "vimwiki/vimwiki"
     use {
-        "iamcco/markdown-preview.nvim",
-        run = "cd app && npm install",
-        config = function()
-            vim.g.mkdp_filetypes = {"markdown"}
-        end,
-        ft = {"markdown"}
+      "iamcco/markdown-preview.nvim",
+      run = "cd app && npm install",
+      config = function()
+        vim.g.mkdp_filetypes = {"markdown"}
+      end,
+      ft = {"markdown"}
     }
     use "dyng/ctrlsf.vim"
     use "rust-lang/rust.vim"
@@ -104,9 +109,11 @@ require ("packer").startup(function(use)
     use "nvim-lua/lsp-status.nvim"
     use "neovim/nvim-lspconfig"
     use {
-        "saecki/crates.nvim",
-        requires = {"nvim-lua/plenary.nvim"},
-        config = function () require("crates").setup() end
+      "saecki/crates.nvim",
+      requires = {"nvim-lua/plenary.nvim"},
+      config = function()
+        require("crates").setup()
+      end
     }
     use "simrat39/rust-tools.nvim"
     use "williamboman/nvim-lsp-installer"
@@ -117,11 +124,15 @@ require ("packer").startup(function(use)
     -- use "Pocco81/DAPInstall.nvim"
     use "p00f/nvim-ts-rainbow"
     use {
-        "folke/trouble.nvim",
-        requires = {"kyazdani42/nvim-web-devicons"},
-        config = function () require("trouble").setup() end
+      "folke/trouble.nvim",
+      requires = {"kyazdani42/nvim-web-devicons"},
+      config = function()
+        require("trouble").setup()
+      end
     }
-end)
+    use {"L3MON4D3/LuaSnip"}
+  end
+)
 
 opt.backspace = {"indent", "eol", "start"}
 opt.clipboard = "unnamed"
@@ -500,7 +511,7 @@ local on_attach = function(_, bufnr)
   map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
   -- map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>")
   -- map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
-  map("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
+  -- map("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
   -- map("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
   -- map("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
   -- map("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
@@ -1246,7 +1257,6 @@ map("n", "gR", "<cmd>Trouble lsp_references<cr>", {silent = true, noremap = true
 map("n", "<M-h>", "<cmd>ClangdSwitchSourceHeader<cr>", {silent = true, noremap = true})
 
 --nvim-tree
-map("n", "<leader>e", ":NvimTreeToggle<CR>")
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
   return
@@ -1315,3 +1325,4 @@ nvim_tree.setup {
     }
   }
 }
+map("n", "<leader>e", ":NvimTreeToggle<CR>")
