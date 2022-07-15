@@ -38,6 +38,21 @@ packer.init {
     },
 }
 
+-- vimwiki settings
+vim.g.vimwiki_list = {
+  {
+    path = "~/vimwiki/",
+    syntax = "markdown",
+    ext = ".md"
+  }
+}
+
+vim.g.vimwiki_ext2syntax = {
+  [".md"] = "markdown"
+}
+
+vim.cmd ":call vimwiki#vars#init()"
+
 -- Install your plugins here
 return packer.startup(function(use)
     -- their plugins here
