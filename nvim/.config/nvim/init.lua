@@ -130,7 +130,14 @@ require("packer").startup(
         require("trouble").setup()
       end
     }
+    use {"rafamadriz/friendly-snippets"}
     use {"L3MON4D3/LuaSnip"}
+
+    -- Automatically set up your configuration after cloning packer.nvim
+    -- Put this at the end after all plugins
+    if PACKER_BOOTSTRAP then
+      require("packer").sync()
+    end
   end
 )
 
@@ -162,7 +169,6 @@ opt.showmode = false -- Don't display mode
 opt.sidescrolloff = 8 -- Columns of context
 opt.smartcase = true -- Do not ignore case with capitals
 opt.smartindent = true -- Insert indents automatically
--- opt.spelllang = "en"
 opt.splitbelow = true -- Put new windows below current
 opt.splitright = true -- Put new windows right of current
 opt.tabstop = 4 -- Number of spaces tabs count for
@@ -246,15 +252,6 @@ endfunction
 ]],
   true
 )
-
--- FZF
--- map("n", "<leader>C", ":Commits<CR>")
--- map("n", "<leader>B", ":BCommits<CR>")
--- map("n", "<leader>b", ":Buffers<CR>")
--- map("n", "<leader>G", ":GFiles?<CR>")
--- map("n", "<leader>r", ":Tags<CR>")
--- map("n", "<leader>gb", ":GBranches<CR>")
--- map("n", "<leader><tab>", ":Maps<CR>")
 
 -- shortcut for counting occurence of word under cursor in file
 map("n", "<leader>c", ":%s/<c-r><c-w>//gn<cr>")
@@ -410,7 +407,7 @@ require("gitsigns").setup {
         gs.blame_line {full = true}
       end
     )
-    map("n", "<leader>tb", gs.toggle_current_line_blame)
+    map("n", "<leader>bt", gs.toggle_current_line_blame)
     map("n", "<leader>hd", gs.diffthis)
     map(
       "n",
@@ -820,9 +817,9 @@ cmp.setup(
           ({
           nvim_lsp = "",
           nvim_lua = "",
-          luasnip = "",
-          buffer = "",
-          path = "",
+          luasnip = "[LuaSnip]",
+          buffer = "[File]",
+          path = "[Path]",
           emoji = ""
         })[entry.source.name]
         return vim_item
@@ -848,89 +845,6 @@ cmp.setup(
     }
   }
 )
-
--- nvim-cmp setup start
--- local cmp = require "cmp"
---
--- cmp.setup(
---   {
---     snippet = {
---       -- REQUIRED - you must specify a snippet engine
---       expand = function(args)
---         vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
---         -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
---         -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
---         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
---       end
---     },
---     window = {},
---     mapping = cmp.mapping.preset.insert(
---       {
---         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
---         ["<C-f>"] = cmp.mapping.scroll_docs(4),
---         ["<C-Space>"] = cmp.mapping.complete(),
---         ["<C-e>"] = cmp.mapping.abort(),
---         ["<CR>"] = cmp.mapping.confirm({select = true}) -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
---       }
---     ),
---     sources = cmp.config.sources(
---       {
---         {name = "nvim_lsp"},
---       },
---       {
---         {name = "buffer"}
---       }
---     )
---   }
--- )
---
--- -- Set configuration for specific filetype.
--- cmp.setup.filetype(
---   "gitcommit",
---   {
---     sources = cmp.config.sources(
---       {
---         {name = "cmp_git"} -- You can specify the `cmp_git` source if you were installed it.
---       },
---       {
---         {name = "buffer"}
---       }
---     )
---   }
--- )
---
--- -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
--- cmp.setup.cmdline(
---   "/",
---   {
---     mapping = cmp.mapping.preset.cmdline(),
---     sources = {
---       {name = "buffer"}
---     }
---   }
--- )
---
--- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
--- cmp.setup.cmdline(
---   ":",
---   {
---     mapping = cmp.mapping.preset.cmdline(),
---     sources = cmp.config.sources(
---       {
---         {name = "path"}
---       },
---       {
---         {name = "cmdline"}
---       }
---     )
---   }
--- )
--- --Setup lspconfig.
--- local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
--- -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
--- require("lspconfig")["sumneko_lua"].setup {
---   capabilities = capabilities
--- }
 
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -965,7 +879,7 @@ _G.s_tab_complete = function()
   end
 end
 
-map("i", "<CR>", "cmp#confirm({ 'keys': '<CR>', 'select': v:true })", {expr = true})
+-- map("i", "<CR>", "cmp#confirm({ 'keys': '<CR>', 'select': v:true })", {expr = true})
 map("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 map("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 map("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
@@ -1271,59 +1185,65 @@ end
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
-  update_focused_file = {
-    enable = true,
-    update_cwd = true
-  },
-  renderer = {
-    root_folder_modifier = ":t",
-    icons = {
-      glyphs = {
-        default = "",
-        symlink = "",
-        folder = {
-          arrow_open = "",
-          arrow_closed = "",
-          default = "",
-          open = "",
-          empty = "",
-          empty_open = "",
-          symlink = "",
-          symlink_open = ""
-        },
-        git = {
-          unstaged = "",
-          staged = "S",
-          unmerged = "",
-          renamed = "➜",
-          untracked = "U",
-          deleted = "",
-          ignored = "◌"
+    disable_netrw = true,
+    prefer_startup_root = false,
+    respect_buf_cwd = true,
+    update_focused_file = {
+        enable = true,
+        update_root = true,
+    },
+    sync_root_with_cwd = true,
+    hijack_cursor = true,
+    renderer = {
+        root_folder_modifier = ":t",
+        icons = {
+            glyphs = {
+                default = "",
+                symlink = "",
+                folder = {
+                    arrow_open = "",
+                    arrow_closed = "",
+                    default = "",
+                    open = "",
+                    empty = "",
+                    empty_open = "",
+                    symlink = "",
+                    symlink_open = ""
+                },
+                git = {
+                    unstaged = "",
+                    staged = "S",
+                    unmerged = "",
+                    renamed = "➜",
+                    untracked = "U",
+                    deleted = "",
+                    ignored = "◌"
+                }
+            }
         }
-      }
+    },
+    diagnostics = {
+        enable = true,
+        show_on_dirs = true,
+        icons = {
+            hint = "",
+            info = "",
+            warning = "",
+            error = ""
+        }
+    },
+    view = {
+        adaptive_size = true,
+        width = 60,
+        height = 30,
+        side = "left",
+        mappings = {
+            list = {
+                {key = {"l", "<CR>", "o"}, cb = tree_cb "edit"},
+                {key = "h", cb = tree_cb "close_node"},
+                {key = "v", cb = tree_cb "vsplit"}
+            }
+        }
     }
-  },
-  diagnostics = {
-    enable = true,
-    show_on_dirs = true,
-    icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = ""
-    }
-  },
-  view = {
-    width = 60,
-    height = 30,
-    side = "left",
-    mappings = {
-      list = {
-        {key = {"l", "<CR>", "o"}, cb = tree_cb "edit"},
-        {key = "h", cb = tree_cb "close_node"},
-        {key = "v", cb = tree_cb "vsplit"}
-      }
-    }
-  }
 }
 map("n", "<leader>e", ":NvimTreeToggle<CR>")
