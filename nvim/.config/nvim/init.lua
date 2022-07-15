@@ -965,7 +965,7 @@ map("n", "<esc>", ":noh<cr><esc>")
 
 -- Telescope Global remapping
 local actions = require("telescope.actions")
-require("telescope").load_extension("project")
+-- require("telescope").load_extension("project")
 
 require("telescope").setup {
   defaults = {
