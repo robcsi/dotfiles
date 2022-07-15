@@ -1,6 +1,48 @@
 local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
 local g = vim.g -- a table to access global variables
 local opt = vim.opt -- to set options
+local fn = vim.fn
+
+-- Automatically install packer
+local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+if fn.empty(fn.glob(install_path)) > 0 then
+  PACKER_BOOTSTRAP =
+    fn.system {
+    "git",
+    "clone",
+    "--depth",
+    "1",
+    "https://github.com/wbthomason/packer.nvim",
+    install_path
+  }
+  print "Installing packer close and reopen Neovim..."
+  cmd [[packadd packer.nvim]]
+end
+
+-- Autocommand that reloads neovim whenever you save the init.lua file
+cmd [[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost init.lua source <afile> | PackerSync
+  augroup end
+]]
+
+-- Use a protected call so we don't error out on first use
+local status_ok, packer = pcall(require, "packer")
+-- if not status_ok then
+--   return
+-- end
+
+-- Have packer use a popup window
+packer.init {
+  display = {
+    open_fn = function()
+      return require("packer.util").float {border = "rounded"}
+    end,
+    show_all_info = true,
+    prompt_border = "double"
+  }
+}
 
 local function map(mode, lhs, rhs, opts)
   local options = {noremap = true, silent = true}
@@ -26,7 +68,7 @@ vim.g.vimwiki_ext2syntax = {
 }
 cmd ":call vimwiki#vars#init()"
 
-vim.cmd [[packadd packer.nvim]]
+cmd [[packadd packer.nvim]]
 
 -- Plugins
 require("packer").startup(
@@ -568,6 +610,21 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     virtual_text = false
   }
 )
+vim.lsp.handlers["textDocument/hover"] =
+  vim.lsp.with(
+  vim.lsp.handlers.hover,
+  {
+    border = "rounded"
+  }
+)
+
+vim.lsp.handlers["textDocument/signatureHelp"] =
+  vim.lsp.with(
+  vim.lsp.handlers.signature_help,
+  {
+    border = "rounded"
+  }
+)
 
 -- LSP Saga config & keys https://github.com/glepnir/lspsaga.nvim
 local saga = require "lspsaga"
@@ -706,14 +763,14 @@ require "lualine".setup {
 
 --nvim-cmp
 local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
-  return
-end
+-- if not cmp_status_ok then
+--   return
+-- end
 
 local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
-  return
-end
+-- if not snip_status_ok then
+--   return
+-- end
 
 require("luasnip/loaders/from_vscode").lazy_load()
 
@@ -1172,15 +1229,15 @@ map("n", "gR", "<cmd>Trouble lsp_references<cr>", {silent = true, noremap = true
 map("n", "<M-h>", "<cmd>ClangdSwitchSourceHeader<cr>", {silent = true, noremap = true})
 
 --nvim-tree
-local status_ok, nvim_tree = pcall(require, "nvim-tree")
-if not status_ok then
-  return
-end
+local nvim_tree_status_ok, nvim_tree = pcall(require, "nvim-tree")
+-- if not nvim_tree_status_ok then
+--   return
+-- end
 
 local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-if not config_status_ok then
-  return
-end
+-- if not config_status_ok then
+--   return
+-- end
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
