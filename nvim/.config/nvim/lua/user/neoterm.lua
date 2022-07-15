@@ -1,7 +1,7 @@
-local status_ok, neoterm = pcall(require, "neoterm")
-if not status_ok then
-	return
-end
+-- local status_ok, neoterm = pcall(require, "neoterm")
+-- if not status_ok then
+-- 	return
+-- end
 
 -- neoterm settings
 vim.g.neoterm_size = 20
