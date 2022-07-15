@@ -174,6 +174,7 @@ require("packer").startup(
     }
     use {"rafamadriz/friendly-snippets"}
     use {"L3MON4D3/LuaSnip"}
+    use "lewis6991/impatient.nvim"
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -1304,3 +1305,6 @@ nvim_tree.setup {
     }
 }
 map("n", "<leader>e", ":NvimTreeToggle<CR>")
+
+-- impatient
+require'impatient'.enable_profile()
