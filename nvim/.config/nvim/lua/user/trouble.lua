@@ -1,9 +1,7 @@
 local status_ok, trouble = pcall(require, "trouble")
 if not status_ok then
-    print("trouble didn't load...")
 	return
 end
-print("trouble did load...")
 
 trouble.setup {
     position = "bottom", -- position of the list can be: bottom, top, left, right
