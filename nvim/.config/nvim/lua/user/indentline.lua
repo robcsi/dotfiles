@@ -15,6 +15,8 @@ indent_blankline.setup {
     "packer",
     "startify",
     "NvimTree",
+    "Trouble",
+    "text"
   },
 }
 

@@ -103,7 +103,7 @@ keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 
 -- Startify
 keymap("n", "<leader>S", ":Startify<CR>", opts)
-keymap("n", "<A-s>", ":SSave", opts)
+-- keymap("n", "<M-s>", ":SSave", opts)
 
 -- CtrlSF
 keymap("n", "<leader><SPACE>", ":CtrlSF <C-r><C-w><CR>", opts)
@@ -207,12 +207,9 @@ vim.cmd "autocmd TermOpen * setlocal statusline=%{b:term_title}" -- disabled in 
 keymap("t", "jj", "<C-\\><C-n>", opts)
 keymap("t", ":q!", "<C-\\><C-n>:q!<CR>", opts)
 -- Toggle terminal on/off (neovim )
-keymap("n", "<A-t>", ":Ttoggle<CR>", opts)
-keymap("i", "<A-t>", "<Esc>:Ttoggle<CR>", opts)
-keymap("t", "<A-t>", "<C-\\><C-n>:Ttoggle<CR>", opts)
-
--- Startify shortcuts
-keymap("n", "<A-s>", ":SSave", opts)
+keymap("n", "<M-t>", ":Ttoggle<CR>", opts)
+keymap("i", "<M-t>", "<Esc>:Ttoggle<CR>", opts)
+keymap("t", "<M-t>", "<C-\\><C-n>:Ttoggle<CR>", opts)
 
 -- resize windows/splits
 keymap("n", "<Left>", ":vertical resize -5<CR>", opts)
@@ -223,13 +220,13 @@ keymap("n", "<Down>", ":resize +5<CR>", opts)
 -- wintabs
 vim.g.wintabs_autoclose = 0
 -- g.wintabs_display = 'statusline'
-keymap("n", "<A-n>", ":WintabsNext<CR>", opts)
-keymap("n", "<A-p>", ":WintabsPrevious<CR>", opts)
-keymap("n", "<A-c>", ":WintabsCloseWindow<CR>", opts)
-keymap("n", "<A-C>", ":WintabsCloseVimtab<CR>", opts)
-keymap("n", "<A-u>", ":WintabsUndo<CR>", opts)
-keymap("n", "<A-o>", ":WintabsOnlyWindow<CR>", opts)
-keymap("n", "<A-r>", ":WintabsRefresh<CR>", opts)
+keymap("n", "<M-n>", ":WintabsNext<CR>", opts)
+keymap("n", "<M-p>", ":WintabsPrevious<CR>", opts)
+keymap("n", "<M-c>", ":WintabsCloseWindow<CR>", opts)
+keymap("n", "<M-C>", ":WintabsCloseVimtab<CR>", opts)
+keymap("n", "<M-u>", ":WintabsUndo<CR>", opts)
+keymap("n", "<M-o>", ":WintabsOnlyWindow<CR>", opts)
+keymap("n", "<M-r>", ":WintabsRefresh<CR>", opts)
 
 -- LspSaga
 keymap("n", "<Leader>cf", ":Lspsaga lsp_finder<CR>", opts)
@@ -275,11 +272,11 @@ keymap("n", "<esc>", ":noh<cr><esc>", opts)
 -- trouble.nvim
 keymap("n", "<leader>xt", "<cmd>TroubleToggle<cr>", opts)
 keymap("n", "<leader>xx", "<cmd>Trouble<cr>", opts)
-keymap("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", opts)
+-- keymap("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", opts)
 keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", opts)
 keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>", opts)
 keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", opts)
-keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", opts)
+keymap("n", "<leader>xr", "<cmd>Trouble lsp_references<cr>", opts)
 
 -- switch between header and source in C++
 keymap("n", "<M-h>", "<cmd>ClangdSwitchSourceHeader<cr>", opts)
@@ -292,9 +289,9 @@ keymap("n", "<M-n>", "<Plug>(CybuPrev)", opts)
 keymap("n", "<M-p>", "<Plug>(CybuNext)", opts)
 
 -- illuminate
-keymap('n', '<a-j>', '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', opts)
-keymap('n', '<a-k>', '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', opts)
+keymap('n', '<M-j>', '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', opts)
+keymap('n', '<M-k>', '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', opts)
 
 -- browse
-keymap("n", "<m-o>", "<cmd>BrowseBookmarks<cr>", opts)
-keymap("n", "<m-i>", "<cmd>BrowseInputSearch<cr>", opts)
+keymap("n", "<M-o>", "<cmd>BrowseBookmarks<cr>", opts)
+keymap("n", "<M-i>", "<cmd>BrowseInputSearch<cr>", opts)
