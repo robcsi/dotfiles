@@ -74,6 +74,8 @@ return packer.startup(function(use)
     use { "folke/tokyonight.nvim"}
     use { "lunarvim/darkplus.nvim"}
     use { "joshdick/onedark.vim" }
+    use { "arzg/vim-substrata"}
+    use { "lunarvim/onedarker.nvim"}
 
     -- cmp plugins
     use { "hrsh7th/nvim-cmp"} -- The completion plugin
@@ -169,6 +171,12 @@ return packer.startup(function(use)
     }
     use "rcarriga/nvim-notify"
     use "matbme/JABS.nvim"
+    use "ghillb/cybu.nvim"
+    use "nacro90/numb.nvim"
+    use({
+            "lalitmee/browse.nvim",
+            requires = { "nvim-telescope/telescope.nvim" },
+    })
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

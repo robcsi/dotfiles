@@ -71,10 +71,24 @@ keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Telescope
 keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
+-- keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>fn", ":Telescope notify<CR>", opts)
+keymap("n", "<leader>ft", "<cmd>Telescope help_tags<cr>", opts)
+keymap("n", "<leader>fv", "<cmd>Telescope vim_options<cr>", opts)
+keymap("n", "<leader>fs", "<cmd>Telescope search_history<cr>", opts)
+keymap("n", "<leader>fh", "<cmd>Telescope command_history<cr>", opts)
+keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", opts)
+keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", opts)
+keymap("n", "<leader>fc", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
+keymap("n", "<leader>fg", "<cmd>Telescope grep_string<cr>", opts)
+keymap("n", "<leader>fr", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<leader>fm", "<cmd>Telescope man_pages<cr>", opts)
+keymap("n", "<leader>fF", "<cmd>Telescope git_files<cr>", opts)
+keymap("n", "<leader>fC", "<cmd>Telescope git_commits<CR>", opts)
+keymap("n", "<leader>fB", "<cmd>Telescope git_bcommits<CR>", opts)
+keymap("n", "<leader>fR", "<cmd>Telescope git_branches<CR>", opts)
+keymap("n", "<leader>fp", "<cmd>Telescope project<cr>", opts)
 
 -- DAP
 keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
@@ -258,33 +272,6 @@ keymap("v", "<c-k>", "<cmd>m -2<CR>gv=gv", opts)
 --After searching, pressing escape stops the highlight
 keymap("n", "<esc>", ":noh<cr><esc>", opts)
 
--- Telescope keybindings
--- Find files using Telescope command-line sugar.
--- general pickers
-keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
-keymap("n", "<leader>fc", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
-keymap("n", "<leader>fg", "<cmd>Telescope grep_string<cr>", opts)
-keymap("n", "<leader>fr", "<cmd>Telescope live_grep<cr>", opts)
-keymap("n", "<leader>fm", "<cmd>Telescope man_pages<cr>", opts)
-
--- git-specific pickers
-keymap("n", "<leader>fF", "<cmd>Telescope git_files<cr>", opts)
-keymap("n", "<leader>fC", "<cmd>Telescope git_commits<CR>", opts)
-keymap("n", "<leader>fB", "<cmd>Telescope git_bcommits<CR>", opts)
-keymap("n", "<leader>fR", "<cmd>Telescope git_branches<CR>", opts)
-
--- extensions
-keymap("n", "<leader>fp", "<cmd>Telescope project<cr>", opts)
-
--- vim-specific pickers
-keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)
-keymap("n", "<leader>ft", "<cmd>Telescope help_tags<cr>", opts)
-keymap("n", "<leader>fv", "<cmd>Telescope vim_options<cr>", opts)
-keymap("n", "<leader>fs", "<cmd>Telescope search_history<cr>", opts)
-keymap("n", "<leader>fh", "<cmd>Telescope command_history<cr>", opts)
-keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", opts)
-keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", opts)
-
 -- trouble.nvim
 keymap("n", "<leader>xt", "<cmd>TroubleToggle<cr>", opts)
 keymap("n", "<leader>xx", "<cmd>Trouble<cr>", opts)
@@ -298,5 +285,16 @@ keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", opts)
 keymap("n", "<M-h>", "<cmd>ClangdSwitchSourceHeader<cr>", opts)
 
 -- jabs
-keymap("n", "<leader>b", "<cmd>JABSOpen<cr>", opts)
+keymap("n", "<leader>fb", "<cmd>JABSOpen<cr>", opts)
 
+-- cybu
+keymap("n", "<M-n>", "<Plug>(CybuPrev)", opts)
+keymap("n", "<M-p>", "<Plug>(CybuNext)", opts)
+
+-- illuminate
+keymap('n', '<a-j>', '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', opts)
+keymap('n', '<a-k>', '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', opts)
+
+-- browse
+keymap("n", "<m-o>", "<cmd>BrowseBookmarks<cr>", opts)
+keymap("n", "<m-i>", "<cmd>BrowseInputSearch<cr>", opts)

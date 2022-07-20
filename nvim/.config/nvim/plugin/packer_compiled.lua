@@ -89,6 +89,11 @@ _G.packer_plugins = {
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["browse.nvim"] = {
+    loaded = true,
+    path = "/home/siar/.local/share/nvim/site/pack/packer/start/browse.nvim",
+    url = "https://github.com/lalitmee/browse.nvim"
+  },
   ["bufferline.nvim"] = {
     loaded = true,
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
@@ -130,6 +135,11 @@ _G.packer_plugins = {
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/ctrlsf.vim",
     url = "https://github.com/dyng/ctrlsf.vim"
   },
+  ["cybu.nvim"] = {
+    loaded = true,
+    path = "/home/siar/.local/share/nvim/site/pack/packer/start/cybu.nvim",
+    url = "https://github.com/ghillb/cybu.nvim"
+  },
   ["darkplus.nvim"] = {
     loaded = true,
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/darkplus.nvim",
@@ -164,11 +174,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/indentLine",
     url = "https://github.com/Yggdroot/indentLine"
-  },
-  ["lightline-bufferline"] = {
-    loaded = true,
-    path = "/home/siar/.local/share/nvim/site/pack/packer/start/lightline-bufferline",
-    url = "https://github.com/mengelbrecht/lightline-bufferline"
   },
   ["lsp-status.nvim"] = {
     loaded = true,
@@ -207,6 +212,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
     url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
+  },
+  ["numb.nvim"] = {
+    loaded = true,
+    path = "/home/siar/.local/share/nvim/site/pack/packer/start/numb.nvim",
+    url = "https://github.com/nacro90/numb.nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,
@@ -272,6 +282,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/onedark.vim",
     url = "https://github.com/joshdick/onedark.vim"
+  },
+  ["onedarker.nvim"] = {
+    loaded = true,
+    path = "/home/siar/.local/share/nvim/site/pack/packer/start/onedarker.nvim",
+    url = "https://github.com/lunarvim/onedarker.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -427,6 +442,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/vim-startify",
     url = "https://github.com/mhinz/vim-startify"
+  },
+  ["vim-substrata"] = {
+    loaded = true,
+    path = "/home/siar/.local/share/nvim/site/pack/packer/start/vim-substrata",
+    url = "https://github.com/arzg/vim-substrata"
   },
   ["vim-surround"] = {
     loaded = true,
