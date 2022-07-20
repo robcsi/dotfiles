@@ -5,6 +5,7 @@ end
 
 local actions = require "telescope.actions"
 telescope.load_extension("project")
+telescope.load_extension("notify")
 
 telescope.setup {
   defaults = {
@@ -38,7 +39,7 @@ telescope.setup {
             prompt_position = "top",
             preview_cutoff = 120,
             preview_width = 0.55,
-            preview_height = 0.5,
+            -- preview_height = 0.5, -- use this in case of vertical layout_strategy
         },
         file_sorter = require "telescope.sorters".get_fuzzy_file,
         generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,

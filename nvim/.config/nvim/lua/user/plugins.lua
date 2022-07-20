@@ -167,6 +167,8 @@ return packer.startup(function(use)
         "folke/trouble.nvim",
         requires = {"kyazdani42/nvim-web-devicons"},
     }
+    use "rcarriga/nvim-notify"
+    use "matbme/JABS.nvim"
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

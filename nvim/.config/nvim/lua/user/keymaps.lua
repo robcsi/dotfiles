@@ -74,6 +74,7 @@ keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
 keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
+keymap("n", "<leader>fn", ":Telescope notify<CR>", opts)
 
 -- DAP
 keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
@@ -295,4 +296,7 @@ keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", opts)
 
 -- switch between header and source in C++
 keymap("n", "<M-h>", "<cmd>ClangdSwitchSourceHeader<cr>", opts)
+
+-- jabs
+keymap("n", "<leader>b", "<cmd>JABSOpen<cr>", opts)
 

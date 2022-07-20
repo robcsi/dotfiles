@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim",
     url = "https://github.com/ravenxrz/DAPInstall.nvim"
   },
+  ["JABS.nvim"] = {
+    loaded = true,
+    path = "/home/siar/.local/share/nvim/site/pack/packer/start/JABS.nvim",
+    url = "https://github.com/matbme/JABS.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -232,6 +237,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-notify"] = {
+    loaded = true,
+    path = "/home/siar/.local/share/nvim/site/pack/packer/start/nvim-notify",
+    url = "https://github.com/rcarriga/nvim-notify"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
