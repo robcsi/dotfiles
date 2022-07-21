@@ -94,11 +94,6 @@ _G.packer_plugins = {
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/browse.nvim",
     url = "https://github.com/lalitmee/browse.nvim"
   },
-  ["bufferline.nvim"] = {
-    loaded = true,
-    path = "/home/siar/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
-    url = "https://github.com/akinsho/bufferline.nvim"
-  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -347,11 +342,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/undotree",
     url = "https://github.com/mbbill/undotree"
-  },
-  ["vem-tabline"] = {
-    loaded = true,
-    path = "/home/siar/.local/share/nvim/site/pack/packer/start/vem-tabline",
-    url = "https://github.com/pacha/vem-tabline"
   },
   ["vifm.vim"] = {
     loaded = true,

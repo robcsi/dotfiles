@@ -63,9 +63,8 @@ return packer.startup(function(use)
     use { "JoosepAlviste/nvim-ts-context-commentstring"}
     use { "kyazdani42/nvim-web-devicons"}
     use { "kyazdani42/nvim-tree.lua"}
-    use { "akinsho/bufferline.nvim"}
+    -- use { "akinsho/bufferline.nvim"}
     use { "moll/vim-bbye"}
-    -- use { "ahmedkhalf/project.nvim"}
     use { "lewis6991/impatient.nvim"}
     use { "lukas-reineke/indent-blankline.nvim"}
     use { "mhinz/vim-startify" }
@@ -145,8 +144,7 @@ return packer.startup(function(use)
     use "kassio/neoterm"
     use "hoob3rt/lualine.nvim"
     use "ryanoasis/vim-devicons"
-    use "pacha/vem-tabline"
-    use "mengelbrecht/lightline-bufferline"
+    -- use "mengelbrecht/lightline-bufferline"
     use "zefei/vim-wintabs"
     use "zefei/vim-wintabs-powerline"
     use "nvim-lua/popup.nvim"

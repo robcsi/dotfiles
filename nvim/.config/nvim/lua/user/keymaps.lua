@@ -219,7 +219,8 @@ keymap("n", "<Down>", ":resize +5<CR>", opts)
 
 -- wintabs
 vim.g.wintabs_autoclose = 0
--- g.wintabs_display = 'statusline'
+-- vim.g.wintabs_display = 'statusline'
+vim.g.wintabs_ignored_filetypes = {"NvimTree", "startify", "gitcommit"}
 keymap("n", "<M-n>", ":WintabsNext<CR>", opts)
 keymap("n", "<M-p>", ":WintabsPrevious<CR>", opts)
 keymap("n", "<M-c>", ":WintabsCloseWindow<CR>", opts)

@@ -59,14 +59,14 @@ vim.opt.wildmode = "full"
 vim.opt.wildmenu = true
 vim.opt.laststatus = 2
 vim.opt.history = 1000
-vim.opt.switchbuf = "useopen,usetab"
+vim.opt.switchbuf = "useopen"
 vim.opt.softtabstop = 4 -- Number of spaces tabs count for
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.cmdheight = 1
 vim.opt.shortmess = "c"
 vim.opt.autowriteall = true
-vim.opt.showtabline = 2
+vim.opt.showtabline = 1
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.getenv("HOME") .. "/.undo"
 
