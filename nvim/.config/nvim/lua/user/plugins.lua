@@ -63,7 +63,7 @@ return packer.startup(function(use)
     use { "JoosepAlviste/nvim-ts-context-commentstring"}
     use { "kyazdani42/nvim-web-devicons"}
     use { "kyazdani42/nvim-tree.lua"}
-    -- use { "akinsho/bufferline.nvim"}
+    use { "akinsho/bufferline.nvim"}
     use { "moll/vim-bbye"}
     use { "lewis6991/impatient.nvim"}
     use { "lukas-reineke/indent-blankline.nvim"}
@@ -121,7 +121,7 @@ return packer.startup(function(use)
     use "tpope/vim-surround"
     use "tpope/vim-repeat"
     use "airblade/vim-rooter"
-    use "voldikss/vim-floaterm"
+    -- use "voldikss/vim-floaterm"
     use "psliwka/vim-smoothie"
     use "tpope/vim-eunuch"
     use "vifm/vifm.vim"
@@ -145,8 +145,8 @@ return packer.startup(function(use)
     use "hoob3rt/lualine.nvim"
     use "ryanoasis/vim-devicons"
     -- use "mengelbrecht/lightline-bufferline"
-    use "zefei/vim-wintabs"
-    use "zefei/vim-wintabs-powerline"
+    -- use "zefei/vim-wintabs"
+    -- use "zefei/vim-wintabs-powerline"
     use "nvim-lua/popup.nvim"
     use "nvim-telescope/telescope-project.nvim"
     use "nvim-telescope/telescope-ui-select.nvim"

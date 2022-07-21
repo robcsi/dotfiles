@@ -94,6 +94,11 @@ _G.packer_plugins = {
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/browse.nvim",
     url = "https://github.com/lalitmee/browse.nvim"
   },
+  ["bufferline.nvim"] = {
+    loaded = true,
+    path = "/home/siar/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
+    url = "https://github.com/akinsho/bufferline.nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -363,11 +368,6 @@ _G.packer_plugins = {
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/vim-eunuch",
     url = "https://github.com/tpope/vim-eunuch"
   },
-  ["vim-floaterm"] = {
-    loaded = true,
-    path = "/home/siar/.local/share/nvim/site/pack/packer/start/vim-floaterm",
-    url = "https://github.com/voldikss/vim-floaterm"
-  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/vim-fugitive",
@@ -452,16 +452,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/siar/.local/share/nvim/site/pack/packer/start/vim-vsnip",
     url = "https://github.com/hrsh7th/vim-vsnip"
-  },
-  ["vim-wintabs"] = {
-    loaded = true,
-    path = "/home/siar/.local/share/nvim/site/pack/packer/start/vim-wintabs",
-    url = "https://github.com/zefei/vim-wintabs"
-  },
-  ["vim-wintabs-powerline"] = {
-    loaded = true,
-    path = "/home/siar/.local/share/nvim/site/pack/packer/start/vim-wintabs-powerline",
-    url = "https://github.com/zefei/vim-wintabs-powerline"
   },
   vimwiki = {
     loaded = true,

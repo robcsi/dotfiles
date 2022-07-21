@@ -60,6 +60,7 @@ nvim_tree.setup {
     },
     view = {
         adaptive_size = true,
+        centralize_selection = true,
         width = 60,
         height = 30,
         side = "left",
