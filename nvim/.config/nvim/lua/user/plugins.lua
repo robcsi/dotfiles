@@ -177,6 +177,10 @@ return packer.startup(function(use)
     use { "lalitmee/browse.nvim",
             requires = { "nvim-telescope/telescope.nvim" },
     }
+    use {
+        "SmiteshP/nvim-navic",
+        requires = "neovim/nvim-lspconfig"
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
