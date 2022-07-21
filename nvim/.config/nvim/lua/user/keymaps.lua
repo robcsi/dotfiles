@@ -115,6 +115,8 @@ keymap("n", "<leader>q", ":TcloseAll! | :xall!<CR>", opts)
 keymap("n", "<leader>p", ":vsplit<CR> | :terminal git push<CR>i", opts)
 
 -- Tagbar
+vim.g.tagbar_width = 70
+vim.g.tagbar_autofocus = 1
 keymap("n", "<leader>t", ":TagbarToggle<CR>", opts)
 
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
@@ -181,11 +183,6 @@ keymap("n", "<expr> <C-Up>", "&diff? '<Plug>(MergetoolDiffExchangeUp)' : '<C-Up>
 
 -- undotree
 keymap("n", "<F5>", ":UndotreeToggle<CR>", opts)
-
--- tagbar width
-vim.g.tagbar_width = 70
-vim.g.tagbar_autofocus = 1
-keymap("n", "<leader>t", ":TagbarToggle<CR>", opts)
 
 -- vim-markdown
 vim.g.mkdp_auto_close = 0
@@ -296,3 +293,6 @@ keymap('n', '<M-k>', '<cmd>lua require"illuminate".next_reference{reverse=true,w
 -- browse
 keymap("n", "<M-o>", "<cmd>BrowseBookmarks<cr>", opts)
 keymap("n", "<M-i>", "<cmd>BrowseInputSearch<cr>", opts)
+
+-- bufferline
+keymap("n", "<leader>bp", ":BufferLinePick<cr>", opts)
