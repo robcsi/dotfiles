@@ -144,7 +144,6 @@ return packer.startup(function(use)
     use "kassio/neoterm"
     use "hoob3rt/lualine.nvim"
     use "ryanoasis/vim-devicons"
-    -- use "mengelbrecht/lightline-bufferline"
     -- use "zefei/vim-wintabs"
     -- use "zefei/vim-wintabs-powerline"
     use "nvim-lua/popup.nvim"
