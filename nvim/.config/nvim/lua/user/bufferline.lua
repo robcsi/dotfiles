@@ -3,8 +3,8 @@ if not status_ok then
   return
 end
 
-local status_ok, custom_areas = pcall(require, "bufferline.custom_area")
-if not status_ok then
+local status_ok_custom, custom_areas = pcall(require, "bufferline.custom_area")
+if not status_ok_custom then
     return
 end
 
