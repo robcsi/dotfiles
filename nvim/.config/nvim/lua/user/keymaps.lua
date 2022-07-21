@@ -283,8 +283,8 @@ keymap("n", "<M-h>", "<cmd>ClangdSwitchSourceHeader<cr>", opts)
 keymap("n", "<leader>fb", "<cmd>JABSOpen<cr>", opts)
 
 -- cybu
-keymap("n", "<M-n>", "<Plug>(CybuPrev)", opts)
-keymap("n", "<M-p>", "<Plug>(CybuNext)", opts)
+keymap("n", "<M-p>", "<Plug>(CybuPrev)", opts)
+keymap("n", "<M-n>", "<Plug>(CybuNext)", opts)
 
 -- illuminate
 keymap('n', '<M-j>', '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', opts)
