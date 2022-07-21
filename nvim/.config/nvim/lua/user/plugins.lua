@@ -174,10 +174,9 @@ return packer.startup(function(use)
     use "matbme/JABS.nvim"
     use "ghillb/cybu.nvim"
     use "nacro90/numb.nvim"
-    use({
-            "lalitmee/browse.nvim",
+    use { "lalitmee/browse.nvim",
             requires = { "nvim-telescope/telescope.nvim" },
-    })
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
