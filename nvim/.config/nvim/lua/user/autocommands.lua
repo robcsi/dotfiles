@@ -46,6 +46,7 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 })
 
 vim.cmd "autocmd TermOpen * setlocal statusline=%{b:term_title}" -- disabled in visual mode
+vim.cmd "au FileType vimwiki setlocal syntax=markdown filetype=markdown" -- set markdown syntax and fitetype for vimwiki
 
 -- restoring the last cursor position
 vim.api.nvim_exec(
