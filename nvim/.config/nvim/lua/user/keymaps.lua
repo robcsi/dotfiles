@@ -4,7 +4,7 @@ local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 --Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
+keymap("", "<leader>", "<Nop>", opts)
 vim.g.mapleader = " "
 
 -- Modes
@@ -148,11 +148,11 @@ keymap("n", "<leader>tm", ":MaximizerToggle!<CR>", opts)
 vim.g.peekaboo_window = "vertical botright 80new"
 
 -- quickhl shortcuts
-keymap("n", "<Space>m", ":QuickhlManualAdd <c-r><c-w><ESC><CR>", opts)
-keymap("x", "<Space>m", ":QuickhlManualAdd <c-r><c-w><ESC><CR>", opts)
-keymap("n", "<Space>M", ":QuickhlManualReset<CR>", opts)
-keymap("x", "<Space>M", ":QuickhlManualReset<CR>", opts)
-keymap("n", "<Space>j", ":QuickhlManualLockToggle<CR>", opts)
+keymap("n", "<leader>m", ":QuickhlManualAdd <c-r><c-w><ESC><CR>", opts)
+keymap("x", "<leader>m", ":QuickhlManualAdd <c-r><c-w><ESC><CR>", opts)
+keymap("n", "<leader>M", ":QuickhlManualReset<CR>", opts)
+keymap("x", "<leader>M", ":QuickhlManualReset<CR>", opts)
+keymap("n", "<leader>j", ":QuickhlManualLockToggle<CR>", opts)
 
 -- custom substitute/sed mapping to shortcut the replacement of work under cursor
 keymap("n", "<leader>z", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gIc<Left><Left><Left><Left>", opts)
