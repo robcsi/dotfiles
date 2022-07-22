@@ -303,3 +303,7 @@ keymap('n', '<leader>h', ':FocusSplitLeft<CR>', opts)
 keymap('n', '<leader>j', ':FocusSplitDown<CR>', opts)
 keymap('n', '<leader>k', ':FocusSplitUp<CR>', opts)
 keymap('n', '<leader>l', ':FocusSplitRight<CR>', opts)
+
+-- neotree
+keymap('n', '<M-e>', ':Neotree filesystem reveal float<CR>', opts)
+keymap('n', '<M-b>', ':Neotree buffers reveal float<CR>', opts)

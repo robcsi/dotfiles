@@ -187,6 +187,17 @@ return packer.startup(function(use)
     use "b0o/incline.nvim"
     use { "beauwilliams/focus.nvim" }
 
+    vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+    use {
+            "nvim-neo-tree/neo-tree.nvim",
+            branch = "v2.x",
+            requires = { 
+                "nvim-lua/plenary.nvim",
+                "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+                "MunifTanjim/nui.nvim",
+            }
+    }
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if PACKER_BOOTSTRAP then
