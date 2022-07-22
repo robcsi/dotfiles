@@ -296,3 +296,10 @@ keymap("n", "<M-i>", "<cmd>BrowseInputSearch<cr>", opts)
 
 -- bufferline
 keymap("n", "<leader>bp", ":BufferLinePick<cr>", opts)
+
+--focus 
+keymap('n', '<M-l>', ':FocusSplitNicely<CR>', opts)
+keymap('n', '<leader>h', ':FocusSplitLeft<CR>', opts)
+keymap('n', '<leader>j', ':FocusSplitDown<CR>', opts)
+keymap('n', '<leader>k', ':FocusSplitUp<CR>', opts)
+keymap('n', '<leader>l', ':FocusSplitRight<CR>', opts)

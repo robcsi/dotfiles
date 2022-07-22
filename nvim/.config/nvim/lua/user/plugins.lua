@@ -103,6 +103,7 @@ return packer.startup(function(use)
 
     -- Treesitter
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+    use {'nvim-treesitter/nvim-treesitter-context'}
 
     -- Git
     use { "lewis6991/gitsigns.nvim"}
@@ -111,6 +112,7 @@ return packer.startup(function(use)
     use { "mfussenegger/nvim-dap"}
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
     use { "ravenxrz/DAPInstall.nvim"}
+    use 'theHamsta/nvim-dap-virtual-text'
 
     -- mine
     use "tami5/lspsaga.nvim"
@@ -181,6 +183,9 @@ return packer.startup(function(use)
         "SmiteshP/nvim-navic",
         requires = "neovim/nvim-lspconfig"
     }
+
+    use "b0o/incline.nvim"
+    use { "beauwilliams/focus.nvim" }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
