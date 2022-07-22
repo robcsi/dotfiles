@@ -6,7 +6,7 @@ end
 --settings here: https://github.com/beauwilliams/focus.nvim
 focus.setup {
     winhighlight = false,
-    hybridnumber = true
+    hybridnumber = false
 }
 
 -- By default, the highlight groups are setup as such:
