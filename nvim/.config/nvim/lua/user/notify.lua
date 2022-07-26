@@ -3,8 +3,6 @@ if not status_ok then
     return
 end
 
-vim.notify = notify
-
 notify.setup {
     background_colour = "Normal",
     fps = 30,
@@ -16,8 +14,12 @@ notify.setup {
         WARN = ""
     },
     level = 2,
+    max_width = 50,
     minimum_width = 50,
     render = "default",
     stages = "fade_in_slide_out",
     timeout = 5000
 }
+
+vim.notify = notify
+
