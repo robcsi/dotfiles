@@ -307,3 +307,10 @@ keymap('n', '<leader>l', ':FocusSplitRight<CR>', opts)
 -- neotree
 keymap('n', '<M-e>', ':Neotree filesystem reveal float<CR>', opts)
 keymap('n', '<M-b>', ':Neotree buffers reveal float<CR>', opts)
+
+-- rest
+keymap('n', '<M-r>', '<Plug>RestNvim', opts)
+-- keymap('n', '<M-r>', '<Plug>RestNvimPreview', opts)
+
+-- lsp-lines -- find a better keymap here...
+-- keymap("n", "<leader>l", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" }, opts)
