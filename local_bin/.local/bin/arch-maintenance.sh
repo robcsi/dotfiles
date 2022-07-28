@@ -8,6 +8,9 @@ echo Check Journal entries:
 sudo journalctl -p 3 -xb
 echo
 
+echo Update arch-keyring:
+pacman -Sy archlinux-keyring
+
 echo Update packages:
 yay -Syu
 echo
