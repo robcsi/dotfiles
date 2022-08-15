@@ -70,10 +70,10 @@ keymap("v", ">", ">gv", opts)
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Telescope
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
+keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
+keymap("n", "<leader>fp", "<cmd>Telescope projects<CR>", opts)
 -- keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
-keymap("n", "<leader>fn", ":Telescope notify<CR>", opts)
+keymap("n", "<leader>fn", "<cmd>Telescope notify<CR>", opts)
 keymap("n", "<leader>ft", "<cmd>Telescope help_tags<cr>", opts)
 keymap("n", "<leader>fv", "<cmd>Telescope vim_options<cr>", opts)
 keymap("n", "<leader>fs", "<cmd>Telescope search_history<cr>", opts)
@@ -89,6 +89,7 @@ keymap("n", "<leader>fC", "<cmd>Telescope git_commits<CR>", opts)
 keymap("n", "<leader>fB", "<cmd>Telescope git_bcommits<CR>", opts)
 keymap("n", "<leader>fR", "<cmd>Telescope git_branches<CR>", opts)
 keymap("n", "<leader>fp", "<cmd>Telescope project<cr>", opts)
+keymap("n", "<leader>fe", "<cmd>Telescope media_files<cr>", opts)
 
 -- DAP
 keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)

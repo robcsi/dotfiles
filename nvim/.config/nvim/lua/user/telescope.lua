@@ -6,6 +6,7 @@ end
 local actions = require "telescope.actions"
 telescope.load_extension("project")
 telescope.load_extension("notify")
+telescope.load_extension("media_files")
 
 telescope.setup {
   defaults = {
@@ -90,6 +91,12 @@ telescope.setup {
       base_dirs = "~/projects",
       max_depth = 3,
       display_type = "full"
+    },
+    media_files = {
+      -- filetypes whitelist
+      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+      filetypes = {"png", "jpg", "jpeg"},
+      find_cmd = "rg" -- find command (defaults to `fd`)
     }
   }
 }

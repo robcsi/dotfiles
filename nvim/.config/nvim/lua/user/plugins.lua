@@ -207,6 +207,7 @@ return packer.startup(function(use)
             require("lsp_lines").setup()
         end,
     }
+    use 'nvim-telescope/telescope-media-files.nvim'
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if PACKER_BOOTSTRAP then
