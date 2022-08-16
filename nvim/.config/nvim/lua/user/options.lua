@@ -69,4 +69,4 @@ vim.opt.autowriteall = true
 vim.opt.showtabline = 1
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.getenv("HOME") .. "/.undo"
-
+vim.opt.viewoptions = "folds,cursor,curdir"
