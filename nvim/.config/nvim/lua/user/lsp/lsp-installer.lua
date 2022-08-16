@@ -14,7 +14,8 @@ local servers = {
   "yamlls",
   "rust_analyzer",
   "taplo",
-  "clangd"
+  "clangd",
+  -- "ccls"
 }
 
 lsp_installer.setup()
