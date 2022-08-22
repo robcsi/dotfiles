@@ -315,3 +315,7 @@ keymap('n', '<M-r>', '<Plug>RestNvim', opts)
 
 -- lsp-lines -- find a better keymap here...
 -- keymap("n", "<leader>l", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" }, opts)
+
+-- Todo-comments
+keymap ('n', '<M-c>', ':TodoTelescope<CR>', opts)
+

@@ -70,3 +70,6 @@ vim.opt.showtabline = 1
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.getenv("HOME") .. "/.undo"
 vim.opt.viewoptions = "folds,cursor,curdir"
+-- Treesitter folding 
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
