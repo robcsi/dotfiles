@@ -80,7 +80,7 @@ keymap("n", "<leader>fs", "<cmd>Telescope search_history<cr>", opts)
 keymap("n", "<leader>fh", "<cmd>Telescope command_history<cr>", opts)
 keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", opts)
 keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", opts)
-keymap("n", "<leader>fc", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
+--[[ keymap("n", "<leader>fc", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts) ]]
 keymap("n", "<leader>fg", "<cmd>Telescope grep_string<cr>", opts)
 keymap("n", "<leader>fr", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<leader>fm", "<cmd>Telescope man_pages<cr>", opts)
@@ -107,7 +107,7 @@ keymap("n", "<leader>S", ":Startify<CR>", opts)
 -- keymap("n", "<M-s>", ":SSave", opts)
 
 -- CtrlSF
-keymap("n", "<leader><SPACE>", ":CtrlSF <C-r><C-w><CR>", opts)
+keymap("n", "<leader><space>", ":CtrlSF <C-r><C-w><CR>", opts)
 
 -- Fugitive
 keymap("n", "<leader>g", ":Gcd<CR>", opts)
@@ -303,7 +303,7 @@ keymap('n', '<M-l>', ':FocusSplitNicely<CR>', opts)
 keymap('n', '<leader>h', ':FocusSplitLeft<CR>', opts)
 keymap('n', '<leader>j', ':FocusSplitDown<CR>', opts)
 keymap('n', '<leader>k', ':FocusSplitUp<CR>', opts)
-keymap('n', '<leader>l', ':FocusSplitRight<CR>', opts)
+--[[ keymap('n', '<leader>l', ':FocusSplitRight<CR>', opts) ]]
 
 -- neotree
 keymap('n', '<M-e>', ':Neotree filesystem reveal float<CR>', opts)
@@ -317,5 +317,5 @@ keymap('n', '<M-r>', '<Plug>RestNvim', opts)
 -- keymap("n", "<leader>l", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" }, opts)
 
 -- Todo-comments
-keymap ('n', '<M-c>', ':TodoTelescope<CR>', opts)
+keymap ('n', '<leader>fc', ':TodoTelescope<CR>', opts)
 

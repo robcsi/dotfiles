@@ -21,7 +21,7 @@ null_ls.setup {
         formatting.google_java_format,
         diagnostics.flake8,
     },
-    on_init = function(new_client, _) 
+    on_init = function(new_client, _)
         new_client.offset_encoding = 'utf-32'
     end,
 }

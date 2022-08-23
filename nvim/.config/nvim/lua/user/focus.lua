@@ -8,7 +8,7 @@ focus.setup {
     autoresize = false,
     winhighlight = true,
     hybridnumber = false,
-    signcolumn = auto,
+    signcolumn = false,
     relativenumber = false
 }
 

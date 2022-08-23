@@ -22,7 +22,7 @@ vim.opt.cursorline = true
 vim.opt.encoding = "utf-8" -- Set default encoding to UTF-8
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.foldenable = false
-vim.opt.foldmethod = "indent"
+--[[ vim.opt.foldmethod = "indent" ]]
 vim.opt.formatoptions = "l"
 vim.opt.hidden = true -- Enable background buffers
 vim.opt.hlsearch = false -- Highlight found searches
@@ -70,6 +70,6 @@ vim.opt.showtabline = 1
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.getenv("HOME") .. "/.undo"
 vim.opt.viewoptions = "folds,cursor,curdir"
--- Treesitter folding 
+-- Treesitter folding
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
