@@ -14,7 +14,7 @@ local servers = {
     "jsonls",
     "yamlls",
     "rust_analyzer",
-    "taplo",
+    --[[ "taplo", ]]
     -- "ccls"
 }
 
@@ -89,9 +89,9 @@ for _, server in pairs(servers) do
         --[[     }, ]]
         --[[ } ]]
 
-        --[[ goto continue ]]
+        goto continue
     end
 
     lspconfig[server].setup(opts)
-    --[[ ::continue:: ]]
+    ::continue::
 end
