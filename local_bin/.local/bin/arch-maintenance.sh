@@ -25,8 +25,10 @@ echo
 
 echo Remove Orphans:
 sudo pacman -Rns $(pacman -Qtdq)
-echo
+echo Empty yay cache:
+yay -Sc
 
+echo
 # Check directory size:
 # du -sh /directory
 
