@@ -135,7 +135,7 @@ lualine.setup {
     sections = {
         lualine_a = { "mode" },
         lualine_b = {"branch", {"filename", file_status = true, path = 3, symbols = {unnamed = ''} }, "fileformat" },
-        lualine_c = { diff, { navic.get_location, cond = navic.is_available }},
+        lualine_c = { diff, { navic.get_location, cond = navic.is_available }, 'lsp_progress'},
         lualine_x = { diagnostics, spaces, "encoding", filetype },
         lualine_y = {},
         lualine_z = {  location ,"progress" },

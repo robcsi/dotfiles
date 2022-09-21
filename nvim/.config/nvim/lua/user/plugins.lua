@@ -87,6 +87,7 @@ return packer.startup(function(use)
     use { "saadparwaiz1/cmp_luasnip"} -- snippet completions
     use { "hrsh7th/cmp-nvim-lsp"}
     use { "hrsh7th/cmp-nvim-lua"}
+    use {'hrsh7th/cmp-nvim-lsp-signature-help'}
 
     -- snippets
     use { "L3MON4D3/LuaSnip"} --snippet engine
@@ -184,7 +185,7 @@ return packer.startup(function(use)
         requires = "neovim/nvim-lspconfig"
     }
 
-    use "b0o/incline.nvim"
+    use {"b0o/incline.nvim"}
     use { "beauwilliams/focus.nvim" }
 
     vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
@@ -207,7 +208,7 @@ return packer.startup(function(use)
             require("lsp_lines").setup()
         end,
     }
-    use 'nvim-telescope/telescope-media-files.nvim'
+    use {'nvim-telescope/telescope-media-files.nvim'}
 
     use {
         "folke/todo-comments.nvim",
@@ -224,6 +225,25 @@ return packer.startup(function(use)
     use {
         'tree-sitter/tree-sitter-rust'
     }
+    use {
+        'm-demare/hlargs.nvim',
+        requires = { 'nvim-treesitter/nvim-treesitter' }
+    }
+    use {'tanvirtin/monokai.nvim'}
+    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+    use {
+        'lukas-reineke/headlines.nvim',
+        config = function()
+            require('headlines').setup()
+        end,
+    }
+    use {'j-hui/fidget.nvim',
+        config = function()
+            require('fidget').setup()
+        end,
+    }
+    use 'arkav/lualine-lsp-progress'
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if PACKER_BOOTSTRAP then
