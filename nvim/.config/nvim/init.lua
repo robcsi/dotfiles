@@ -34,6 +34,7 @@ require "user.neotree"
 require "user.rust-tools"
 require "user.rest"
 require "user.lsp-lines"
+require "user.leap"
 
 -- leave this line last, otherwise lsp doesn't load all language servers!!!
 require "user.lsp"
