@@ -73,3 +73,5 @@ vim.opt.viewoptions = "folds,cursor,curdir"
 -- Treesitter folding
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+
+vim.opt.guifont = { "Fira Mono", ":h11" }
