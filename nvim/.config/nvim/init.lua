@@ -35,6 +35,7 @@ require "user.rust-tools"
 require "user.rest"
 require "user.lsp-lines"
 require "user.leap"
+require "user.noirbuddy"
 
 -- leave this line last, otherwise lsp doesn't load all language servers!!!
 require "user.lsp"
