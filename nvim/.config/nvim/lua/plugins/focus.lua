@@ -1,0 +1,3 @@
+return {
+  "beauwilliams/focus.nvim",
+}

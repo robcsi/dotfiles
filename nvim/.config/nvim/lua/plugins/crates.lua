@@ -1,0 +1,3 @@
+return {
+  "saecki/crates.nvim",
+}
