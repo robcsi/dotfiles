@@ -40,7 +40,7 @@ keymap("t", "<M-t>", "<C-\\><C-n>:Ttoggle<CR>", opts)
 -- Use K to show documentation in preview window.
 keymap("n", "H", ":call Show_documentation()<CR>", opts)
 vim.api.nvim_exec(
-  [[
+    [[
         function! Show_documentation()
         "if (index(['nvim','help'], &filetype) >= 0)
         execute 'Help '.expand('<cword>')
@@ -49,10 +49,13 @@ vim.api.nvim_exec(
         "endif
         endfunction
     ]],
-  true
+    true
 )
 
 -- switch between header and source in C++
 keymap("n", "<M-h>", "<cmd>ClangdSwitchSourceHeader<cr>", opts)
 -- open help in vertical split directly
 vim.api.nvim_command("command! -nargs=* -complete=help Help vertical belowright help <args> | vertical resize 85")
+
+--undotree
+keymap("n", "<F5>", require("undotree").toggle, opts)
