@@ -1,3 +1,3 @@
 return {
-  "beauwilliams/focus.nvim",
+    "nvim-focus/focus.nvim",
 }
