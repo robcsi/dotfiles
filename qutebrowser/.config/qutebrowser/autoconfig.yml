@@ -6,5 +6,5 @@
 
 config_version: 2
 settings:
-  auto_save.session:
-    global: true
+  content.geolocation:
+    https://www.cinemacity.ro: false
