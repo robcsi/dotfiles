@@ -36,7 +36,7 @@ vim.opt.inccommand = "split" -- Get a preview of replacements
 vim.opt.incsearch = true -- Shows the match while typing
 vim.opt.joinspaces = false -- No double spaces with join
 vim.opt.linebreak = true -- Stop words being broken on wrap
-vim.opt.list = true -- Show some invisible characters
+vim.opt.list = false -- Show some invisible characters
 vim.opt.listchars = "tab:<->,space:·,nbsp:+,eol:↓,trail:●,precedes:<,extends:>"
 vim.opt.number = true -- Show line numbers
 vim.opt.relativenumber = true -- Show relative numbers
@@ -85,3 +85,5 @@ vim.g.neoterm_size = 20
 vim.g.neoterm_default_mod = "botright"
 vim.g.neoterm_autoinsert = 1
 vim.g.neoterm_autojump = 1
+
+-- vim.opt.statuscolumn = "%l %r"
