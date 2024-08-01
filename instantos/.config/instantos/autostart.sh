@@ -4,7 +4,6 @@
 
 xfce4-power-manager &
 nm-applet &
-artha &
-dropbox &
 pa-applet &
-
+blueman-applet &
+solaar &
