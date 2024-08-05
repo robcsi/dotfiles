@@ -39,7 +39,7 @@ keymap("t", "<M-t>", "<C-\\><C-n>:Ttoggle<CR>", opts)
 
 -- Use K to show documentation in preview window.
 keymap("n", "H", ":call Show_documentation()<CR>", opts)
-vim.api.nvim_exec(
+vim.api.nvim_exec2(
     [[
         function! Show_documentation()
         "if (index(['nvim','help'], &filetype) >= 0)
@@ -49,7 +49,7 @@ vim.api.nvim_exec(
         "endif
         endfunction
     ]],
-    true
+    {}
 )
 
 -- switch between header and source in C++
