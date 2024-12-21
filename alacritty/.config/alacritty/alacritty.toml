@@ -1,0 +1,28 @@
+[window]
+dimensions = { columns = 200, lines = 55 }
+opacity = 0.9
+blur = true
+padding = { x = 3, y = 3 }
+dynamic_padding = true
+
+[colors]
+transparent_background_colors = true
+
+[font]
+size = 10.5
+
+[font.bold]
+family = "monospace"
+style = "Bold"
+
+[font.bold_italic]
+family = "monospace"
+style = "Bold Italic"
+
+[font.italic]
+family = "monospace"
+style = "Italic"
+
+[font.normal]
+family = "monospace"
+style = "Regular"
