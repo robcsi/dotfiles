@@ -10,7 +10,7 @@ return {
         opts = function(_, opts)
             local bordered = require("cmp.config.window").bordered
             return vim.tbl_deep_extend("force", opts, {
-                window = {
+                win = {
                     completion = bordered(BORDER_STYLE),
                     documentation = bordered(BORDER_STYLE),
                 },
@@ -21,7 +21,7 @@ return {
     -- lazyvim.plugins.editor
     {
         "which-key.nvim",
-        opts = { window = { border = BORDER_STYLE } },
+        opts = { win = { border = BORDER_STYLE } },
     },
     {
         "gitsigns.nvim",

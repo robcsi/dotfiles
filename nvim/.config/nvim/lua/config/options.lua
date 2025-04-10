@@ -87,3 +87,5 @@ vim.g.neoterm_autoinsert = 1
 vim.g.neoterm_autojump = 1
 
 -- vim.opt.statuscolumn = "%l %r"
+
+vim.g.minipairs_disable = true

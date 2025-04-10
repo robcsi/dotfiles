@@ -12,7 +12,7 @@ return {
                 hide_hidden = false, -- only works on Windows for hidden files/directories
             },
         },
-        window = {
+        win = {
             position = "left",
         },
         reveal_force_cwd = true,
