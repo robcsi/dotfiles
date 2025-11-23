@@ -33,7 +33,18 @@ alias grs='git restore'
 # aliasing vifm to vifm with ueberzug
 alias vifm='vifmrun'
 
+#tmux aliases
+TMUX_CONFIG="~/.tmux.conf"
+tn="tmux -u -f $TMUX_CONFIG new"
+ta="tmux -u -f $TMUX_CONFIG attach"
+tt="nvim $TMUX_CONFIG"
+
+#tokei/sloc
+alias sloc="tokei"
+
 # set vi mode for shell
 set -o vi
 
 eval "$(atuin init zsh)"
+
+source /home/siar/.config/broot/launcher/bash/br
