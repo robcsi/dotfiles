@@ -1,9 +1,20 @@
 source /usr/share/instantshell/zshrc
 
+# Initialize completion system explicitly after zimfw loads
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qNmh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+
+# set vi mode for shell (after completion initialization)
+set -o vi
+
 export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 
 # generic aliases
-alias ls='exa -alHm --git --group-directories-first'
+alias ls='eza -alHm --git --group-directories-first'
 alias vim='nvim'
 
 # docker aliases
@@ -42,9 +53,12 @@ tt="nvim $TMUX_CONFIG"
 #tokei/sloc
 alias sloc="tokei"
 
-# set vi mode for shell
-set -o vi
+# v = nvim
+alias v='nvim'
 
 eval "$(atuin init zsh)"
 
-source /home/siar/.config/broot/launcher/bash/br
+#source /home/siar/.config/broot/launcher/bash/br
+
+export RUST_WRAPPER=sccache
+
