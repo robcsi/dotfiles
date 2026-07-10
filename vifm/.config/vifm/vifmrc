@@ -158,7 +158,7 @@ set wrap
 
 " }}}
 
-colorscheme Default
+"colorscheme Default
 
 " fileviewer coloring
 " 8-color terminal using highlight
@@ -207,7 +207,10 @@ fileviewer *.pdf
 
 "setting up findprg to run for the :find command
 "set findprg="c:\\GnuWin32\\bin\\find.exe %s %a"
-set findprg="find %s %a -print , -type d \( ! -readable -o ! -executable \) -prune"
+"set findprg="find %s %a -print , -type d \( ! -readable -o ! -executable \) -prune"
+" Use fd (https://github.com/sharkdp/fd) instead of find.
+" Macros: %p = literal :find arguments (pattern), %s = paths (selection or cwd).
+set findprg='fd --hidden --follow --no-ignore-vcs --color=never %p %s'
 
 "adding mappings for Explore command to display file content in one full screen window
 nnoremap e <c-w>oe
@@ -231,7 +234,11 @@ set syscalls
 "setting viewcolumns options
 windo set viewcolumns=-{iname},{ext},{size},{mtime}
 
-set grepprg=ag\ −−line-numbers\ %i\ %a\ %s
+" Use ripgrep (https://github.com/BurntSushi/ripgrep) for :grep.
+" Macros: %i = "-v" when :grep! (inverted match), %a = pattern/args, %s = paths.
+" --no-heading + -H keeps the path:line:match format vifm parses.
+set grepprg='rg --color=never --line-number --no-heading -H --smart-case %i %a %s'
+"set grepprg='ag --line-numbers %i %a %s'
 
 
 " vim: set ts=4 sw=4 tw=0 et :
