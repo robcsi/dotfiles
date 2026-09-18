@@ -60,7 +60,7 @@ cmd = "pavucontrol"
 
 [[block]]
 block = "time"
-format = " $icon $timestamp.datetime(f:'%H:%M') "
+format = " $icon $timestamp.datetime(f:'%a %d.%m %H:%M') "
 
 [[block]]
 block = "custom"

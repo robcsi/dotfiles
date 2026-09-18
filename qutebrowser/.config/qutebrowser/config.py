@@ -60,10 +60,10 @@ c.new_instance_open_target = 'tab'
 c.qt.force_software_rendering = 'qt-quick'
 
 # Turn on Qt HighDPI scaling. This is equivalent to setting
-# QT_AUTO_SCREEN_SCALE_FACTOR=1 or QT_ENABLE_HIGHDPI_SCALING=1 (Qt >=
-# 5.14) in the environment. It's off by default as it can cause issues
-# with some bitmap fonts. As an alternative to this, it's possible to
-# set font sizes and the `zoom.default` setting.
+# QT_ENABLE_HIGHDPI_SCALING=1 (Qt >= 5.14) in the environment. It's off
+# by default as it can cause issues with some bitmap fonts. As an
+# alternative to this, it's possible to set font sizes and the
+# `zoom.default` setting.
 # Type: Bool
 c.qt.highdpi = True
 
@@ -130,14 +130,12 @@ config.set('content.cookies.accept', 'all', 'devtools://*')
 #   - disallow: Disallows all navigation requests to URLs with unknown schemes.
 #   - allow-from-user-interaction: Allows navigation requests to URLs with unknown schemes that are issued from user-interaction (like a mouse-click), whereas other navigation requests (for example from JavaScript) are suppressed.
 #   - allow-all: Allows all navigation requests to URLs with unknown schemes.
-config.set('content.unknown_url_scheme_policy',
-           'allow-all', 'teams.microsoft.com')
+config.set('content.unknown_url_scheme_policy', 'allow-all', 'teams.microsoft.com')
 
 # Value to send in the `Accept-Language` header. Note that the value
 # read from JavaScript is always the global value.
 # Type: String
-config.set('content.headers.accept_language',
-           '', 'https://matchmaker.krunker.io/*')
+config.set('content.headers.accept_language', '', 'https://matchmaker.krunker.io/*')
 
 # User agent to send.  The following placeholders are defined:  *
 # `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
@@ -153,8 +151,7 @@ config.set('content.headers.accept_language',
 # between 5.12 and 5.14 (inclusive), changing the value exposed to
 # JavaScript requires a restart.
 # Type: FormatString
-config.set('content.headers.user_agent',
-           'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://docs.google.com/*')
+config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://docs.google.com/*')
 
 # User agent to send.  The following placeholders are defined:  *
 # `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
@@ -170,8 +167,7 @@ config.set('content.headers.user_agent',
 # between 5.12 and 5.14 (inclusive), changing the value exposed to
 # JavaScript requires a restart.
 # Type: FormatString
-config.set('content.headers.user_agent',
-           'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://drive.google.com/*')
+config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:71.0) Gecko/20100101 Firefox/71.0', 'https://drive.google.com/*')
 
 # User agent to send.  The following placeholders are defined:  *
 # `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
@@ -187,8 +183,7 @@ config.set('content.headers.user_agent',
 # between 5.12 and 5.14 (inclusive), changing the value exposed to
 # JavaScript requires a restart.
 # Type: FormatString
-config.set('content.headers.user_agent',
-           'Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}', 'https://web.whatsapp.com/')
+config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}', 'https://web.whatsapp.com/')
 
 # User agent to send.  The following placeholders are defined:  *
 # `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
@@ -204,8 +199,7 @@ config.set('content.headers.user_agent',
 # between 5.12 and 5.14 (inclusive), changing the value exposed to
 # JavaScript requires a restart.
 # Type: FormatString
-config.set('content.headers.user_agent',
-           'Mozilla/5.0 ({os_info}; rv:90.0) Gecko/20100101 Firefox/90.0', 'https://accounts.google.com/*')
+config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:90.0) Gecko/20100101 Firefox/90.0', 'https://accounts.google.com/*')
 
 # User agent to send.  The following placeholders are defined:  *
 # `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
@@ -221,8 +215,7 @@ config.set('content.headers.user_agent',
 # between 5.12 and 5.14 (inclusive), changing the value exposed to
 # JavaScript requires a restart.
 # Type: FormatString
-config.set('content.headers.user_agent',
-           'Mozilla/5.0 ({os_info}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99 Safari/537.36', 'https://*.slack.com/*')
+config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99 Safari/537.36', 'https://*.slack.com/*')
 
 # Load images automatically in web pages.
 # Type: Bool
@@ -235,7 +228,11 @@ config.set('content.images', True, 'devtools://*')
 # Allow JavaScript to read from or write to the clipboard. With
 # QtWebEngine, writing the clipboard as response to a user interaction
 # is always allowed.
-# Type: Bool
+# Type: String
+# Valid values:
+#   - none: Disable access to clipboard.
+#   - access: Allow reading from and writing to the clipboard.
+#   - access-paste: Allow accessing the clipboard and pasting clipboard content.
 c.content.javascript.clipboard = 'access-paste'
 
 # Enable JavaScript.
@@ -254,15 +251,13 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 # Type: Bool
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
-# Allow websites to register protocol handlers via
-# `navigator.registerProtocolHandler`.
-# Type: BoolAsk
-# Valid values:
-#   - true
-#   - false
-#   - ask
-config.set('content.register_protocol_handler', True,
-           'https://mail.google.com?extsrc=mailto&url=%25s')
+# Allow locally loaded documents to access remote URLs.
+# Type: Bool
+config.set('content.local_content_can_access_remote_urls', True, 'file:///home/robcsi/.local/share/qutebrowser/userscripts/*')
+
+# Allow locally loaded documents to access other local URLs.
+# Type: Bool
+config.set('content.local_content_can_access_file_urls', False, 'file:///home/robcsi/.local/share/qutebrowser/userscripts/*')
 
 # Allow websites to register protocol handlers via
 # `navigator.registerProtocolHandler`.
@@ -271,8 +266,7 @@ config.set('content.register_protocol_handler', True,
 #   - true
 #   - false
 #   - ask
-config.set('content.register_protocol_handler', True,
-           'https://outlook.office.com?mailtouri=%25s')
+config.set('content.register_protocol_handler', True, 'https://mail.google.com?extsrc=mailto&url=%25s')
 
 # Allow websites to register protocol handlers via
 # `navigator.registerProtocolHandler`.
@@ -281,8 +275,16 @@ config.set('content.register_protocol_handler', True,
 #   - true
 #   - false
 #   - ask
-config.set('content.register_protocol_handler', True,
-           'https://calendar.google.com?cid=%25s')
+config.set('content.register_protocol_handler', True, 'https://outlook.office.com?mailtouri=%25s')
+
+# Allow websites to register protocol handlers via
+# `navigator.registerProtocolHandler`.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.register_protocol_handler', True, 'https://calendar.google.com?cid=%25s')
 
 # Position of the status bar.
 # Type: VerticalPosition
@@ -326,7 +328,13 @@ c.tabs.show = 'always'
 # either a float value with a "pt" suffix, or an integer value with a
 # "px" suffix.
 # Type: String
-c.fonts.default_size = '11pt'
+import os
+# Wayland renders Qt fonts at ~96 DPI; X11 shrinks them via Xft.dpi=75.
+# Match the smaller X11 look on Wayland only, leaving X11 unchanged.
+if os.environ.get('XDG_SESSION_TYPE') == 'wayland':
+    c.fonts.default_size = '8pt'
+else:
+    c.fonts.default_size = '10pt'
 
 # Font used for the hints.
 # Type: Font
@@ -337,8 +345,7 @@ c.fonts.hints = 'default_size default_family'
 c.fonts.web.size.default = 14
 
 # Bindings for normal mode
-config.bind(
-    '<Escape>', ':clear-keychain ;; search ;; fullscreen --leave ;; fake-key <Escape>')
+config.bind('<Escape>', ':clear-keychain ;; search ;; fullscreen --leave ;; fake-key <Escape>')
 config.bind('X', ':undo')
 config.bind('d', 'cmd-run-with-count 10 scroll down')
 config.bind('gJ', 'tab-move +')
