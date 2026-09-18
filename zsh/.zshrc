@@ -1,8 +1,5 @@
  [[ -n "$SSH_CONNECTION" && -z "$COLORTERM" ]] && export COLORTERM=truecolor
 
-# Pin Claude Code to the 1M-context Opus 4.8 (settings.json strips the [1m] variant on restart)
-export ANTHROPIC_MODEL='claude-opus-4-8[1m]'
-
 # instantshell was uninstalled 2026-09-10; it used to source this. Loads autosuggestions,
 # syntax-highlighting, fzf-tab, zsh-completions, zoxide. Prompt now comes from starship (end of file).
 export ZIM_HOME=${HOME}/.zim   # required by zimfw (build/update/upgrade)
