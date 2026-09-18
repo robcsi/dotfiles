@@ -1,0 +1,17 @@
+# Reconstructed 2026-09-14 from ~/.zim/init.zsh after instantshell (which shipped
+# /usr/share/instantshell/zimrc) was removed. Module order matches init.zsh.
+
+zmodule environment
+zmodule input
+zmodule utility
+
+zmodule ajeetdsouza/zoxide
+zmodule ohmyzsh/ohmyzsh --root plugins/fzf --source fzf.plugin.zsh
+zmodule ohmyzsh/ohmyzsh --root plugins/command-not-found --source command-not-found.plugin.zsh
+
+# completion-adjacent modules must come before the widget-wrapping ones
+zmodule zsh-users/zsh-completions --fpath src
+
+zmodule zsh-users/zsh-autosuggestions
+zmodule zsh-users/zsh-syntax-highlighting
+zmodule Aloxaf/fzf-tab

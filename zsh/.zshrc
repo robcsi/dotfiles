@@ -1,15 +1,26 @@
-source /usr/share/instantshell/zshrc
+ [[ -n "$SSH_CONNECTION" && -z "$COLORTERM" ]] && export COLORTERM=truecolor
 
-# Initialize completion system explicitly after zimfw loads
+# instantshell was uninstalled 2026-09-10; it used to source this. Loads autosuggestions,
+# syntax-highlighting, fzf-tab, zsh-completions, zoxide. Prompt now comes from starship (end of file).
+export ZIM_HOME=${HOME}/.zim   # required by zimfw (build/update/upgrade)
+[[ -e ${ZIM_HOME}/init.zsh ]] && source ${ZIM_HOME}/init.zsh
+
+# Initialize completion system explicitly after zimfw loads.
+# Full compinit (slow, rescans fpath) only if the dump is missing or >24h old;
+# otherwise use the cached dump. Note: the glob must be in an array assignment --
+# [[ ]] does not perform filename generation, so a glob there is a literal string.
 autoload -Uz compinit
-if [[ -n ${ZDOTDIR}/.zcompdump(#qNmh+24) ]]; then
-  compinit
-else
-  compinit -C
-fi
+() {
+  setopt localoptions extendedglob
+  local -a fresh=(${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh-24))
+  if (( $#fresh )); then compinit -C; else compinit; fi
+}
 
-# set vi mode for shell (after completion initialization)
-set -o vi
+# set vi mode for shell (after completion initialization).
+# bindkey -v, not `set -o vi`: the latter sets the `vi` OPTION, which zargs'
+# _zarun replays via `emulate -l` in workers that have no line editor, emitting
+# "can't change option: vi" once per module during zimfw updates.
+bindkey -v
 
 export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 
@@ -43,6 +54,7 @@ alias grs='git restore'
 
 # aliasing vifm to vifm with ueberzug
 alias vifm='vifmrun'
+alias j='z'
 
 #tmux aliases
 TMUX_CONFIG="~/.tmux.conf"
@@ -56,9 +68,16 @@ alias sloc="tokei"
 # v = nvim
 alias v='nvim'
 
+#jenkins jcli source alias
+jc() {
+  source ~/.jenkins.env || return 1
+  jenkins-cli "$@"
+}
+
 eval "$(atuin init zsh)"
 
 #source /home/siar/.config/broot/launcher/bash/br
 
-export RUST_WRAPPER=sccache
 
+# prompt
+eval "$(starship init zsh)"
