@@ -1,0 +1,50 @@
+#!/bin/sh
+# screens: swap laptop / external monitor order. Works on X11 and Wayland.
+#   screens home    laptop on the RIGHT  (external left)
+#   screens office  laptop on the LEFT   (external right)
+#   screens status  show current layout  (default)
+# The external output is auto-detected (any connected non-eDP), so it works
+# whichever port it uses at each location. Laptop stays primary.
+
+laptop=$(instantwmctl -j monitor list 2>/dev/null | jq -r '.[]|select(.name|test("eDP"))|.name' | head -1)
+external=$(instantwmctl -j monitor list 2>/dev/null | jq -r '.[]|select(.name|test("eDP")|not)|.name' | head -1)
+
+wayland() { [ "$XDG_SESSION_TYPE" = wayland ] || [ -n "$WAYLAND_DISPLAY" ]; }
+
+status() {
+    instantwmctl -j monitor list 2>/dev/null | \
+        jq -r 'sort_by(.x)[]|"\(.name)\t\(.width)x\(.height) @ \(.x),\(.y)\(if .is_selected then "  *focused" else "" end)"'
+}
+
+if [ -z "$laptop" ]; then echo "no laptop (eDP) output found" >&2; exit 1; fi
+
+case "${1:-status}" in
+    home)   left=$external; right=$laptop   ;;
+    office) left=$laptop;   right=$external ;;
+    status) status; exit 0 ;;
+    *) echo "usage: screens home|office|status" >&2; exit 2 ;;
+esac
+
+# Undocked: only the laptop is present -> just enable it at 0,0.
+if [ -z "$external" ]; then
+    if wayland; then instantwmctl monitor set "$laptop" --enable --pos 0,0
+    else xrandr --output "$laptop" --auto --primary --pos 0x0; fi
+    echo "only $laptop connected"; status; exit 0
+fi
+
+if wayland; then
+    lw=$(instantwmctl -j monitor list 2>/dev/null | jq -r --arg n "$left" '.[]|select(.name==$n)|.width')
+    instantwmctl monitor set "$left"  --enable --pos 0,0
+    instantwmctl monitor set "$right" --enable --pos "${lw},0"
+    instantwmctl monitor set "$laptop" >/dev/null 2>&1   # keep laptop as focused/primary
+else
+    # --auto picks each monitor's preferred mode; --left-of/right-of auto-computes X.
+    xrandr --output "$laptop" --auto --primary --output "$external" --auto
+    if [ "$right" = "$laptop" ]; then
+        xrandr --output "$laptop" --right-of "$external"
+    else
+        xrandr --output "$laptop" --left-of "$external"
+    fi
+fi
+echo "layout: $1 (laptop=$laptop $( [ "$right" = "$laptop" ] && echo right || echo left ))"
+status
