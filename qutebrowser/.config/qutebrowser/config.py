@@ -253,11 +253,15 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 
 # Allow locally loaded documents to access remote URLs.
 # Type: Bool
-config.set('content.local_content_can_access_remote_urls', True, 'file:///home/robcsi/.local/share/qutebrowser/userscripts/*')
+# Built from the running user's home so it works on every machine
+# (a hardcoded /home/<user> path conflicted between two machines).
+import os
+_userscripts = 'file://' + os.path.expanduser('~/.local/share/qutebrowser/userscripts/*')
+config.set('content.local_content_can_access_remote_urls', True, _userscripts)
 
 # Allow locally loaded documents to access other local URLs.
 # Type: Bool
-config.set('content.local_content_can_access_file_urls', False, 'file:///home/robcsi/.local/share/qutebrowser/userscripts/*')
+config.set('content.local_content_can_access_file_urls', False, _userscripts)
 
 # Allow websites to register protocol handlers via
 # `navigator.registerProtocolHandler`.
